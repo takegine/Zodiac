@@ -1,0 +1,24 @@
+<root>
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+        <include src="s2r://panorama/styles/custom_game/roundoptions.css" />
+    </styles>
+    <scripts>
+        <include src="s2r://panorama/scripts/custom_game/roundoptions.js" />
+    </scripts>
+    
+    <Panel hittest="false" class="RoundOptionsPanel">
+        <Panel hittest="false" id="RoundOptions">
+            <Label hittest="false" id="question" text="#votetext"/>
+
+            <DOTAHeroImage id="hero1" heroname="" style="height:36px;width:62px; margin-top:50px; margin-left:220px;"/>
+            <DOTAHeroImage id="hero2" heroname="" style="height:36px;width:62px; margin-top:50px; margin-left:310px;"/>
+            <DOTAHeroImage id="hero3" heroname="" style="height:36px;width:62px; margin-top:50px; margin-left:400px;"/>
+            <DOTAHeroImage id="hero4" heroname="" style="height:36px;width:62px; margin-top:50px; margin-left:490px;"/>
+            <DOTAHeroImage id="hero5" heroname="" style="height:36px;width:62px; margin-top:50px; margin-left:580px;"/>
+            
+            <Label hittest="false" id="confirmation" text="#ready"/><!--你在绿色内-->
+
+        </Panel>
+    </Panel>
+</root>

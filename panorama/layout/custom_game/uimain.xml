@@ -1,0 +1,250 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/custom_game/uimain.css" />
+
+        
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/uimain.js" />
+   
+    </scripts>
+
+
+    <Panel hittest="false">
+        <Panel id="mainWin"><!--开局界面-->
+            <Panel id="Buttons" hittest="false"><!--左下角按钮-->
+                <Button><Label class="btnleft" id="UIButton1" text="#UIButton1" onactivate="OpenNewPanel(1)"/></Button>
+                <Button><Label class="btnleft" id="UIButton2" text="#UIButton2" onactivate="OpenNewPanel(2)"/></Button>
+                <Button><Label class="btnleft" id="UIButton3" text="#UIButton3" onactivate="OpenNewPanel(3)"/></Button>
+            </Panel>
+
+            <Panel id="Bolls" hittest="false"><!--顶部圆球-->
+                <Button class="btntop" id="btntop0">
+                    <Label id="Boll0" text="#dota_item_EA_0_1"/></Button>
+                <Button class="btntop" id="btntop1">
+                    <Label id="Boll1" text="#dota_item_EA_1_1"/></Button>
+                <Button class="btntop" id="btntop2">
+                    <Label id="Boll2" text="#dota_item_EA_2_1"/></Button>
+                <Button class="btntop" id="btntop3">
+                    <Label id="Boll3" text="#dota_item_EA_3_1"/></Button>
+                <Button class="btntop" id="btntop4">
+                    <Label id="Boll4" text="#dota_item_EA_4_1"/></Button>
+                <Button class="btntop" id="btntop5">
+                    <Label id="Boll5" text="#dota_item_EA_5_1"/></Button>
+                <Button class="btntop" id="btntop6">
+                    <Label  id="Boll6" text="#dota_item_EA_6_1"/></Button>
+                <Button class="btntop" id="btntop7">
+                    <Label id="Boll7" text="#dota_item_EA_7_1"/></Button>
+                <Button class="btntop" id="btntop8">
+                    <Label id="Boll8" text="#dota_item_EA_8_1"/></Button>
+                <Button class="btntop" id="btntop9">
+                    <Label  id="Boll9" text="#dota_item_EA_9_1"/></Button>
+            </Panel>
+        </Panel>
+
+        <Panel id="PMenu1" hittest="false"><!--待写：源力配方-->
+            <Panel id="totle" hittest="false">
+                <Panel id="row0" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu ji"/>
+                    <Panel class="BtnInMenu wu"/>
+                    <Panel class="BtnInMenu geng"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu kui"/>
+                    <Panel class="BtnInMenu ding"/>
+                    <Panel class="BtnInMenu ren"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu ding"/>
+                    <Panel class="BtnInMenu xin"/>
+                    <Panel class="BtnInMenu yi"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                <Panel id="row1" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu geng"/>
+                    <Panel class="BtnInMenu jia"/>
+                    <Panel class="BtnInMenu wu"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu bing"/>
+                    <Panel class="BtnInMenu geng"/>
+                    <Panel class="BtnInMenu ren"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu bing"/>
+                    <Panel class="BtnInMenu ding"/>
+                    <Panel class="BtnInMenu yi"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                <Panel id="row2" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu xin"/>
+                    <Panel class="BtnInMenu wu"/>
+                    <Panel class="BtnInMenu bing"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu yi"/>
+                    <Panel class="BtnInMenu jia"/>
+                    <Panel class="BtnInMenu bing"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu geng"/>
+                    <Panel class="BtnInMenu bing"/>
+                    <Panel class="BtnInMenu kui"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                <Panel id="row3" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu xin"/>
+                    <Panel class="BtnInMenu jia"/>
+                    <Panel class="BtnInMenu ding"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu geng"/>
+                    <Panel class="BtnInMenu yi"/>
+                    <Panel class="BtnInMenu ding"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu ji"/>
+                    <Panel class="BtnInMenu xin"/>
+                    <Panel class="BtnInMenu geng"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                <Panel id="row4" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu ji"/>
+                    <Panel class="BtnInMenu xin"/>
+                    <Panel class="BtnInMenu jia"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu ding"/>
+                    <Panel class="BtnInMenu ren"/>
+                    <Panel class="BtnInMenu wu"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu ren"/>
+                    <Panel class="BtnInMenu ji"/>
+                    <Panel class="BtnInMenu yi"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                <Panel id="row5" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu kui"/>
+                    <Panel class="BtnInMenu ji"/>
+                    <Panel class="BtnInMenu ding"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu ding"/>
+                    <Panel class="BtnInMenu ji"/>
+                    <Panel class="BtnInMenu bing"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu ren"/>
+                    <Panel class="BtnInMenu wu"/>
+                    <Panel class="BtnInMenu ji"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                <Panel id="row6" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu kui"/>
+                    <Panel class="BtnInMenu bing"/>
+                    <Panel class="BtnInMenu yi"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu kui"/>
+                    <Panel class="BtnInMenu geng"/>
+                    <Panel class="BtnInMenu xin"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu wu"/>
+                    <Panel class="BtnInMenu xin"/>
+                    <Panel class="BtnInMenu kui"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                <Panel id="row7" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu yi"/>
+                    <Panel class="BtnInMenu wu"/>
+                    <Panel class="BtnInMenu kui"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu geng"/>
+                    <Panel class="BtnInMenu jia"/>
+                    <Panel class="BtnInMenu ren"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu ding"/>
+                    <Panel class="BtnInMenu geng"/>
+                    <Panel class="BtnInMenu jia"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                <Panel id="row8" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu ji"/>
+                    <Panel class="BtnInMenu wu"/>
+                    <Panel class="BtnInMenu yi"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu kui"/>
+                    <Panel class="BtnInMenu jia"/>
+                    <Panel class="BtnInMenu ji"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu wu"/>
+                    <Panel class="BtnInMenu bing"/>
+                    <Panel class="BtnInMenu jia"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                <Panel id="row9" class="RootPanel" hittest="false">
+                    <Panel class="BtnInMenu ren"/>
+                    <Panel class="BtnInMenu bing"/>
+                    <Panel class="BtnInMenu xin"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu ren"/>
+                    <Panel class="BtnInMenu xin"/>
+                    <Panel class="BtnInMenu yi"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                    <Panel class="BtnInMenu ren"/>
+                    <Panel class="BtnInMenu jia"/>
+                    <Panel class="BtnInMenu kui"/>
+                    <Label class="jiantou" text="→"/>
+                    <Panel class="BtnItem"><!--Image class="image" src="file://{resources}/images/custom_game/loading_screen.jpg"/--></Panel>
+                </Panel>
+                
+            </Panel>
+        </Panel>
+        
+        <Panel id="PMenu3" hittest="false"><!--待写：神的证明-->
+            <Panel id="sinspanel" hittest="false">
+                <Panel id="sinsused" hittest="false">
+                    <Label id="SinsCollectText" text="#SinsCollectText"/>
+                </Panel>
+                <Panel id="names" hittest="false">
+                    <Label id="" text="1111"/>
+                </Panel>
+                <Panel id="rightnamed" hittest="false">
+                    <Label id="" text="1111"/>
+                </Panel>
+
+
+            </Panel>
+        </Panel>
+        
+    
+
+        
+<!--
+        <Button text="#UIButton" style="position:9.9px 9.9px 9.9px;visibility:visible;;height:32px;width:84%;color: #1FCD99;" />
+-->
+    
+    
+    </Panel>
+
+
+
+</root>
+

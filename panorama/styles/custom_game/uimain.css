@@ -1,0 +1,215 @@
+#mainWin {width:100%;height: 100%;}
+/**左下角按钮**/
+#Buttons{
+   margin-top:79%;
+   margin-left:1%;
+   width:210px;
+   height: 210px;
+   flow-children:down;
+}
+#UIButton1{margin-top:0px; }
+#UIButton2{margin-top:19px; }
+#UIButton3{margin-top:18px; }
+.btnleft{/*按钮集齐静态*/
+         width :200px;
+         height: 50px;
+         font-family: "Comic Sans MS";
+         color:#00454D;
+         font-size: 30px;
+         text-align:center;
+         border: 7px;
+         border-radius: 100px;
+         box-shadow: 0px 0px 10px 0px #01bcff;
+         font-weight: bold;
+         background-color: gradient( linear, 0% 0%, 0% 55%, from( #fbfbfbff ), color-stop( 0.3, #ebebebff ), to( #c0c0c0c0 ) );
+}
+
+.btnleft:hover{/*按钮集齐鼠标悬浮*/
+         color:#e66465;
+         box-shadow: 1px 2px 10px rgba(255,76,106,0.75);
+}
+
+
+/**顶部圆球*****************************************************/
+#Bolls{
+   horizontal-align:center;
+   border: 1px solid #eeeeee;
+   flow-children:right;
+   margin-left:-10px;
+}
+
+.btntop
+{/*按钮集齐静态*/
+         width :70px;
+         height:70px;
+         text-align:center;
+         margin-left:20px;
+         border-radius: 100px;
+         box-shadow: 0 0 10px 0 #01bcff;
+         
+         color:#00454D;
+         font-size: 30px;
+}
+
+.btntop:hover{/*按钮集齐鼠标悬浮*/
+         color:#fff;
+         box-shadow: -1px -2px 10px #fff;
+}
+#Boll0 {horizontal-align:center;vertical-align:center;}
+#Boll1 {horizontal-align:center;vertical-align:center;}
+#Boll2 {horizontal-align:center;vertical-align:center;}
+#Boll3 {horizontal-align:center;vertical-align:center;}
+#Boll4 {horizontal-align:center;vertical-align:center;}
+#Boll5 {horizontal-align:center;vertical-align:center;}
+#Boll6 {horizontal-align:center;vertical-align:center;}
+#Boll7 {horizontal-align:center;vertical-align:center;}
+#Boll8 {horizontal-align:center;vertical-align:center;}
+#Boll9 {horizontal-align:center;vertical-align:center;}
+
+#btntop0 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #18D337 ), color-stop( 0.4, #137723 ), to( #48A357 ) );
+}
+#btntop1 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #344C99 ), color-stop( 0.4, #152044 ), to( #2A365B ) );
+}
+#btntop2 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #505B51 ), color-stop( 0.4, #000000 ), to( #384438 ) );
+}
+#btntop3 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #7854B2 ), color-stop( 0.4, #2D1756 ), to( #4D3277 ) );
+}
+#btntop4 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #844B35 ), color-stop( 0.4, #28180A ), to( #6A371F ) );
+}
+#btntop5 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #E59E51 ), color-stop( 0.7, #BA2B04 ), to( #E26940 ) );
+margin-left:130px;background-image: url("file://{resources}/images/custom_game/zhengming/yi.jpg");background-size:100%;}
+#btntop6 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #EFF438 ), color-stop( 0.4, #A6AA04 ), to( #C9CC48 ) );
+}
+#btntop7 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #E5E5E5 ), color-stop( 0.4, #969899 ), to( #C9C9C9 ) );
+}
+#btntop8 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #6D8BC6 ), color-stop( 0.5, #1142A5 ), to( #527CCE ) );
+}
+#btntop9 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #5EEAEA ), color-stop( 0.4, #2A8282 ), to( #42BCBC ) );
+}
+
+
+/******************************************************源力配方****/
+#PMenu1{width:100%;height: 100%; visibility:collapse;}
+
+#totle{
+   margin-top:20%; margin-left :20px;
+   flow-children:down;
+background-image: url("file://{resources}/images/custom_game/148800565930.jpg");background-size:100%;
+}
+.RootPanel{
+   flow-children:right;margin-top:4px;
+}
+.BtnInMenu{ 
+   width:50px;height: 50px;margin-left:4px;
+
+}
+.jia {background-color: #48A357 ;}
+.yi  {background-color: #2A365B ;border-radius: 100px;background-image: url("file://{resources}/images/custom_game/zhengming/yi.jpg");background-size:100%;}
+.bing{background-color: #384438 ;}
+.ding{background-color: #4D3277 ;}
+.wu  {background-color: #6A371F ;}
+.ji  {background-color: #E26940 ;}
+.geng{background-color: #EFF438 ;}
+.xin {background-color: #C9C9C9 ;}
+.ren {background-color: #1142A5 ;}
+.kui {background-color: #42BCBC ;}
+
+.jiantou{font-size: 50px;color: #fff;}
+
+.BtnItem{/*合成物品图片*/
+   width:70px;height: 50px;
+
+}
+/******************************************************神的证明****/
+#PMenu3{width:100%;height: 100%;visibility:collapse;}
+#sinspanel{ horizontal-align:center;margin-bottom: 5%;
+   width:40%;height: 95%;
+   border: 1px solid #eeeeee;
+   background-image: url("file://{resources}/images/custom_game/zhengming/sinspanel.png");
+   background-size:100% 100%;}
+
+#sinsused{
+   flow-children:down;
+}
+
+#SinsCollectText{
+   margin:130px;
+   border: 1px solid #eeeeee;
+   font-size: 20px;
+   horizontal-align:center;}
+
+/**
+#UIMain{width:100%;height: 100%;
+        
+}
+
+@keyframes 'contentAnimation'
+{
+         0%
+         {
+                   opacity: 0;
+                   transform:translateY(5px);
+         }
+}
+
+
+#content1{
+         flow-children:down;
+         horizontal-align:center;vertical-align:center;
+         background-color: #00454D;
+         animation-name:contentAnimation;
+         animation-duration:0.3s;
+}
+
+#title{
+         margin: 10px;
+         color: #FFE406;
+         font-size: 25px;
+}
+
+#butto2ns{
+         flow-children:right;
+}
+
+.buttonStyle{
+         border: 1px solid #aaaaaa;
+         padding: 10px;
+         margin: 10px;
+         color: #1FCD00;
+         font-size: 50px;
+}
+
+.buttonStyle:hover{
+         border: 1px solid #eeeeee;
+}
+
+/***********************************面板按钮*******************************
+.Boll{
+         
+         margin-top:94%;
+         
+}
+
+
+
+
+/*按钮静止状态*
+.BollLabel{
+         margin-top: 94%;
+         margin: 10px;
+         padding: 5px;
+         color: #FF6D03;
+         font-size: 25px;
+         background-color: #00454D;
+/*边框是深色*
+         border: 2px solid #444444;
+         transition-property:border;
+         transition-duration:0.3s;
+}
+
+/*鼠标挪上去后的变化*
+.BollLabel:hover{
+   /*边框变浅色*
+         border: 2px solid #888888;
+}
+**/

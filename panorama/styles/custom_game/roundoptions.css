@@ -1,0 +1,87 @@
+.RoundOptionsPanel
+{
+    width: 100%;
+    height: 100%;
+    overflow: clip;
+}
+.selectred{ border: 3px solid #E59E51; }
+.selectgreen{ border: 3px solid #18D337; }
+
+#confirmation 
+{
+    horizontal-align: center;
+  vertical-align: top;
+  font-size: 20px;
+    font-weight: bold;
+  margin-top: 110px;
+  color: #00FF00;
+}
+
+#RoundOptions
+{
+  background-color:#707070;
+  horizontal-align: left;
+  margin-left:-200px;
+  margin-top:150px;
+  vertical-align: top;
+  width: 700px;
+  height: 150px;
+  border-radius: 100px;
+ }
+
+#question
+  {
+    horizontal-align: right;
+  vertical-align: top;
+  margin-right: 85px;
+  font-size: 20px;
+    font-weight: bold;
+  margin-top: 10px;
+  text-transform: uppercase;
+  color: #FFEA00;
+ }
+ #readytext
+ {
+  horizontal-align: center;
+  margin-top: 105px;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #0000FF;
+ }
+
+ .CreatePanelClass
+ {
+    //transform: translate3d( 0px, 0px, 0px );
+    animation-name: CreatePanel;
+    animation-duration: .42s;
+    animation-iteration-count: 1;
+ }
+ @keyframes 'CreatePanel'
+ {
+     0%
+     {
+        transform: translate3d( -500px, 0px, 0px );
+     }
+     100%
+     {
+        transform: translate3d( 0px, 0px, 0px );
+     }
+ }
+ .OffPanelClass
+ {
+    transform: translate3d( -499px, 0px, 0px );
+    animation-name: OffPanel;
+    animation-duration: .42s;
+    animation-iteration-count: 1;
+ }
+ @keyframes 'OffPanel'
+ {
+     0%
+     {
+        transform: translate3d( 0px, 0px, 0px );
+     }
+     100%
+     {
+        transform: translate3d( -499px, 0px, 0px );
+     }
+ }

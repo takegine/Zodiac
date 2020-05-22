@@ -1,0 +1,20 @@
+<root>
+        <styles>
+                <!-- 导入官方css -->
+                <include src="s2r://panorama/styles/dotastyles.vcss_c"/>
+        </styles>
+        
+        <Panel>
+
+<!-- 面板使用方法：https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools/Panorama/Panels -->
+          
+
+                <!-- 标签 -->
+                <Label id="addon_game_name" text="#addon_game_name" style="margin-top:20px;font-size:60px;"/>
+                <Label id="GameInfoText" text="#GameInfoText" style="margin-top:80px;margin-left:-30px;font-size:25px;border: 30px;"/>
+                
+        </Panel>
+   
+
+
+</root>

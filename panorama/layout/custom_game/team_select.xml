@@ -1,0 +1,97 @@
+<root>
+    <styles>
+            <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+            <include src="s2r://panorama/styles/play.vcss_c" />
+            <include src="s2r://panorama/styles/custom_game/team_select.vcss_c" />
+    </styles>
+    <scripts>
+            <include src="s2r://panorama/scripts/custom_game/team_select.vjs_c" />
+            <!--include src="s2r://panorama/scripts/custom_game/legion_options.vjs_c" /-->
+    </scripts>
+    <Panel hittest="false" class="TeamSelect">
+        <Panel hittest="false" id="TeamSelectContainer" selectionpos="auto">`
+        <!--Empty space to let the loading screen and chat be visible-->
+        <Panel hittest="false" id="TeamsSelectEmptySpace" />
+
+        <!--Settings List, left hand panel-->
+        <Panel id="StartGameCountdownTimer">
+            <Image id="TimerBg" src="file://{images}/status_icons/timer_background.psd" />
+            <Image id="TimerRing" src="file://{images}/status_icons/timer_ring.psd" />
+            <Label id="TeamSelectTimer" text="#custom_game_team_select_timer" />
+            <Panel id="TimerLabelBox" >
+            <Label class='hidden' id="TimerLabelAutoStart" text="#custom_game_team_select_auto_start" />
+            <Label class='hidden' id="TimerLabelGameStart" text="#custom_game_team_select_starting" />
+            </Panel>
+        </Panel>
+        <!--Teams List, left hand panel-->
+        <Panel id="TeamsList" >
+            <Panel id="TeamsListGroup" >
+            <Panel class='hidden' id="TeamListHeader">
+                <Label class='hidden' id="TeamListHeaderLabel" text="#custom_game_team_select" />
+                <Image class='hidden' id="TeamListLockedIcon" src="file://{images}/control_icons/lock_small.png" />
+            </Panel>
+            <Panel id="TeamsListRoot" />
+            <Panel id="OptionList">
+                <Panel id="OptionListGroup">
+                <Label id="OptionTitle" text="#Options_title" />
+                <Panel id="OptionDivider" />
+                <Panel id="Options">
+                    <ToggleButton id="tango_limit" onactivate="VoteOptionClicked('tango_limit')" text="#Option_Income_Limit" 
+                                    onmouseover="DOTAShowTextTooltip('#Option_Income_Limit_Tooltip')" onmouseout="DOTAHideTextTooltip()"/>
+                    <ToggleButton id="return_to_sender" onactivate="VoteOptionClicked('return_to_sender')" text="#Option_Return_To_Sender" 
+                                    onmouseover="DOTAShowTextTooltip('#Option_Return_To_Sender_Tooltip')" onmouseout="DOTAHideTextTooltip()"/>
+                    <ToggleButton id="fog_of_war" onactivate="VoteOptionClicked('fog_of_war')" text="#Option_Fog_Of_War" 
+                                    onmouseover="DOTAShowTextTooltip('#Option_Fog_Of_War_Tooltip')" onmouseout="DOTAHideTextTooltip()"/>
+                    <ToggleButton id="deactivate_duels" onactivate="VoteOptionClicked('deactivate_duels')" text="#Option_Deactivate_Duels" 
+                                    onmouseover="DOTAShowTextTooltip('#Option_Deactivate_Duels_Tooltip')" onmouseout="DOTAHideTextTooltip()"/>
+                    <ToggleButton id="hard_mode" onactivate="VoteOptionClicked('hard_mode')" text="#Option_Hard_Mode" 
+                                    onmouseover="DOTAShowTextTooltip('#Option_Hard_Mode_Tooltip')" onmouseout="DOTAHideTextTooltip()"/>
+                    <ToggleButton id="final_duel" onactivate="VoteOptionClicked ('final_duel')" text="#Option_Final_Duel" 
+                                    onmouseover="DOTAShowTextTooltip('#Option_Final_Duel_Tooltip')" onmouseout="DOTAHideTextTooltip()"/>
+                </Panel>
+
+                </Panel>
+            </Panel>
+            <Panel id="Discord" class="AdBanner">
+                <Image id="DiscordImage" class="AdImage" src="s2r://panorama/images/custom_game/game_info/discord_png.vtex" onactivate="ExternalBrowserGoToURL('https://discord.gg/pmMnfdA');" onload="DOTAShowTextTooltip('#Ad_updated')" onmouseover="DOTAShowTextTooltip('#Ad_updated')" onmouseout="DOTAHideTextTooltip()"/>
+            </Panel>
+            </Panel>
+        </Panel>
+
+        <!--Game Info and Unassigned players, right hand panel-->
+        <Panel id="GameAndPlayersRoot">
+
+            <Panel id="GameInfoPanel" >
+
+            <!--Game mode and map-->
+            <Panel id="CustomGameModeName">
+                <Label id="GameModeNameLabel" text="#addon_game_name" />
+            </Panel>
+            <Panel id="MapInfo">
+                <Label id="MapInfoLabel" text="#LoadingScreenMapInfo" />
+            </Panel>
+            </Panel>
+
+            <!--Unassigned players-->
+            <Panel id="UnassignedPlayerPanel" >
+            <Button id="UnassignedPlayersButton" onactivate="OnLeaveTeamPressed()">
+                <Panel id="UnassignedPlayersHeader">
+                <Label text="#custom_game_team_select_unassigned_players" />
+                </Panel>
+                <Panel id="UnassignedPlayersDivider" />
+                <Panel id="UnassignedPlayersContainer" />
+            </Button>
+            </Panel>
+
+            <!--Start and lock button-->
+            <Button id="LockAndStartButton" class="PlayButton" onactivate="OnLockAndStartPressed()">
+                <Label text="#custom_game_team_select_lock_start" />
+            </Button>
+            <Button id="CancelAndUnlockButton" class="PlayButton" onactivate="OnCancelAndUnlockPressed()">
+                <Label text="#custom_game_team_select_cancel_unlock" />
+            </Button>
+
+        </Panel>
+        </Panel>
+    </Panel>
+</root>

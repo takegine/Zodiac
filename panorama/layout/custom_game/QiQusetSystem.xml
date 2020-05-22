@@ -1,0 +1,50 @@
+<root>
+	<styles>
+
+		<include src="file://{resources}/styles/custom_game/QiQusetSystem.css"/>
+	</styles>
+
+	<scripts>
+
+		<include src="file://{resources}/scripts/custom_game/QiQusetSystem.js"/>
+
+	</scripts>
+
+	<snippets>
+
+		<snippet name="QuestLine">
+
+			<Panel>
+
+				<Panel direction="horizontal" class="Progress">
+
+					<Panel class="Progress_Left" style="margin-bottom: 0;"/>
+
+						<Panel class="Progress_Right" style="margin-bottom: 0;"/>
+
+				</Panel>
+
+				<Panel class="slider_lable">
+
+					<Label class="slider_info" text=""/>
+
+				</Panel>
+
+			</Panel>
+
+		</snippet>
+
+	</snippets>
+
+
+	<Panel hittest="false">
+
+		<Panel hittest="false" id="QuestMain">
+
+			<Panel id="QuestExample"> </Panel>
+
+		</Panel>
+
+	</Panel>
+
+</root>

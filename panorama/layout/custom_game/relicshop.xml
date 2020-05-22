@@ -1,0 +1,249 @@
+<root>
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+        <include src="s2r://panorama/styles/custom_game/relicshop.css" />
+    </styles>
+    <scripts>
+        <include src="s2r://panorama/scripts/custom_game/relicshop.js" />
+    </scripts>
+
+    <Panel hittest="false" class="RelicShopPanel">
+        <!--主界面按钮-->
+        <Panel hittest="false" id="RelicShop">
+            <Button id="Vote_Yes" onactivate='Yes()'/>
+            <Label hittest="false" id="readytext" text="#relics"/>
+        </Panel>
+
+<!--遗物图片，点击领取-->
+        <Panel hittest="false" class="Relicbuy">
+                <DOTAItemImage id="lvlmyitem1" class="riimg" itemname="item_relic_damage"      onactivate='Buy(1)'/>
+                <DOTAItemImage id="lvlmyitem2" class="riimg" itemname="item_relic_attackspeed" onactivate='Buy(2)'/>
+                <DOTAItemImage id="lvlmyitem3" class="riimg" itemname="item_relic_armor"       onactivate='Buy(3)'/>
+                <DOTAItemImage id="lvlmyitem4" class="riimg" itemname="item_relic_allsatas"    onactivate='Buy(4)'/>
+                <DOTAItemImage id="lvlmyitem5" class="riimg" itemname="item_relic_magres"      onactivate='Buy(5)'/>
+                <DOTAItemImage id="lvlmyitem6" class="riimg" itemname="item_relic_magvam"      onactivate='Buy(6)'/>
+                <DOTAItemImage id="lvlmyitem7" class="riimg" itemname="item_relic_magdam"      onactivate='Buy(7)'/>
+                <DOTAItemImage id="lvlmyitem8" class="riimg" itemname="item_book"              onactivate='Buy(8)'/>
+                </Panel>
+<!--遗物个数，-->
+<Panel class="Relicbuy" >
+                <Label hittest="false" id="lvlmyitemtext1" text="-" />
+                <Label hittest="false" id="lvlmyitemtext2" text="-" />
+                <Label hittest="false" id="lvlmyitemtext3" text="-" />
+                <Label hittest="false" id="lvlmyitemtext4" text="-" />
+                <Label hittest="false" id="lvlmyitemtext5" text="-" />
+                <Label hittest="false" id="lvlmyitemtext6" text="-" />
+                <Label hittest="false" id="lvlmyitemtext7" text="-" />
+
+     </Panel>
+
+     <Panel hittest="false" class="Relicbuy" >
+
+     </Panel>
+
+
+        <Panel hittest="false" id="AllRelicPanel">
+            <Panel hittest="false" id="RelicPanel">
+
+          
+                
+                
+
+                <Button id="ColorButton1" class="selectedfilter" style="height:20px;width:20px; margin-top:550px;margin-left:700px;" onactivate='SetColor(1)' onmouseover='DOTAShowTextTooltip(Default)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton2" class="nocolor" style="height:20px;width:20px; margin-top:550px;margin-left:727px;" onactivate='SetColor(2)' onmouseover='DOTAShowTextTooltip(Ice)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton3" class="nocolor" style="height:20px;width:20px; margin-top:550px;margin-left:754px;" onactivate='SetColor(3)' onmouseover='DOTAShowTextTooltip(Fire)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton4" class="nocolor" style="height:20px;width:20px; margin-top:550px;margin-left:781px;" onactivate='SetColor(4)' onmouseover='DOTAShowTextTooltip(Water)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton5" class="nocolor" style="height:20px;width:20px; margin-top:550px;margin-left:808px;" onactivate='SetColor(5)' onmouseover='DOTAShowTextTooltip(Energy)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton6" class="nocolor" style="height:20px;width:20px; margin-top:550px;margin-left:835px;" onactivate='SetColor(6)' onmouseover='DOTAShowTextTooltip(Earth)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton7" class="nocolor" style="height:20px;width:20px; margin-top:577px;margin-left:700px;" onactivate='SetColor(7)' onmouseover='DOTAShowTextTooltip(Life)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton8" class="nocolor" style="height:20px;width:20px; margin-top:577px;margin-left:727px;" onactivate='SetColor(8)' onmouseover='DOTAShowTextTooltip(Void)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton9" class="nocolor" style="height:20px;width:20px; margin-top:577px;margin-left:754px;" onactivate='SetColor(9)' onmouseover='DOTAShowTextTooltip(Air)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton10" class="nocolor" style="height:20px;width:20px; margin-top:577px;margin-left:781px;" onactivate='SetColor(10)' onmouseover='DOTAShowTextTooltip(Light)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton11" class="nocolor" style="height:20px;width:20px; margin-top:577px;margin-left:808px;" onactivate='SetColor(11)' onmouseover='DOTAShowTextTooltip(Shadow)' onmouseout='DOTAHideTextTooltip()'/>
+                <Button id="ColorButton12" class="nocolor" style="height:20px;width:20px; margin-top:577px;margin-left:835px;" onactivate='SetColor(12)' onmouseover='DOTAShowTextTooltip(Patreon)' onmouseout='DOTAHideTextTooltip()'/>
+                <Panel hittest="false" id="dustlabel" >
+                    
+                    <Label hittest="false" id="dustlabeltxt" text="0" style="margin-top:400px;margin-left:50px;"/> <!--粉末面板？-->
+                    
+                </Panel>
+                <Panel hittest="false" id="upgradepanel" >
+                    
+                    <Button id="UpgradeButton" class="PureButtondis" onactivate='UpgradeButton()' style="margin-top:325px;margin-left:200px;">
+                        <Label hittest="false" id="upgradebuttontext" text="#noupgrade"/>
+                    </Button>
+                    <Panel hittest="false" id="forupgradepartpanel" />
+                </Panel>
+                <Panel hittest="false" id="rsinv" style="height:395px;width:300px; margin-top:95px;margin-left:580px;" />
+                
+                <Panel hittest="false" id="rsfilter" ><!--石头筛选列表，上面四个筛选颜色，下面四个筛选品类-->
+                    <Label hittest="false" id="filterlabel" text="#filterlabel" style="margin-top:15px;margin-left:590px;"/>
+                    <Button id="FilterButton1" class="noselectedfilter" style="height:20px;width:20px; margin-top:40px;margin-left:600px;" onactivate='SetFilter(1)' onmouseover='DOTAShowTextTooltip(Common)' onmouseout='DOTAHideTextTooltip()'/>
+                    <Button id="FilterButton2" class="noselectedfilter" style="height:20px;width:20px; margin-top:40px;margin-left:630px;" onactivate='SetFilter(2)' onmouseover='DOTAShowTextTooltip(Rare)' onmouseout='DOTAHideTextTooltip()'/>
+                    <Button id="FilterButton3" class="noselectedfilter" style="height:20px;width:20px; margin-top:40px;margin-left:660px;" onactivate='SetFilter(3)' onmouseover='DOTAShowTextTooltip(Mythical)' onmouseout='DOTAHideTextTooltip()'/>
+                    <Button id="FilterButton4" class="noselectedfilter" style="height:20px;width:20px; margin-top:40px;margin-left:690px;" onactivate='SetFilter(4)' onmouseover='DOTAShowTextTooltip(Immortal)' onmouseout='DOTAHideTextTooltip()'/>
+                    <DOTAItemImage id="FilterButton21" class="noselectedfilter" itemname="item_relic_damage" style="height:20px;width:28px; margin-top:68px; margin-left:600px;" onactivate='SetFilter2(1)'/>
+                    <DOTAItemImage id="FilterButton22" class="noselectedfilter" itemname="item_relic_attackspeed" style="height:20px;width:28px; margin-top:68px; margin-left:635px;" onactivate='SetFilter2(2)'/>
+                    <DOTAItemImage id="FilterButton23" class="noselectedfilter" itemname="item_relic_armor" style="height:20px;width:28px; margin-top:68px; margin-left:670px;" onactivate='SetFilter2(3)'/>
+                    <DOTAItemImage id="FilterButton24" class="noselectedfilter" itemname="item_relic_allsatas" style="height:20px;width:28px; margin-top:68px; margin-left:705px;" onactivate='SetFilter2(4)'/>
+                    <DOTAItemImage id="FilterButton25" class="noselectedfilter" itemname="item_relic_magres" style="height:20px;width:28px; margin-top:68px; margin-left:740px;" onactivate='SetFilter2(5)'/>
+                    <DOTAItemImage id="FilterButton26" class="noselectedfilter" itemname="item_relic_magvam" style="height:20px;width:28px; margin-top:68px; margin-left:775px;" onactivate='SetFilter2(6)'/>
+                    <DOTAItemImage id="FilterButton27" class="noselectedfilter" itemname="item_relic_magdam" style="height:20px;width:28px; margin-top:68px; margin-left:810px;" onactivate='SetFilter2(7)'/>
+                </Panel>
+
+                <Panel hittest="false" id="saves" class="savesdis">
+                    <Panel hittest="false" id="savespanel">
+                        <Label hittest="false" id="savesbuttontext" text="#saves"/>
+                        <Panel hittest="false" id="savespanelitems"/>
+                        <Button id="SaveButton1" class="SaveButtons" onactivate='SaveSet(1)' >
+                            <Label hittest="false" class="centertext" text="#save"/>
+                        </Button>
+                        <Button id="SaveButton2" class="SaveButtons" onactivate='SaveSet(2)' >
+                            <Label hittest="false" class="centertext" text="#save"/>
+                        </Button>
+                        <Button id="SaveButton3" class="SaveButtons" onactivate='SaveSet(3)' >
+                            <Label hittest="false" class="centertext" text="#save"/>
+                        </Button>
+                        <Button id="SaveButton4" class="SaveButtons" onactivate='SaveSet(4)' >
+                            <Label hittest="false" class="centertext" text="#save"/>
+                        </Button>
+                        <Button id="SaveButton5" class="SaveButtons" onactivate='SaveSet(5)' >
+                            <Label hittest="false" class="centertext" text="#save"/>
+                        </Button>
+                        <Button id="SaveButton6" class="SaveButtons" onactivate='SaveSet(6)' >
+                            <Label hittest="false" class="centertext" text="#save"/>
+                        </Button>
+                        <Button id="SaveButton7" class="SaveButtons" onactivate='SaveSet(7)' >
+                            <Label hittest="false" class="centertext" text="#save"/>
+                        </Button>
+                        <Button id="SaveButton8" class="SaveButtons" onactivate='SaveSet(8)' >
+                            <Label hittest="false" class="centertext" text="#save"/>
+                        </Button>
+                        <Button id="LoadButton1" class="SaveButtons" onactivate='LoadSet(1)' >
+                            <Label hittest="false" class="centertext" text="#load"/>
+                        </Button>
+                        <Button id="LoadButton2" class="SaveButtons" onactivate='LoadSet(2)' >
+                            <Label hittest="false" class="centertext" text="#load"/>
+                        </Button>
+                        <Button id="LoadButton3" class="SaveButtons" onactivate='LoadSet(3)' >
+                            <Label hittest="false" class="centertext" text="#load"/>
+                        </Button>
+                        <Button id="LoadButton4" class="SaveButtons" onactivate='LoadSet(4)' >
+                            <Label hittest="false" class="centertext" text="#load"/>
+                        </Button>
+                        <Button id="LoadButton5" class="SaveButtons" onactivate='LoadSet(5)' >
+                            <Label hittest="false" class="centertext" text="#load"/>
+                        </Button>
+                        <Button id="LoadButton6" class="SaveButtons" onactivate='LoadSet(6)' >
+                            <Label hittest="false" class="centertext" text="#load"/>
+                        </Button>
+                        <Button id="LoadButton7" class="SaveButtons" onactivate='LoadSet(7)' >
+                            <Label hittest="false" class="centertext" text="#load"/>
+                        </Button>
+                        <Button id="LoadButton8" class="SaveButtons" onactivate='LoadSet(8)' >
+                            <Label hittest="false" class="centertext" text="#load"/>
+                        </Button>
+                    </Panel>
+                    <Button id="SavesButton" onactivate='SavesButton()' >
+                        <Image hittest="false" id="SavesButtonimg" class="imgoff" src="s2r://panorama/images/custom_game/all/fondtop.png" style="height:90px;width:15px; margin-top:3px; margin-left:5px;"/>
+                    </Button>
+                </Panel>
+                <Panel hittest="false" id="osnova">
+                    <Image src="s2r://panorama/images/custom_game/all/minirfon_png.vtex" style="height:456px;width:500px; margin-top:25px; margin-left:25px;" />
+
+                    <Panel hittest="false" id="animslot1" >
+                        <Panel hittest="false" id="slot1anim1" />
+                        <Panel hittest="false" id="slot1anim2" />
+                    </Panel>
+                    <Panel hittest="false" id="animslot2" >
+                        <Panel hittest="false" id="slot2anim1" />
+                        <Panel hittest="false" id="slot2anim2" />
+                    </Panel>
+                    <Panel hittest="false" id="animslot3" >
+                        <Panel hittest="false" id="slot3anim1" />
+                        <Panel hittest="false" id="slot3anim2" />
+                    </Panel>
+                    <Panel hittest="false" id="animslot4" >
+                        <Panel hittest="false" id="slot4anim1" />
+                        <Panel hittest="false" id="slot4anim2" />
+                    </Panel>
+                    <Panel hittest="false" id="animslot5" >
+                        <Panel hittest="false" id="slot5anim1" />
+                        <Panel hittest="false" id="slot5anim2" />
+                    </Panel>
+                    <Panel hittest="false" id="animslot6" >
+                        <Panel hittest="false" id="slot6anim1" />
+                        <Panel hittest="false" id="slot6anim2" />
+                    </Panel>
+                    <Panel hittest="false" id="animslot7" >
+                        <Panel hittest="false" id="slot7anim1" />
+                        <Panel hittest="false" id="slot7anim2" />
+                    </Panel>
+                    <Panel hittest="false" id="animslot8" >
+                        <Panel hittest="false" id="slot8anim1" />
+                        <Panel hittest="false" id="slot8anim2" />
+                    </Panel>
+                    <Panel hittest="false" class="itemfon" style="height:50px;width:50px; margin-top:30px; margin-left:250px;"/>
+                    <Panel hittest="false" class="itemfon" style="height:50px;width:50px; margin-top:426px; margin-left:250px;"/>
+                    <Panel hittest="false" class="itemfon" style="height:50px;width:50px; margin-top:228px; margin-left:40px;"/>
+                    <Panel hittest="false" class="itemfon" style="height:50px;width:50px; margin-top:228px; margin-left:460px;"/>
+                    <Panel hittest="false" class="itemfon2" style="height:50px;width:50px; margin-top:78px; margin-left:88px;"/>
+                    <Panel hittest="false" class="itemfon2" style="height:50px;width:50px; margin-top:78px; margin-left:413px;"/>
+                    <Panel hittest="false" class="itemfon2" style="height:50px;width:50px; margin-top:379px; margin-left:87px;"/>
+                    <Panel hittest="false" class="itemfon2" style="height:50px;width:50px; margin-top:378px; margin-left:413px;"/>
+                    <Image id="osnimg" src="s2r://panorama/images/custom_game/all/tttest2_png.vtex" style="height:476px;width:520px; margin-top:15px; margin-left:15px;" />
+                    <Panel hittest="false" id="imgslots"/>
+
+                    <Panel hittest="false" id="locks1">
+                        <Image id="lockimg1" src="s2r://panorama/images/custom_game/all/lock_png.vtex" style="height:32px;width:32px; margin-top:38px; margin-left:259px;" />
+                        <Image id="lockimg2" src="s2r://panorama/images/custom_game/all/lock_png.vtex" style="height:32px;width:32px; margin-top:237px; margin-left:469px;" />
+                        <Image id="lockimg3" src="s2r://panorama/images/custom_game/all/lock_png.vtex" style="height:32px;width:32px; margin-top:435px; margin-left:259px;" />
+                        <Image id="lockimg4" src="s2r://panorama/images/custom_game/all/lock_png.vtex" style="height:32px;width:32px; margin-top:237px; margin-left:49px;" />
+                    </Panel>
+
+                    <Panel hittest="false" id="locks2">
+                        <Image id="lockimg5" src="s2r://panorama/images/custom_game/all/lock_png.vtex" style="height:32px;width:32px; margin-top:86px; margin-left:422px;" />
+                        <Image id="lockimg6" src="s2r://panorama/images/custom_game/all/lock_png.vtex" style="height:32px;width:32px; margin-top:387px; margin-left:422px;" />
+                        <Image id="lockimg7" src="s2r://panorama/images/custom_game/all/lock_png.vtex" style="height:32px;width:32px; margin-top:387px; margin-left:97px;" />
+                        <Image id="lockimg8" src="s2r://panorama/images/custom_game/all/lock_png.vtex" style="height:32px;width:32px; margin-top:86px; margin-left:97px;" />
+                    </Panel>
+
+                    <DOTAScenePanel id="mysealcampart" hittest="false" style="height:400px;width:400px; margin-top:45px; margin-left:62px;" map="cameras" camera="partcamera1" /><!--未知-->
+                    <DOTAItemImage id="relicitem" itemname="" style="height:64px;width:88px; margin-top:221px; margin-left:231px;"/>
+                </Panel>
+
+                <Panel hittest="false" id="puredust" >
+                    <Label hittest="false" id="puredisklabel" html="true" text="#puretextlbl" style="margin-top:70px;margin-left:50px; width:420px;"/>
+                    <Label hittest="false" id="puredustlabel" text="0" style="margin-top:225px;margin-left:300px;"/><!--粉碎余额-->
+
+                    <Button id="PureButton" class="PureButtonact" onactivate='PureButton()' style="margin-top:325px;margin-left:200px;"><!--粉碎按钮-->
+                        <Label hittest="false" id="purebuttontext" text="#conf"/>
+                    </Button>
+
+                </Panel>
+
+                <Button id="GAButton" onactivate='Buy(0)'><!--购买全部遗物-->
+                    <Label id="mytext" text="#getall" />
+                </Button>
+                <Button id="RButton" onactivate='RefreshR()'><!--刷新按钮-->
+                    <Label hittest="false" id="refreshtext" text="#refreshrelics"/>
+                </Button>
+            </Panel>
+      <!--点击更改面板-->      <Button id="SelPlButton0" onactivate='SelectPl(0)' style="margin-bottom:794px; margin-left:30px;">
+                <Image class="SelPlButtonimg" src="s2r://panorama/images/custom_game/all/selectpldis_png.vtex" style="height:48px;"/>
+      <!--高亮图标-->     <Image src="s2r://panorama/images/custom_game/all/selectplact_png.vtex" id="spba0" class="SelPlButtonAct" />
+                <Image src="s2r://panorama/images/custom_game/all/noseal_png.vtex" style="height:42px;width:42px; margin-top:4px; margin-left:20px;"/>
+            </Button>
+      <!--点击更改面板-->      <Button id="SelPlButton1" onactivate='SelectPl(1)' style="margin-bottom:794px; margin-left:120px;">
+                <Image class="SelPlButtonimg" src="s2r://panorama/images/custom_game/all/selectpldis_png.vtex" style="height:48px;"/>
+      <!--高亮图标-->                 <Image src="s2r://panorama/images/custom_game/all/selectplact_png.vtex" id="spba1" class="SelPlButtonAct" />
+                <Image src="s2r://panorama/images/custom_game/all/nodust_png.vtex" style="height:26px;width:42px; margin-top:12px; margin-left:20px;"/>
+            </Button>
+      <!--点击更改面板-->      <Button id="SelPlButton2" onactivate='SelectPl(2)' style="margin-bottom:794px; margin-left:210px;">   
+                <Image class="SelPlButtonimg" src="s2r://panorama/images/custom_game/all/selectpldis_png.vtex" style="height:48px;"/>
+      <!--高亮图标-->   <Image src="s2r://panorama/images/custom_game/all/selectplact_png.vtex" id="spba2" class="SelPlButtonAct" />
+                <Image src="s2r://panorama/images/custom_game/all/anvil_png.vtex" style="height:28px;width:36px; margin-top:12px; margin-left:23px;"/>
+            </Button>
+
+        </Panel>
+    </Panel>
+</root>

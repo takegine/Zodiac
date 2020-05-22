@@ -1,0 +1,65 @@
+.WaveDamageTop
+{
+    width: 100%;
+    height: 100%;
+    overflow: clip;
+}
+
+#DamageTop
+{
+
+  margin-left:80%;
+  vertical-align: top;
+ }
+ 
+#topp
+{
+  horizontal-align: left;
+  margin-left:0px;
+  vertical-align: top;
+  width: 250px;
+  height: 20px;
+ }
+ 
+ #TPtext
+ {
+  margin-left:5px;
+  font-size: 18px;
+  font-weight: bold;
+ }
+ 
+ #hero1,
+ #hero2,
+ #hero3,
+ #hero4,
+ #hero5
+ {
+  horizontal-align: left;
+  margin-left:0px;
+  vertical-align: top;
+  width: 250px;
+  height: 28px;
+ }
+ 
+ #DamageH1,
+ #DamageH2,
+ #DamageH3,
+ #DamageH4,
+ #DamageH5
+ {
+  horizontal-align: right;
+  margin-right:10px;
+  margin-top:3px;
+  font-size: 18px;
+  font-weight: bold;
+ }
+ 
+ #ihero1,
+ #ihero2,
+ #ihero3,
+ #ihero4,
+ #ihero5
+ {
+  margin-top:2px;
+  margin-left:4px;
+ }

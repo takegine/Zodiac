@@ -1,0 +1,72 @@
+#QuestPanel{
+  margin-left: 690px;
+  margin-top: 27%;
+  flow-children:down;
+ 
+}
+.Progress{
+  width: 550px;
+  height: 30px;
+  border:3px solid #454545;
+  padding:3px;
+  box-shadow:inset #532017 0px 0px 0px;
+  background-color:gradient( linear, 0% 0%, 100% 0%, from( #242424 ), to( #000000 ) );
+  border-radius:5px;
+}
+
+.CommunityChallengeProgressLeft{
+  /*background-color:gradient( linear, 0% 0%, 0% 100%, from( accentColor ), to( #EEEE00 ) );
+  box-shadow:inset accentColorGlow 0px 0px 6px;*/
+  border-radius:3px;
+}
+
+.SliderLable{
+  horizontal-align:center;
+}
+
+.AchievementQuestLable{
+  horizontal-align:left;
+  flow-children:right;
+}
+
+
+.SliderInfo{
+    margin-top:5px;
+    margin-left: 0px;
+    text-shadow :1px 1px 10px 5.0 #000000;
+    font-size:18px;
+    color:#FFFFFF;
+    font-family:Radiance,FZLanTingHei-R-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+}
+
+.AffixesLine{
+  margin-top: 10px;
+  width: 300px;
+  height: 40px;
+}
+
+.AbilityImage{
+  width: 40px;
+  height: 40px;
+  transition: position 1.2s ease-in-out 0s, perspective-origin 1.2s ease-in-out 0.8s;
+}
+
+.Panle_MarginStyle{
+  margin-bottom:12px; 
+}
+
+.Progress_Left
+{
+  background-color:gradient( linear, 0% 100%, 0% 0%, from( #242424 ), to( #FF1111 ) );
+  /*box-shadow:inset accentColorGlow 2px 3px 6px;*/
+  border-radius:6px;
+  width: 0%;
+  height: 100%;
+  border:1px solid #563C35;
+ 
+}
+
+.Progress_Right{
+  width: 100%;
+  height: 100%;
+}

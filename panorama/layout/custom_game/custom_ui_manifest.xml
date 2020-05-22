@@ -1,0 +1,26 @@
+<root>
+    <scripts>
+      <include src="s2r://panorama/scripts/custom_game/custom_ui_manifest.js" />
+
+    </scripts>
+
+    <Panel>
+        <CustomUIElement type="GameInfo" layoutfile="file://{resources}/layout/custom_game/game_info.xml"   /><!--游戏梗概-->
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/uimain.xml"           /><!--左下角按钮，等面板做好之后做跳转，元素购买-->
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/QiQusetSystem.xml"    /><!--左上角任务系统，倒计时-->
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/uiscreen.xml"         /><!--中间进入游戏时选择难度，等难度控制器做好做挂钩-->
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/profile.xml"          /><!--玩家游戏记录，这个还没写出来-->
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/boss_hp.xml"  /><!--待写：元素合成表-->
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/damagetop.xml"  /><!--待写：元素合成表-->
+        <!--CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/relicshop.xml"  /--><!--待写：元素合成表-->
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/elementshop.xml"  /><!--待写：元素合成表-->
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/roundoptions.xml"  /><!--待写：元素合成表-->
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/power_item_menu.xml"  /><!--待写：元素合成表-->
+        <!--待写：罪证的面板，需要先做好罪证及卷轴-->
+        <!--待写：右上角数据面板，秒伤，承担伤害，治疗，死亡-->
+        <!--待写：右上角掉签名的弹窗，需要先做好物品及掉落-->
+
+
+    </Panel>
+
+</root>

@@ -1,0 +1,81 @@
+<root>
+    <styles>
+        
+        <include src="s2r://panorama/styles/custom_game/elementshop.css" />
+    </styles>
+    <scripts>
+        <include src="s2r://panorama/scripts/custom_game/elementshop.js" />
+    </scripts>
+    
+    <Panel hittest="false" class="ElementShopPanel">
+        
+            <Panel class="Bolls" hittest="false"><!--顶部圆球.右下角标示剩余数字-->
+                <Button class="btntop" id="btntop0" onactivate='Buy(1)'>
+                    <Label hittest="false" id="Boll0" text="#dota_item_EA_0_1"/>
+                </Button>
+                    <Label id="lvlmyitemtext1" calss="numb" text="x 0"/>
+                <Button class="btntop" id="btntop1" onactivate='Buy(2)'>
+                    <Label id="Boll1" text="#dota_item_EA_1_1"/>
+                </Button>
+                    <Label id="lvlmyitemtext2" text="x 0" calss="numb"/>
+                <Button class="btntop" id="btntop2" onactivate='Buy(3)'>
+                    <Label id="Boll2" text="#dota_item_EA_2_1"/>
+                </Button>
+                    <Label  id="lvlmyitemtext3" text="x 0" calss="numb"/>
+                <Button class="btntop" id="btntop3" onactivate='Buy(4)'>
+                    <Label id="Boll3" text="#dota_item_EA_3_1"/>
+                </Button>
+                    <Label id="lvlmyitemtext4" text="x 0" calss="numb"/>
+                <Button class="btntop" id="btntop4" onactivate='Buy(5)'>
+                    <Label id="Boll4" text="#dota_item_EA_4_1"/>
+                </Button>
+                    <Label id="lvlmyitemtext5" text="x 0" calss="numb"/>
+                <Button class="btntop" id="btntop5" onactivate='Buy(6)'>
+                    <Label id="Boll5" text="#dota_item_EA_5_1"/>
+                </Button>
+                    <Label id="lvlmyitemtext6" text="x 0" calss="numb"/>
+                <Button class="btntop" id="btntop6" onactivate='Buy(7)'>
+                    <Label  id="Boll6" text="#dota_item_EA_6_1"/>
+                </Button>
+                    <Label id="lvlmyitemtext7" text="x 0" calss="numb"/>
+                <Button class="btntop" id="btntop7" onactivate='Buy(8)'>
+                    <Label id="Boll7" text="#dota_item_EA_7_1"/>
+                </Button>
+                    <Label  id="lvlmyitemtext8" text="x 0"  calss="numb"/>
+                <Button class="btntop" id="btntop8" onactivate='Buy(9)'>
+                    <Label id="Boll8" text="#dota_item_EA_8_1"/>
+                </Button>
+                    <Label id="lvlmyitemtext9" text="x 0" calss="numb"/>
+                <Button class="btntop" id="btntop9" onactivate='Buy(10)'>
+                    <Label  id="Boll9" text="#dota_item_EA_9_1"/>
+                </Button>
+                <Label id="lvlmyitemtext10" text="x 0" calss="numb"/>
+            </Panel>
+
+            <Button class="btnleft" id="ElementShop" onactivate='Yes()'>
+                <Label id="readytext" class="ElementShopText" text="#UIButton1"/>
+            </Button>
+
+
+            
+            <Panel hittest="false" id="ShopInfo" class="ShopInfoAnim"><!--弹出合成列表-->
+                <Image hittest="false" src="file://panorama/images/custom_game/all/fondtop.png" style="height:100%;width:100%; "/><!--背景图片-->
+                
+                <Panel id="textforhero">
+                    <Label text="#textforhero1" class="textforh" style="margin-right:240px;color:#18D337;"/>
+                    <Label text="#textforhero2" class="textforh" style="margin-right:240px;color:#344C99;"/>
+                    <Label text="#textforhero3" class="textforh" style="margin-right:80px;"/>
+                </Panel>
+
+                <Button id="ToggleX3mode" onactivate='ToggleX3mode()' style="height:30px;width:30px;margin-top:510px;margin-left:860px;" onmouseover='DOTAShowTextTooltip(x3 Mode)' onmouseout='DOTAHideTextTooltip()'>
+                    <Label text="x3" style="font-size:25px;color:#58ACFA;"/>
+                </Button>
+            </Panel>
+
+
+
+
+ 
+        
+    </Panel>
+</root>

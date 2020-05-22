@@ -1,0 +1,40 @@
+kv{
+	
+}
+
+npc{						//清单-kv
+	npc_abilities_custom	//自建技能
+	npc_abilities_override	//原生技能覆盖
+	npc_heroes_custom		//自建英雄
+	npc_items_custom.txt	//自建物品
+	npc_units_custom.txt 	//自建单位
+}
+
+vscripts{					//程序-lua
+	items 				-	//自建物品
+		{
+		book				//卷轴：罄竹难书
+		finalbook			//神的证明
+		proved				//七罪证明
+		……
+		}
+	hero 				-	//英雄设计
+		{}
+	skill 				-	//怪物技能
+		{}
+	modifiers			-	//修饰器
+		{}
+	unitAI 				-	//怪物智能
+		{}
+	other				-	//其他程序
+		{}
+
+	addon_game_mode			//游戏启动文件
+	timers					//计时器
+	questsysem				//任务系统
+	ea01					//主体程序
+	shop_area				//投票判定IO
+
+
+
+}

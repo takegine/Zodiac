@@ -1,0 +1,55 @@
+
+<root>
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+        <include src="file://{resources}/styles/custom_game/uiscreen.css" />
+        GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_CUSTOMUI_BEHIND_HUD_ELEMENTS, false );//把自定义面板放到内置面板后面
+    </styles>
+    <scripts>
+        <include src="file://{resources}/scripts/custom_game/uiscreen.js" />
+    </scripts>
+    <Panel>
+        <Panel id="psd" hittest="false"><!--中间进入游戏时选择难度-->
+            <Panel id="UIstartmain" hittest="false">
+                <Label id="ModeS" text="#ModeS"/>
+                <Label id="ModeNow" text=""/>
+                
+                
+          
+                <Panel id="ModeSel" hittest="false">
+                    
+
+                    <RadioButton checked="checked" group="Demo" class="Mode"  id="mode0"  onactivate="OpenInfo(1)">
+                        <Label class="modelabel" text="#mode1"/>
+                        <Panel id="spl0"/>
+                        
+                    </RadioButton>
+                    <RadioButton group="Demo" class="Mode"  id="mode1"  onactivate="OpenInfo(2)">
+                        <Label class="modelabel" text="#mode2"/>
+                        <Panel id="spl1"/>
+                    </RadioButton>
+                    <RadioButton group="Demo" class="Mode"  id="mode2"  onactivate="OpenInfo(3)">
+                        <Label class="modelabel" text="#mode3"/>
+                        <Panel id="spl2"/>
+                    </RadioButton>
+                    <!-- group="Demo" class="Mode"  id="mode3"  onactivate="OpenInfo(4)">
+                        <Label class="modelabel" text="#mode4"/>
+                        <Panel id="spl3"/>
+                    </RadioButton-->   
+                </Panel>
+                
+            
+                <Panel id="ModeInfoPanel">
+                    <Label id="ModeInfo4" class="ModeInfo Hidden" text="ModeInfo4"/>
+                    <Label id="ModeInfo3" class="ModeInfo Hidden" text="ModeInfo3"/>
+                    <Label id="ModeInfo2" class="ModeInfo Hidden"  text="ModeInfo2"/>
+                    <Label id="ModeInfo1" class="ModeInfo" text="ModeInfo1" />
+                    
+                
+                </Panel>
+                
+                <Button id="btn" onactivate="onBtnClick()"><Label id="vote" text="#vote"/></Button><!-- 按钮，确定 -->
+            </Panel>
+        </Panel>
+    </Panel>
+</root>

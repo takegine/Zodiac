@@ -1,0 +1,209 @@
+.ProfilePanel{    width: 100%;    height: 100%;}
+
+ #Profile
+{
+  horizontal-align: center;  vertical-align: center;
+  width: 640px;  height: 480px;
+flow-children:right;
+background-color: #00454D;border-radius: 25px;
+   box-shadow: #ffffff80 2px 2px 10px 0px;
+   color:#fff;
+ }
+
+#confirmation 
+{
+    horizontal-align: center;
+	vertical-align: top;
+	font-size: 20px;
+    font-weight: bold;
+	margin-top: 110px;
+	color: #00FF00;
+}
+
+#noheader
+{
+margin-top:40px;
+margin-left: 113px;
+horizontal-align:left;
+color: #FFEA00;
+font-size: 20px;
+font-weight: bold;
+}
+
+#yesheader
+{
+margin-top:40px;
+margin-right: 109px;
+horizontal-align:right;
+color: #FFEA00;
+font-size: 20px;
+font-weight: bold;
+}
+
+#noresults
+{
+margin-top:60px;
+margin-left: 100px;
+horizontal-align:left;
+}
+
+#yesresults
+{
+margin-top:60px;
+margin-left: 100px;
+horizontal-align:left;
+}
+
+#ProfileButton
+{
+  horizontal-align: left;
+  margin-left:135px;
+  margin-bottom:100px;
+  vertical-align: bottom;
+  width: 120px;
+  height: 148px;
+}
+
+
+ #MaxProfile
+{
+  horizontal-align: center;
+  vertical-align: center;
+  margin-left:0px;
+  margin-bottom:100px;
+  width: 600px;
+  height: 550px;
+ }
+ .CreatePanelClass
+ {
+    opacity: 1;
+    animation-name: CreatePanel;
+    animation-duration: .22s;
+    animation-iteration-count: 1;
+ }
+ @keyframes 'CreatePanel'
+ {
+     0%
+     {
+         opacity: 0;
+     }
+     100%
+          {
+         opacity: 1;
+     }
+ }
+ .OffPanelClass
+ {
+    opacity: 0;
+    animation-name: OffPanel;
+    animation-duration: .22s;
+    animation-iteration-count: 1;
+ }
+ @keyframes 'OffPanel'
+ {
+     0%
+     {
+         opacity: 1;
+     }
+     100%
+          {
+         opacity: 0;
+     }
+ }
+ #BG_Image
+{
+  horizontal-align: left;
+  vertical-align: bottom;
+  margin-left:0px;
+  margin-bottom:0px;
+  width: 279px;
+  height: 60px;
+ }
+
+ .SelPlButton{  margin-top:3px;horizontal-align: center; }
+
+ .SelPlButton:hover{  border: 1px solid #eeeeee; }
+
+
+.btnleft{/*按钮集齐静态*/
+         width :200px;
+         height: 50px;
+         color:#00454D;
+         font-size: 30px;
+         text-align:center;
+         border: 7px;
+         border-radius: 100px;
+         box-shadow: 0px 0px 10px 0px #01bcff;
+         font-weight: bold;
+         background-color: gradient( linear, 0% 0%, 0% 55%, from( #fbfbfbff ), color-stop( 0.3, #ebebebff ), to( #c0c0c0c0 ) );
+}
+
+.btnleft:hover{/*按钮集齐鼠标悬浮*/
+         color:#e66465;
+         box-shadow: 1px 2px 10px rgba(255,76,106,0.75);
+}
+ #Vote_Yes{	/*按钮位置*/
+margin-top: 93%;margin-left:5%;
+ }
+ #readytext {horizontal-align: center;vertical-align: center;
+   text-transform: uppercase;
+   font-family:Radiance,FZLanTingHei-B-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+
+    //animation-name: OpacityPulse; 闪烁动画
+    //animation-duration: .82s;
+    //animation-iteration-count: infinite;
+ }
+
+ #refresh
+{
+	horizontal-align: center;
+  vertical-align: top;
+  margin-right:5px;
+ margin-top: 99px;
+  width: 280px;
+    height: 60px;
+ }
+ 
+#question
+  {
+    horizontal-align: right;
+	vertical-align: top;
+	margin-right: 85px;
+	font-size: 20px;
+    font-weight: bold;
+	margin-top: 10px;
+	text-transform: uppercase;
+	color: #FFEA00;
+ }
+
+ #UserName {
+  pre-transform-scale2d: 1.5;
+  horizontal-align: center;
+  margin-top:20px;
+   }
+ @keyframes 'OpacityPulse'
+ {
+     0%
+     {
+         text-shadow: 0 1px #AA22AA;
+     }
+     50%
+     {
+         text-shadow: 0 0 5px #AA22AA;
+     }
+     100%
+     {
+         text-shadow: 0 0 1px #AA22AA;
+     }
+ }
+ .mytest
+ {
+    font-family: impact, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-top:5px;
+ }
+ 
+ .Heroes{    saturation: 0;height:33px;width:33px;margin-right:4px;margin-top: 4px; }
+ 
+ .Heroes2{    saturation: 1;height:37px;width:37px;}

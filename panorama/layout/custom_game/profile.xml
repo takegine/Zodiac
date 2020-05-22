@@ -1,0 +1,71 @@
+<root>
+    <styles>
+        <include src="s2r://panorama/styles/custom_game/profile.css" />
+    </styles>
+    <scripts>
+        <include src="s2r://panorama/scripts/custom_game/profile.js" />
+    </scripts>
+    
+    <Panel hittest="false" class="ProfilePanel">
+     
+        <Button id="Vote_Yes" class="btnleft" onactivate='Yes()'>
+          <Label hittest="false" id="readytext" text="#profile"/>
+        </Button>
+
+        <Panel hittest="false" id="MaxProfile" >
+            
+
+            <Panel hittest="false" id="Profile">
+                <Panel id="PlayersButtons" style="flow-children:down;margin-left:30px;margin-top:15px;">
+                    <DOTAAvatarImage id="ava" steamid="" style="height:110px;width:110px;border-radius: 100%;"/><!--玩家头像-->
+                    <DOTAUserName id="UserName" steamid=""/><!--玩家昵称-->
+                    <Panel id="playerst"/><!--玩家列表，动态创建-->
+                </Panel>
+
+                <Panel style="flow-children:down;width:376px;margin-left:30px;margin-top:15px;">
+                    <Label hittest="false" text="#lhardwins" class="mytest" style="" id="hardwins"/><!--困难次数-->
+                    <Label hittest="false" text="#lwins" class="mytest" style="" id="wins"/><!--通关次数-->
+                    <Label hittest="false" text="#lplays" class="mytest" style="" id="plays" /><!--玩次数-->
+                    <Label hittest="false" class="mytest" text="#relics" style="" id="relicstext"/><!--罪证列表表头-->
+                    <Panel hittest="false" style="flow-children: right-wrap;" id="Relics"><!--罪证列表-->
+                        <DOTAItemImage id="lvlmyitem1" itemname="item_relic_damage" style="width:44px;margin-left:3px;"/>
+                        <DOTAItemImage id="lvlmyitem2" itemname="item_relic_attackspeed" style="width:44px;margin-left:3px;"/>
+                        <DOTAItemImage id="lvlmyitem3" itemname="item_relic_armor" style="width:44px;margin-left:3px;"/>
+                        <DOTAItemImage id="lvlmyitem4" itemname="item_relic_allsatas" style="width:44px;margin-left:3px;"/>
+                        <DOTAItemImage id="lvlmyitem5" itemname="item_relic_magres" style="width:44px;margin-left:3px;"/>
+                        <DOTAItemImage id="lvlmyitem6" itemname="item_relic_magvam" style="width:44px;margin-left:3px;"/>
+                        <DOTAItemImage id="lvlmyitem7" itemname="item_relic_magdam" style="width:44px;margin-left:3px;"/>
+                        <DOTAItemImage id="lvlmyitem8" itemname="item_book" style="width:44px;margin-left:3px;"/>
+                        <Label hittest="false" id="lvlmyitemtext1" text="-" style="width:44px;margin-left:3px;"/>
+                        <Label hittest="false" id="lvlmyitemtext2" text="-" style="width:44px;margin-left:3px;"/>
+                        <Label hittest="false" id="lvlmyitemtext3" text="-" style="width:44px;margin-left:3px;"/>
+                        <Label hittest="false" id="lvlmyitemtext4" text="-" style="width:44px;margin-left:3px;"/>
+                        <Label hittest="false" id="lvlmyitemtext5" text="-" style="width:44px;margin-left:3px;"/>
+                        <Label hittest="false" id="lvlmyitemtext6" text="-" style="width:44px;margin-left:3px;"/>
+                        <Label hittest="false" id="lvlmyitemtext7" text="-" style="width:44px;margin-left:3px;"/>
+                        <Label hittest="false" id="lvlmyitemtext8" text="-" style="width:44px;margin-left:3px;"/>
+                    </Panel>
+
+                    <Label hittest="false" id="refreshtext" class="mytest" text="#ahclabel" style=""/><!--全英雄挑战-->
+                    <Panel hittest="false" id="ProfileHeroes" style="flow-children: right-wrap;margin-top:5px;"/><!--英雄图标面板-->
+                </Panel>
+
+
+                <Button id="CloseButton" onactivate='Close()' style="margin-top:20px;margin-left:10px; width: 25px;height: 25px;border-radius: 100%;border:30px solid rgba(0,0,0,0.7); " onmouseover='DOTAShowTextTooltip(#close)' onmouseout='DOTAHideTextTooltip()'>
+                    <Label text="X" />
+                </Button>
+
+
+            </Panel>
+            
+
+            
+                    
+                    
+            
+            
+
+
+        </Panel>
+    </Panel>
+</root>

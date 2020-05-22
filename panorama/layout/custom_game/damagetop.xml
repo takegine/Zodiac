@@ -1,0 +1,43 @@
+<root>
+	<styles>
+		<include src="file://panorama/styles/dotastyles.css" />
+		<include src="file://panorama/styles/custom_game/damagetop.css" />
+	</styles>
+	<scripts>
+		<include src="file://panorama/scripts/custom_game/damagetop.js" />
+	</scripts>
+    
+	<Panel hittest="false" class="WaveDamageTop">
+        <Panel hittest="false" id="DamageTop">
+            <Panel hittest="false" id="topp">
+                <Image hittest="false" id="BG_ImageTP" src="file://panorama/images/custom_game/all/fondtop.png"/>
+                <Label hittest="false" id="TPtext" text="Wave Damage Top:"/>
+            </Panel>
+            <Panel hittest="false" id="hero1" style="margin-top:20px;">
+                <Image hittest="false" id="BG_ImageH1" src="file://panorama/images/custom_game/all/fondtop.png"/>
+                <DOTAHeroImage id="ihero1" heroname="" style="height:24px;width:41px;"/>
+                <Label hittest="false" id="DamageH1" text="-"/>
+            </Panel>
+            <Panel hittest="false" id="hero2" style="margin-top:47px;">
+                <Image hittest="false" id="BG_ImageH1" src="file://panorama/images/custom_game/all/fondtop.png"/>
+                <DOTAHeroImage id="ihero2" heroname="" style="height:24px;width:41px;"/>
+                <Label hittest="false" id="DamageH2" text="-"/>
+            </Panel>
+            <Panel hittest="false" id="hero3" style="margin-top:74px;">
+                <Image hittest="false" id="BG_ImageH1" src="file://panorama/images/custom_game/all/fondtop.png"/>
+                <DOTAHeroImage id="ihero3" heroname="" style="height:24px;width:41px;"/>
+                <Label hittest="false" id="DamageH3" text="-"/>
+            </Panel>
+            <Panel hittest="false" id="hero4" style="margin-top:101px;">
+                <Image hittest="false" id="BG_ImageH1" src="file://panorama/images/custom_game/all/fondtop.png"/>
+                <DOTAHeroImage id="ihero4" heroname="" style="height:24px;width:41px;"/>
+                <Label hittest="false" id="DamageH4" text="-"/>
+            </Panel>
+            <Panel hittest="false" id="hero5" style="margin-top:128px;">
+                <Image hittest="false" id="BG_ImageH1" src="file://panorama/images/custom_game/all/fondtop.png"/>
+                <DOTAHeroImage id="ihero5" heroname="" style="height:24px;width:41px;"/>
+                <Label hittest="false" id="DamageH5" text="-"/>
+            </Panel>
+        </Panel>
+	</Panel>
+</root>

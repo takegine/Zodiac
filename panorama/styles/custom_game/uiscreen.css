@@ -1,0 +1,85 @@
+/**中间进入游戏时选择难度**/
+#psd{width:100%;height: 100%;}
+
+#UIstartmain{
+      horizontal-align:center;/**竖直居中**/
+   vertical-align:center;/**水平居中**/
+   background-color: #00454D;border-radius: 25px;
+   background-image: url("file://{resources}/images/custom_game/acblt-t7sat.jpg");
+   background-size: 100%;
+   width:500px;
+   height: 500px;
+   box-shadow: #ffffff80 2px 2px 10px 0px;
+   
+   flow-children:down;
+   font-size: 40px;
+   font-weight: bold;
+
+   
+   
+}
+
+#ModeS{
+margin-top: 20px;
+margin-left: 30px;
+   font-size: 30px;
+}
+#ModeSel{
+   flow-children:right;
+   horizontal-align:center;/**竖直居中**/
+   vertical-align:center;/**水平居中**/
+   margin-left: -10px;
+}
+.Mode{
+   margin-left: 20px;
+   font-size: 50px;
+
+   
+}
+.modelabel{
+   font-size: 30px;
+   margin-top:-7px;
+   color: #fff;
+}
+   
+.ModeInfo{
+   font-size: 30px;
+   border: 24px;
+}
+
+.Hidden{visibility:collapse;}
+
+#btn{/*按钮集齐静态*/
+         width :200px;
+         height: 50px;
+         
+         horizontal-align:center;/**竖直居中**/
+         vertical-align:center;/**水平居中**/
+         
+         
+         border-radius: 100px;
+         box-shadow: 0px 0px 10px 0px #01bcff;
+         
+         background-color: gradient( linear, 0% 0%, 0% 55%, from( #fbfbfbff ), color-stop( 0.3, #ebebebff ), to( #c0c0c0c0 ) );
+}
+
+#btn:hover{/*按钮集齐鼠标悬浮*/
+         color:#e66465;
+         box-shadow: 1px 2px 10px rgba(255,76,106,0.75);
+}
+#vote{
+   color:#00454D;
+   font-size: 30px;
+   horizontal-align:center;/**竖直居中**/
+   vertical-align:center;/**水平居中**/
+
+}
+
+.userhead{height:30px;width:30px;border-radius: 100%;   /**  border: 1px solid #eeeeee;**/}
+
+
+
+#spl0,#spl1,#spl2,#spl3
+{
+   flow-children:down;
+}

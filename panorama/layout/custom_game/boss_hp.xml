@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<root>
+    <styles>
+        <include src="s2r://panorama/styles/custom_game/boss_hp.css"/>
+    </styles>
+    <scripts>
+        <include src="s2r://panorama/scripts/custom_game/boss_hp.js"/>
+        <include src="s2r://panorama/scripts/custom_game/util.js" />
+    </scripts>
+    <snippets>
+        <snippet hittest="false" name="QuestLine">
+            <Panel hittest="false">
+                <Panel  hittest="false"  class="Progress" direction="horizontal">
+                    <Panel  hittest="false" class="Progress_Left" style="margin-bottom: 0;"/>
+                    <Panel  hittest="false" class="Progress_Right" style="margin-bottom: 0;"/>
+                </Panel>
+                <Panel  hittest="false" class="SliderLable">
+                    <Label hittest="false" class="SliderInfo" text=""/>
+                </Panel>
+            </Panel>
+        </snippet>
+
+    </snippets>
+    <Panel hittest="false">
+        <Panel hittest="false" id="QuestMain">
+            <Panel hittest="false" id="QuestPanel"> </Panel>
+        </Panel>
+    </Panel>
+</root>

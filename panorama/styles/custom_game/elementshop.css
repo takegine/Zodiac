@@ -1,0 +1,142 @@
+.ElementShopPanel{width: 100%;height: 100%;overflow: clip;}
+
+
+.btntop{/*按钮集齐静态*/
+         width :70px;
+         height:70px;
+         text-align:center;
+         border-radius: 100px;
+         box-shadow: 0 0 10px 0 #01bcff;
+         color:#00454D;
+         font-size: 30px;
+}
+.btntop:hover{/*按钮集齐鼠标悬浮*/
+         color:#fff;
+         box-shadow: -1px -2px 10px #fff;
+}
+
+
+
+.Bolls{
+   horizontal-align:center;
+   flow-children:right;
+   margin-left:-20px;
+   color: #E5E5E5;
+}
+/*按钮颜色*/
+#btntop0 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #18D337 ), color-stop( 0.4, #137723 ), to( #48A357 ) );
+margin-left: 50px;}
+#btntop1 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #344C99 ), color-stop( 0.4, #152044 ), to( #2A365B ) );
+}
+#btntop2 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #505B51 ), color-stop( 0.4, #000000 ), to( #384438 ) );
+}
+#btntop3 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #7854B2 ), color-stop( 0.4, #2D1756 ), to( #4D3277 ) );
+}
+#btntop4 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #844B35 ), color-stop( 0.4, #28180A ), to( #6A371F ) );
+}
+#btntop5 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #E59E51 ), color-stop( 0.7, #BA2B04 ), to( #E26940 ) );
+margin-left:100px;background-image: url("file://{resources}/images/custom_game/zhengming/yi.jpg");background-size:100%;}
+#btntop6 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #EFF438 ), color-stop( 0.4, #A6AA04 ), to( #C9CC48 ) );
+}
+#btntop7 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #E5E5E5 ), color-stop( 0.4, #969899 ), to( #C9C9C9 ) );
+}
+#btntop8 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #6D8BC6 ), color-stop( 0.5, #1142A5 ), to( #527CCE ) );
+}
+#btntop9 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #5EEAEA ), color-stop( 0.4, #2A8282 ), to( #42BCBC ) );
+}
+
+.numb{/*按钮右侧个数*/
+  height:10px;width:10px;
+   vertical-align: bottom;
+}
+/*顶部按钮内部文字*/
+#Boll0 {horizontal-align:center;vertical-align:center;}
+#Boll1 {horizontal-align:center;vertical-align:center;}
+#Boll2 {horizontal-align:center;vertical-align:center;}
+#Boll3 {horizontal-align:center;vertical-align:center;}
+#Boll4 {horizontal-align:center;vertical-align:center;}
+#Boll5 {horizontal-align:center;vertical-align:center;}
+#Boll6 {horizontal-align:center;vertical-align:center;}
+#Boll7 {horizontal-align:center;vertical-align:center;}
+#Boll8 {horizontal-align:center;vertical-align:center;}
+#Boll9 {horizontal-align:center;vertical-align:center;}
+
+.btnleft{/*按钮集齐静态*/
+         width :200px;
+         height: 50px;
+         color:#00454D;
+         font-size: 30px;
+         text-align:center;
+         border: 7px;
+         border-radius: 100px;
+         box-shadow: 0px 0px 10px 0px #01bcff;
+         font-weight: bold;
+         background-color: gradient( linear, 0% 0%, 0% 55%, from( #fbfbfbff ), color-stop( 0.3, #ebebebff ), to( #c0c0c0c0 ) );
+}
+
+.btnleft:hover{/*按钮集齐鼠标悬浮*/
+         color:#e66465;
+         box-shadow: 1px 2px 10px rgba(255,76,106,0.75);
+}
+
+#ElementShop{/*按钮位置*/
+margin-top: 85%;margin-left:5%;
+}
+#readytext {horizontal-align: center;vertical-align: center;
+   text-transform: uppercase;
+   font-family:Radiance,FZLanTingHei-B-GBK,TH Sarabun New,YDYGO 540,Gulim,MingLiU;
+}
+
+ #ShopInfo
+{/****列表面板*****/
+  horizontal-align: left;
+  margin-left:20px;
+  margin-top:32%;
+  width: 920px;
+  height: 560px;
+ }
+
+#textforhero{
+  horizontal-align:center;flow-children:right;
+  margin-top: 510px;
+  font-size: 35px;
+
+}
+
+
+ .ElementShopText
+ {/****按钮的闪烁动画*****/
+    animation-name: OpacityPulse;
+    animation-duration: .82s;
+    animation-iteration-count: infinite;
+ }
+ @keyframes 'OpacityPulse'
+ {
+     0%     {         text-shadow: 0px 0px 0px #CC22CC;     }
+     50%    {         text-shadow: 0px 0px 15px #CC22CC,0px 0px 20px #CC22CC,0px 0px 25px #CC22CC;     }
+     100%   {         text-shadow: 0px 0px 0px #CC22CC;     }
+ }
+
+
+
+ .ShopInfoAnim
+ {/****显示的动画*****/
+    animation-name: CreateAnim;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+ }
+ @keyframes 'CreateAnim'
+ {/****显示的动画*****/
+     0%     {        transform: translate3d( -850px, 0px, 0px );     }
+     100%     {        transform: translate3d( 0px, 0px, 0px );     }
+ }
+
+
+
+ .selectedfilter{     border: 2px solid #00FF00; }/*X3的状态*/
+
+.offcraft {     saturation: 0; }/*使余额为O的元素为灰色*/
+
+.shopitem{height:45px;width:58px; }/*给合成面板里的物品带个圈*/
+
+.shopitem:hover{border: 2px solid #00FF00;}/*给合成面板里的物品带个圈*/

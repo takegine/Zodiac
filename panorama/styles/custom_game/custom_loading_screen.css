@@ -1,0 +1,29 @@
+/*通过关键字bg，设定格式*/
+.bg{
+	/*导入图片*/
+	background-image: url("file://{resources}/images/custom_game/loading_screen.jpg");
+	/*不重复*/
+	background-repeat: repeat;
+	/*填充100%*/
+	background-size: 100%;
+	/*背景底色：米白色*/
+	background-color: antiquewhite;
+
+
+}
+.bb{
+	/*颜色粉红色*/
+	color:lightcoral;
+	/*字号100像素*/
+	font-size:100px;
+	/*左边空出320像素*/
+	padding-left:320px;
+
+}
+	/*Panel{} 可以控制xml中的所有Panel
+	.bg只能影响class为bg的代码
+	*/
+
+/*Panel{
+	background-image: url("file://{resources}/images/custom_game/loading_screen.jpg");
+}*/

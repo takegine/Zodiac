@@ -1,14 +1,14 @@
 -- 修改1：引入文件
 
 print ( '[root] be running' )
-require("questsystem")  --任务列表，倒计时
-require("Zodiac")			--主体程序
-require("timers")       --计时器
-require("round_units")   --每轮出怪数
+require("root/questsystem")  --任务列表，倒计时
+require("root/Zodiac")			--主体程序
+require("root/timers")       --计时器
+require("root/round_units")   --每轮出怪数
 require("code")   --密钥
-require("VauleTable")
-require("barebones")
-require("RelicStone")
+require("root/VauleTable")
+require("root/bare_bones")
+require("root/RelicStone")
 
 
 function Precache(context)--用于模型，特效，音效的预载入

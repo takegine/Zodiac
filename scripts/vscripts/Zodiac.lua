@@ -341,7 +341,7 @@ function Zodiac:OnEntityKilled( keys )
         if not killedUnit:IsIllusion() then                     --当死者不是幻象
             local getxp = killedUnit:GetBaseDayTimeVisionRange()--获得死者白天的标准视野范围
             if  getxp > 0 then
-                local heroes = Zodiac:GetAllRealHeroes()        --获得全部在游戏中的英雄的名单
+                local heroes = GameMode:GetAllRealHeroes()      --获得全部在游戏中的英雄的名单
                 for i=1, #heroes do                             --给这些英雄发经验
                     heroes[i]:AddExperience((getxp / #heroes)*(1-(0.05*(5 - #heroes))),false,false)--发经验值
                 end
@@ -634,7 +634,7 @@ function RollDrops(unit)
                                 local PlayerIDs = {}
                                 print( "Zodiac:OnRelicSpawned - New Relic " .. item:GetAbilityName() .. " created." )
                                  
-                                for _,Hero in pairs ( Zodiac:GetAllRealHeroes() ) do 		--遍历在场英雄，所有value
+                                for _,Hero in pairs ( GameMode:GetAllRealHeroes() ) do 		--遍历在场英雄，所有value
                                     if Hero ~= nil  										--如果英雄非空，
                                     and Hero:IsRealHero() 									--不是幻想和召唤物，
                                     and Hero:HasOwnerAbandoned() == false 					--没有被持有者遗弃(false)，玩家没有掉线(2)
@@ -710,7 +710,7 @@ function RollDrops(unit)
                     if not GameRules:IsCheatMode() then                     --不是作弊模式
                         if RollPercentage(chance*PlayerResource:GetPlayerCount()) then --随机一个100以内的数，如果小于爆率X玩家缺省数
                                     local PlayerIDs = {}
-                                    local Heroes = Zodiac:GetAllRealHeroes()
+                                    local Heroes = GameMode:GetAllRealHeroes()
                                     for _,Hero in pairs ( Heroes ) do
                                         if Hero ~= nil and Hero:IsRealHero() and Hero:HasOwnerAbandoned() == false and PlayerResource:GetConnectionState(Hero:GetPlayerID()) == 2 then
                                             table.insert( PlayerIDs, Hero:GetPlayerID() )

@@ -9,6 +9,7 @@ require("code")   --密钥
 require("root/VauleTable")
 require("root/bare_bones")
 require("root/RelicStone")
+require("root/Expand_API")
 
 
 function Precache(context)--用于模型，特效，音效的预载入

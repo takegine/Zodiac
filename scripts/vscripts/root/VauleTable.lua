@@ -62,7 +62,6 @@ _G.defaultpart = {}
 
 _G.hardmode = 1	    	--默认游戏难度为简单
 _G.GAME_ROUND = 0 		--初始化回合数
-time_ = 0 				--初始化阶段时间
 
 
 notforall = {

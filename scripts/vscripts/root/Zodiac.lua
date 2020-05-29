@@ -23,6 +23,8 @@ function Zodiac:new()
     self.vBroadcasters = {}
     _G.DedicatedServerKey = GetDedicatedServerKeyV2("2")
 
+
+    
 end
 
 function Zodiac:NanDuXuanZe(data)
@@ -117,7 +119,7 @@ function Zodiac:OnNPCSpawned(keys)
         local info = {}
         info.PlayerID = id
         Timers:CreateTimer(1, function()
-            Zodiac:LoadRelics(info)
+            RelicStone:LoadRelics(info)
         end)
 
         value = {}
@@ -142,6 +144,8 @@ function Zodiac:OnNPCSpawned(keys)
             npc:AddNewModifier(npc, nil, "modifier_easy_mode", {})
         end
 
+        hRequest:Login(id)
+
         --[[给资助的人一个宠物
         if _G.patreons[tostring(PlayerResource:GetSteamID(id))] ~= nil then
             if _G.patreons[tostring(PlayerResource:GetSteamID(id))] > 3 then
@@ -160,7 +164,7 @@ function Zodiac:OnConnectFull(keys)
     for i=1,MAX_LEVEL do
         XP_PER_LEVEL_TABLE[i] = i * 100--升级按经验总量来算，这里就是每级都是100点经验
     end
-    --DeepPrintTable(XP_PER_LEVEL_TABLE)
+    
     -- 建立游戏模式的参数
     GameRules:GetGameModeEntity():SetAnnouncerDisabled(true)--禁用播音员
     GameRules:GetGameModeEntity():SetCustomHeroMaxLevel(MAX_LEVEL)--设定最高等级

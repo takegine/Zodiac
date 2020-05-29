@@ -226,3 +226,80 @@ notforall = {
     "item_cuirass_of_life",
     "item_hammer_of_god"
 }
+
+if  hRequest   == nil then hRequest = class({}) end
+
+function hRequest:Login(playerID) 
+    local req = CreateHTTPRequestScriptVM("POST", "https://14769.playfabapi.com/Client/LoginWithCustomID")
+    req:SetHTTPRequestHeaderValue("Content-Type", "application/json")
+
+    local encoded = {}
+    encoded.CustomId      = tostring(PlayerResource:GetSteamID(playerID))
+    encoded.CreateAccount = true
+    encoded.TitleId       = 14769
+
+    req:SetHTTPRequestRawPostBody("application/json",json.encode(encoded))
+    
+    req:Send(function(res)
+        --print("[STATS] Received", res.Body)
+        local resbody   = json.decode(res.Body)
+        local data      =resbody.data
+        local ticket    =data.SessionTicket
+        local playfab_id=data.PlayFabId
+        --PlayerData[playerID]={}--init player data
+        --PlayerData[playerID][0]=ticket  --store session ticket
+        print(playfab_id,ticket)
+        self:getplayerdata(ticket)
+    end)
+end
+
+function hRequest:getplayerdata(session_ticket, keys)
+    local req = CreateHTTPRequestScriptVM("POST", "https://14769.playfabapi.com/Client/GetUserData")
+    req:SetHTTPRequestHeaderValue("Content-Type", "application/json")
+    req:SetHTTPRequestHeaderValue("X-Authentication", session_ticket)
+
+    local encoded = {}
+    encoded.Keys  = {"Gold","TimeSaved"}
+    req:SetHTTPRequestRawPostBody("application/json",json.encode(encoded))
+                
+    req:Send(function(res)
+        print("[STATS] Received", res.Body)
+        local resbody = json.decode(res.Body)
+        local data=resbody["data"]
+        local datadata=data["Data"]
+        local gold=datadata["Gold"]
+
+        if gold==nil then                        --First time player
+                self:updateplayerdata(session_ticket,0)
+        else
+                print("current gold is")
+                local goldnum=tonumber(gold["Value"])
+                --PlayerData[0][1]=goldnum
+        end
+    end)
+end
+
+function hRequest:updateplayerdata(session_ticket, goldnum)
+    --login
+    print(goldnum)
+
+    local req = CreateHTTPRequestScriptVM("POST", "https://14769.playfabapi.com/Client/UpdateUserData")
+          req:SetHTTPRequestHeaderValue("Content-Type", "application/json")
+          req:SetHTTPRequestHeaderValue("X-Authentication", session_ticket)
+
+    local encoded   = {}
+    encoded.Data    = {}
+    encoded.Data.Gold   = tostring(goldnum)
+    encoded.Data.isPayed= true
+    encoded.Permission  = "Public"
+        
+    req:SetHTTPRequestRawPostBody("application/json",json.encode(encoded))
+                
+    req:Send(function(res)
+        print("[STATS] Received", res.Body)
+        local resbody = json.decode(res.Body)
+        local data    =resbody["data"]
+        local dataversion=data["DataVersion"]
+        print(dataversion)
+    end)
+end

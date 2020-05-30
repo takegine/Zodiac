@@ -670,3 +670,40 @@ function RelicStone:LoadSet(event)
     RelicStone:UpdateRS(event.PlayerID)
     RelicStone:Levels(event)
 end
+
+function GameMode:_Stats(iswin)
+    local plc = PlayerResource:GetPlayerCount() 		--玩家数
+    if  not GameRules:IsCheatMode()  					--非作弊模式
+    and _G.GAME_ROUND ~= 0 						    	--游戏已经开始。轮数不为0
+    and cheats == false 						    	--作弊状态为假
+    and GameRules:GetDOTATime(false,false) > 35     	--返回Dota游戏内的时间，不包含 赛前时间PregameTime 和 负时间NegativeTime
+    and plc > 0 then 							    	--玩家数大于0
+        local req = CreateHTTPRequestScriptVM( "POST", GameMode.gjfll2 .. "/data.php")--创建一个通讯到数据服务器
+        
+        req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)--专用服务器密钥
+
+        if iswin ~= nil then 							--判断是否通关
+            req:SetHTTPRequestGetOrPostParameter("test", "-1" .. iswin)
+        else
+            req:SetHTTPRequestGetOrPostParameter("test", tostring(_G.GAME_ROUND))
+        end 	
+        										--把玩家数和通关时间发给服务器
+        req:SetHTTPRequestGetOrPostParameter("players", tostring(plc))
+        req:SetHTTPRequestGetOrPostParameter("time", tostring(math.floor(GameRules:GetDOTATime(false,false))))
+
+        if _G.hardmode > 1 then 	       				--判断游戏难度，把通关难度发给服务器
+            req:SetHTTPRequestGetOrPostParameter("hardmode", "true")
+        else
+            req:SetHTTPRequestGetOrPostParameter("hardmode", "false")
+        end
+
+        for i=0,plc-1 do 										--遍历所有玩家
+            if PlayerResource:GetConnectionState(i) == 2 then 	--在线的玩家，把通关记录发给服务器
+                req:SetHTTPRequestGetOrPostParameter("hero" .. i+1,tostring(PlayerResource:GetSelectedHeroID(i)))
+                req:SetHTTPRequestGetOrPostParameter("id" .. i+1, tostring(PlayerResource:GetSteamID(i)))
+            end
+        end
+
+        req:Send(function(result) print(result.Body) end)
+    end
+end

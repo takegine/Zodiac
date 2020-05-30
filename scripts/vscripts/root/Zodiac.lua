@@ -579,191 +579,6 @@ function RollDrops(unit)
                         CreateItemOnPositionSync( unit:GetAbsOrigin() , item )  --掉落在死者处
                         item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin() + RandomVector(RandomFloat(150,200)) )--按照150/200之前随机一个浮点数，然后随机向量把这个装备弹射出去，防止物品卡位
                     end
-                elseif ItemTable.Relict == 1 then 			--掉落relic
-                        if not GameRules:IsCheatMode() then --反作弊
-                            if RollPercentage(chance*PlayerResource:GetPlayerCount()) then  --随机生成1-100内的数，小于等于给定数（玩家数）则返回true
-                                local item = CreateItem(item_name, nil, nil)				--创建该掉落实体
-                                      item:SetPurchaseTime(0)								--购买时间为0
-                                CreateItemOnPositionSync( unit:GetAbsOrigin(), item )		--实现物品掉落
-                                --在死亡地点增加一个 根据100/125随机一个浮点数产生的随机向量，把掉落物装备发射出去，防止装备相位卡住
-                                item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin()+RandomVector(RandomFloat(110,140)))
-                                item.bIsRelic = true 										--不知道干嘛的
-                                local PlayerIDs = {}
-                                print( "Zodiac:OnRelicSpawned - New Relic " .. item:GetAbilityName() .. " created." )
-                                 
-                                for _,Hero in pairs ( GameMode:GetAllRealHeroes() ) do 		--遍历在场英雄，所有value
-                                    if Hero ~= nil  										--如果英雄非空，
-                                    and Hero:IsRealHero() 									--不是幻想和召唤物，
-                                    and Hero:HasOwnerAbandoned() == false 					--没有被持有者遗弃(false)，玩家没有掉线(2)
-                                    and PlayerResource:GetConnectionState(Hero:GetPlayerID()) == 2 then
-                                        print( "Zodiac:OnRelicSpawned - PlayerID " .. Hero:GetPlayerID() .. " does not own item, adding to grant list." )
-                                        table.insert( PlayerIDs, Hero:GetPlayerID() ) 		--在PlayerIDs表单中加入这个玩家
-                                    end
-                                end
-
-                                --抽一个玩家作为得到掉落的人
-                                local WinningPlayerID = -1
-                                if #PlayerIDs == 1 then 										--当PlayerIDs表单中只有一个键值对
-                                    WinningPlayerID = PlayerIDs[1] 								--取值，为玩家ID
-                                else
-                                    WinningPlayerID = PlayerIDs[ RandomInt( 1, #PlayerIDs ) ]	--不是只有一个玩家的时候，取值 随机一个玩家
-                                    print( "Zodiac:OnRelicSpawned - " .. #PlayerIDs .. " players have not yet found an artifact, winner is player ID " .. WinningPlayerID )
-                                end
-
-                                if WinningPlayerID == -1 or WinningPlayerID == nil then 		--当值为初始值-1或空时，打印无玩家
-                                    print( "Zodiac:OnRelicSpawned - ERROR - WinningPlayerID is invalid." )
-                                    return
-                                end
-                                
-                                local WinningHero = PlayerResource:GetSelectedHeroEntity( WinningPlayerID ) --实体化胜利的玩家
-                                local WinningSteamID = PlayerResource:GetSteamID( WinningPlayerID )			--取值 steamID
-
-                                print( "Zodiac:OnRelicSpawned - Relic " .. item:GetAbilityName() .. " has been bound to " .. WinningPlayerID )
-                                item:SetPurchaser( WinningHero ) 											--设置物品的购买者
-                                
-                                if  item_name == "item_relic_damage" then
-                                    if	WinningHero.lvl_item_relic_damage ~= nil then WinningHero.lvl_item_relic_damage = WinningHero.lvl_item_relic_damage + 1
-                                        else                                        WinningHero.lvl_item_relic_damage = 1
-                                    end
-                                elseif  item_name == "item_relic_armor" then
-                                    if  WinningHero.lvl_item_relic_armor ~= nil then WinningHero.lvl_item_relic_armor = WinningHero.lvl_item_relic_armor + 1
-                                        else                                        WinningHero.lvl_item_relic_armor = 1
-                                    end
-                                elseif  item_name == "item_relic_magres" then
-                                    if  WinningHero.lvl_item_relic_magres ~= nil then WinningHero.lvl_item_relic_magres = WinningHero.lvl_item_relic_magres + 1
-                                        else                                        WinningHero.lvl_item_relic_magres = 1
-                                    end
-                                elseif  item_name == "item_relic_attackspeed" then
-                                    if  WinningHero.lvl_item_relic_attackspeed ~= nil then WinningHero.lvl_item_relic_attackspeed = WinningHero.lvl_item_relic_attackspeed + 1
-                                        else                                        WinningHero.lvl_item_relic_attackspeed = 1
-                                    end
-                                elseif  item_name == "item_relic_allsatas" then
-                                    if  WinningHero.lvl_item_relic_allsatas ~= nil then WinningHero.lvl_item_relic_allsatas = WinningHero.lvl_item_relic_allsatas + 1
-                                        else                                        WinningHero.lvl_item_relic_allsatas = 1
-                                    end
-                                elseif  item_name == "item_relic_magvam" then
-                                    if  WinningHero.lvl_item_relic_magvam ~= nil then WinningHero.lvl_item_relic_magvam = WinningHero.lvl_item_relic_magvam + 1
-                                        else                                        WinningHero.lvl_item_relic_magvam = 1
-                                    end
-                                elseif  item_name == "item_relic_magdam" then
-                                    if  WinningHero.lvl_item_relic_magdam ~= nil then WinningHero.lvl_item_relic_magdam = WinningHero.lvl_item_relic_magdam + 1
-                                        else                                        WinningHero.lvl_item_relic_magdam = 1
-                                    end
-                                end
-                                
-                                EmitSoundOn( "sounds/misc/soundboard/absolutely_perfect.vsnd", WinningHero )
-                                local otv = ""
-                                local req = CreateHTTPRequestScriptVM( "POST", Zodiac.gjfll2 .. "/lol21.php")
-                                req:SetHTTPRequestGetOrPostParameter("id", tostring(WinningSteamID))
-                                req:SetHTTPRequestGetOrPostParameter("name", item_name)
-                                req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
-                                req:Send(function(result)
-                                    otv = result.Body
-                                end)
-                            end
-                        end
-
-                elseif item_name == "RS" then  ------掉落relic stone 宝石的------
-                    if not GameRules:IsCheatMode() then                     --不是作弊模式
-                        if RollPercentage(chance*PlayerResource:GetPlayerCount()) then --随机一个100以内的数，如果小于爆率X玩家缺省数
-                                    local PlayerIDs = {}
-                                    local Heroes = GameMode:GetAllRealHeroes()
-                                    for _,Hero in pairs ( Heroes ) do
-                                        if Hero ~= nil and Hero:IsRealHero() and Hero:HasOwnerAbandoned() == false and PlayerResource:GetConnectionState(Hero:GetPlayerID()) == 2 then
-                                            table.insert( PlayerIDs, Hero:GetPlayerID() )
-                                        end
-                                    end
-    
-                                    local WinningPlayerID = -1
-                                    if #PlayerIDs == 1 then
-                                        WinningPlayerID = PlayerIDs[1]
-                                    else
-                                        WinningPlayerID = PlayerIDs[ RandomInt( 1, #PlayerIDs ) ]
-                                    end
-                                    if WinningPlayerID == -1 or WinningPlayerID == nil then
-                                        print( "Zodiac:OnRelicSpawned - ERROR - WinningPlayerID is invalid." )
-                                        return
-                                    end
-                                    
-                                    local WinningHero = PlayerResource:GetSelectedHeroEntity( WinningPlayerID )
-                                    local WinningSteamID = PlayerResource:GetSteamID( WinningPlayerID )
-                                    local ininvid = ""
-                                    if WinningHero.rsinv ~= nil then
-                                        if #WinningHero.rsinv > 99 then
-                                            ininvid = tostring(#WinningHero.rsinv)
-                                        elseif #WinningHero.rsinv > 9 then
-                                            ininvid = "0"..tostring(#WinningHero.rsinv)
-                                        elseif #WinningHero.rsinv > -1 then
-                                            ininvid = "00"..tostring(#WinningHero.rsinv)
-                                        end
-                                    else
-                                        ininvid = "001"
-                                    end
-
-                                    local rares = ItemTable.Rares
-
-                                    local rsid = nil   --初始化一个宝石的序列号
-                                    if rares == 0 then     rsid =            "1"..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7).."0000"..ininvid
-                                        if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
-                                        else WinningHero.rsinv = {rsid}
-                                        end
-                                    elseif rares == 1 then rsid = RandomInt(1,2)..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7).."0000"..ininvid
-                                        if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
-                                        else WinningHero.rsinv = {rsid}
-                                        end
-                                    elseif rares == 2 then rsid =            "2"..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7).."0000"..ininvid
-                                        if WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
-                                        else WinningHero.rsinv = {rsid}
-                                        end
-                                    elseif rares == 3 then
-                                        local rrr = RandomInt(1,3)
-                                        local secstat = 0
-                                        if rrr == 3 then
-                                            secstat = RandomInt(1,7)
-                                        end
-                                                              rsid = rrr..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7)..secstat.."000"..ininvid
-                                        if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
-                                        else WinningHero.rsinv = {rsid}
-                                        end
-                                    elseif rares == 4 then
-                                        local rrr = RandomInt(2,3)
-                                        local secstat = 0
-                                        if rrr == 3 then secstat = RandomInt(1,7) end
-                                                              rsid = rrr..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7)..secstat.."000"..ininvid
-                                        if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
-                                        else WinningHero.rsinv = {rsid}
-                                        end
-                                    elseif rares == 5 then
-                                                        rsid = "3"..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7)..RandomInt(1,7).."000"..ininvid
-                                        if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
-                                        else WinningHero.rsinv = {rsid}
-                                        end
-                                    elseif rares == 6 then
-                                    elseif rares == 7 then
-                                    elseif rares == 8 then
-                                    elseif rares == 9 then
-                                        local stat1 = RandomInt(1,7)
-                                        local stat2 = RandomInt(1,6)
-                                        if stat2 >= stat1 then  stat2 = stat2 + 1  end
-                                            rsid = "4"..RandomInt(0,9)..RandomInt(1,4)..stat1..stat2.."0"..RandomInt(1,5)..RandomInt(0,2)..ininvid
-                                        if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
-                                        else WinningHero.rsinv = {rsid}
-                                        end
-                                    end
-
-                                    if rsid ~= nil then
-                                        CustomGameEventManager:Send_ServerToAllClients( "AddRSUI", {rsid = rsid,hero = WinningHero:GetName()})
-                                        local otv = ""
-                                        local req = CreateHTTPRequestScriptVM( "POST", Zodiac.gjfll2 .. "/relicstones1.php")
-                                        req:SetHTTPRequestGetOrPostParameter("id", tostring(WinningSteamID))
-                                        req:SetHTTPRequestGetOrPostParameter("rsid", rsid)
-                                        req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
-                                        req:Send(function(result)
-                                            otv = result.Body
-                                        end)
-                                    end
-                                end
-                    end
 
                 elseif item_name == "item_elbol" then       --掉落 元素球
                     if #needdropel == 0 then                         --需要掉落的球
@@ -806,6 +621,194 @@ function RollDrops(unit)
                             end
                         end
                     end
+                elseif ItemTable.Relict == 1 then 			--掉落relic
+                    
+                    if RollPercentage(chance*PlayerResource:GetPlayerCount()) then  --随机生成1-100内的数，小于等于给定数（玩家数）则返回true
+                        local item = CreateItem(item_name, nil, nil)				--创建该掉落实体
+                                item:SetPurchaseTime(0)								--购买时间为0
+                        CreateItemOnPositionSync( unit:GetAbsOrigin(), item )		--实现物品掉落
+                        --在死亡地点增加一个 根据100/125随机一个浮点数产生的随机向量，把掉落物装备发射出去，防止装备相位卡住
+                        item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin()+RandomVector(RandomFloat(110,140)))
+                        item.bIsRelic = true 										--不知道干嘛的
+                        local PlayerIDs = {}
+                        print( "Zodiac:OnRelicSpawned - New Relic " .. item:GetAbilityName() .. " created." )
+                            
+                        for _,Hero in pairs ( GameMode:GetAllRealHeroes() ) do 		--遍历在场英雄，所有value
+                            if Hero ~= nil  										--如果英雄非空，
+                            and Hero:IsRealHero() 									--不是幻想和召唤物，
+                            and Hero:HasOwnerAbandoned() == false 					--没有被持有者遗弃(false)，玩家没有掉线(2)
+                            and PlayerResource:GetConnectionState(Hero:GetPlayerID()) == 2 then
+                                print( "Zodiac:OnRelicSpawned - PlayerID " .. Hero:GetPlayerID() .. " does not own item, adding to grant list." )
+                                table.insert( PlayerIDs, Hero:GetPlayerID() ) 		--在PlayerIDs表单中加入这个玩家
+                            end
+                        end
+
+                        --抽一个玩家作为得到掉落的人
+                        local WinningPlayerID = -1
+                        if #PlayerIDs == 1 then 										--当PlayerIDs表单中只有一个键值对
+                            WinningPlayerID = PlayerIDs[1] 								--取值，为玩家ID
+                        else
+                            WinningPlayerID = PlayerIDs[ RandomInt( 1, #PlayerIDs ) ]	--不是只有一个玩家的时候，取值 随机一个玩家
+                            print( "Zodiac:OnRelicSpawned - " .. #PlayerIDs .. " players have not yet found an artifact, winner is player ID " .. WinningPlayerID )
+                        end
+
+                        if WinningPlayerID == -1 or WinningPlayerID == nil then 		--当值为初始值-1或空时，打印无玩家
+                            print( "Zodiac:OnRelicSpawned - ERROR - WinningPlayerID is invalid." )
+                            return
+                        end
+                        
+                        local WinningHero = PlayerResource:GetSelectedHeroEntity( WinningPlayerID ) --实体化胜利的玩家
+                        local WinningSteamID = PlayerResource:GetSteamID( WinningPlayerID )			--取值 steamID
+
+                        print( "Zodiac:OnRelicSpawned - Relic " .. item:GetAbilityName() .. " has been bound to " .. WinningPlayerID )
+                        item:SetPurchaser( WinningHero ) 											--设置物品的购买者
+                        
+                        if  item_name == "item_relic_damage" then
+                            if	WinningHero.lvl_item_relic_damage ~= nil then WinningHero.lvl_item_relic_damage = WinningHero.lvl_item_relic_damage + 1
+                                else                                        WinningHero.lvl_item_relic_damage = 1
+                            end
+                        elseif  item_name == "item_relic_armor" then
+                            if  WinningHero.lvl_item_relic_armor ~= nil then WinningHero.lvl_item_relic_armor = WinningHero.lvl_item_relic_armor + 1
+                                else                                        WinningHero.lvl_item_relic_armor = 1
+                            end
+                        elseif  item_name == "item_relic_magres" then
+                            if  WinningHero.lvl_item_relic_magres ~= nil then WinningHero.lvl_item_relic_magres = WinningHero.lvl_item_relic_magres + 1
+                                else                                        WinningHero.lvl_item_relic_magres = 1
+                            end
+                        elseif  item_name == "item_relic_attackspeed" then
+                            if  WinningHero.lvl_item_relic_attackspeed ~= nil then WinningHero.lvl_item_relic_attackspeed = WinningHero.lvl_item_relic_attackspeed + 1
+                                else                                        WinningHero.lvl_item_relic_attackspeed = 1
+                            end
+                        elseif  item_name == "item_relic_allsatas" then
+                            if  WinningHero.lvl_item_relic_allsatas ~= nil then WinningHero.lvl_item_relic_allsatas = WinningHero.lvl_item_relic_allsatas + 1
+                                else                                        WinningHero.lvl_item_relic_allsatas = 1
+                            end
+                        elseif  item_name == "item_relic_magvam" then
+                            if  WinningHero.lvl_item_relic_magvam ~= nil then WinningHero.lvl_item_relic_magvam = WinningHero.lvl_item_relic_magvam + 1
+                                else                                        WinningHero.lvl_item_relic_magvam = 1
+                            end
+                        elseif  item_name == "item_relic_magdam" then
+                            if  WinningHero.lvl_item_relic_magdam ~= nil then WinningHero.lvl_item_relic_magdam = WinningHero.lvl_item_relic_magdam + 1
+                                else                                        WinningHero.lvl_item_relic_magdam = 1
+                            end
+                        end
+                        
+                        EmitSoundOn( "sounds/misc/soundboard/absolutely_perfect.vsnd", WinningHero )
+                        --[[
+                        local otv = ""
+                        local req = CreateHTTPRequestScriptVM( "POST", Zodiac.gjfll2 .. "/lol21.php")
+                        req:SetHTTPRequestGetOrPostParameter("id", tostring(WinningSteamID))
+                        req:SetHTTPRequestGetOrPostParameter("name", item_name)
+                        req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
+                        req:Send(function(result)
+                            otv = result.Body
+                        end)
+                        ]]
+                    end
+
+                elseif item_name == "RS" then  ------掉落relic stone 宝石的------
+                    
+                    if RollPercentage(chance*PlayerResource:GetPlayerCount()) then --随机一个100以内的数，如果小于爆率X玩家缺省数
+                        local PlayerIDs = {}
+                        local Heroes = GameMode:GetAllRealHeroes()
+                        for _,Hero in pairs ( Heroes ) do
+                            if Hero ~= nil and Hero:IsRealHero() and Hero:HasOwnerAbandoned() == false and PlayerResource:GetConnectionState(Hero:GetPlayerID()) == 2 then
+                                table.insert( PlayerIDs, Hero:GetPlayerID() )
+                            end
+                        end
+
+                        local WinningPlayerID = -1
+                        if #PlayerIDs == 1 then
+                            WinningPlayerID = PlayerIDs[1]
+                        else
+                            WinningPlayerID = PlayerIDs[ RandomInt( 1, #PlayerIDs ) ]
+                        end
+                        if WinningPlayerID == -1 or WinningPlayerID == nil then
+                            print( "Zodiac:OnRelicSpawned - ERROR - WinningPlayerID is invalid." )
+                            return
+                        end
+                        
+                        local WinningHero = PlayerResource:GetSelectedHeroEntity( WinningPlayerID )
+                        local WinningSteamID = PlayerResource:GetSteamID( WinningPlayerID )
+                        local ininvid = ""
+                        if WinningHero.rsinv ~= nil then
+                            if #WinningHero.rsinv > 99 then
+                                ininvid = tostring(#WinningHero.rsinv)
+                            elseif #WinningHero.rsinv > 9 then
+                                ininvid = "0"..tostring(#WinningHero.rsinv)
+                            elseif #WinningHero.rsinv > -1 then
+                                ininvid = "00"..tostring(#WinningHero.rsinv)
+                            end
+                        else
+                            ininvid = "001"
+                        end
+
+                        local rares = ItemTable.Rares
+
+                        local rsid = nil   --初始化一个宝石的序列号
+                        if rares == 0 then     rsid =            "1"..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7).."0000"..ininvid
+                            if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
+                            else WinningHero.rsinv = {rsid}
+                            end
+                        elseif rares == 1 then rsid = RandomInt(1,2)..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7).."0000"..ininvid
+                            if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
+                            else WinningHero.rsinv = {rsid}
+                            end
+                        elseif rares == 2 then rsid =            "2"..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7).."0000"..ininvid
+                            if WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
+                            else WinningHero.rsinv = {rsid}
+                            end
+                        elseif rares == 3 then
+                            local rrr = RandomInt(1,3)
+                            local secstat = 0
+                            if rrr == 3 then
+                                secstat = RandomInt(1,7)
+                            end
+                                                    rsid = rrr..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7)..secstat.."000"..ininvid
+                            if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
+                            else WinningHero.rsinv = {rsid}
+                            end
+                        elseif rares == 4 then
+                            local rrr = RandomInt(2,3)
+                            local secstat = 0
+                            if rrr == 3 then secstat = RandomInt(1,7) end
+                                                    rsid = rrr..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7)..secstat.."000"..ininvid
+                            if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
+                            else WinningHero.rsinv = {rsid}
+                            end
+                        elseif rares == 5 then
+                                            rsid = "3"..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7)..RandomInt(1,7).."000"..ininvid
+                            if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
+                            else WinningHero.rsinv = {rsid}
+                            end
+                        elseif rares == 6 then
+                        elseif rares == 7 then
+                        elseif rares == 8 then
+                        elseif rares == 9 then
+                            local stat1 = RandomInt(1,7)
+                            local stat2 = RandomInt(1,6)
+                            if stat2 >= stat1 then  stat2 = stat2 + 1  end
+                                rsid = "4"..RandomInt(0,9)..RandomInt(1,4)..stat1..stat2.."0"..RandomInt(1,5)..RandomInt(0,2)..ininvid
+                            if   WinningHero.rsinv ~= nil then table.insert(WinningHero.rsinv,rsid)
+                            else WinningHero.rsinv = {rsid}
+                            end
+                        end
+
+                        if rsid ~= nil then
+                            CustomGameEventManager:Send_ServerToAllClients( "AddRSUI", {rsid = rsid,hero = WinningHero:GetName()})
+                            --[[
+                            local otv = ""
+                            local req = CreateHTTPRequestScriptVM( "POST", Zodiac.gjfll2 .. "/relicstones1.php")
+                            req:SetHTTPRequestGetOrPostParameter("id", tostring(WinningSteamID))
+                            req:SetHTTPRequestGetOrPostParameter("rsid", rsid)
+                            req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
+                            req:Send(function(result)
+                                otv = result.Body
+                            end)
+                            ]]
+                        end
+                    end
+
                 end
             end
         end

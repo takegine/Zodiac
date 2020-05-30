@@ -1,6 +1,6 @@
 
-print ( '[RelicStone] be running' )
-if  RelicStone   == nil then RelicStone = class({}) end
+print ( '[RelicStone] be loadding' )
+RelicStone = RelicStone or {}
 
 function RelicStone:listenList()
     CustomGameEventManager:RegisterListener("Buy_Relic",      Dynamic_Wrap(RelicStone, 'Buy_Relic'))--购买relic

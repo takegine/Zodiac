@@ -1,7 +1,7 @@
 --使Zodiac 为全局可用，Zodiac可自己改
-print ( '[Zodiac] be running' )
+print ( '[Zodiac] be loadding' )
 
-if  Zodiac   == nil then Zodiac = class({}) end
+Zodiac = Zodiac or {}
 
 -- 此函数初始化游戏模式，并在任何人加载到游戏之前调用
 -- 可用于预先初始化以后需要的任何值/表

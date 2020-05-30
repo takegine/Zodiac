@@ -1,7 +1,7 @@
-if QuestSystem ==nil then
-        QuestSystem=class({})
-    QuestSystem.InfoTable={}
-end
+
+print ( '[QuestSystem] be loadding' )
+QuestSystem = QuestSystem or {}
+QuestSystem.InfoTable={}
 
 --创建一个定时任务
 function QuestSystem:CreateTimeLimitQuest(qusetName,qusetText,QuestCallback,time)

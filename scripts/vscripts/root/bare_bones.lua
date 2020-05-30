@@ -1,6 +1,6 @@
 
-print ( '[GameMode] be running' )
-if  GameMode== nil then GameMode = class({}) end
+print ( '[GameMode] be loadding' )
+GameMode = GameMode or {}
 
 function GameMode:InitGameMode()
     GameRules:SetPreGameTime(5)--设置选择英雄与开始游戏之间的倒数时间

@@ -227,7 +227,8 @@ notforall = {
     "item_hammer_of_god"
 }
 
-if  hRequest   == nil then hRequest = class({}) end
+print ( '[hRequest] be loadding' )
+hRequest = hRequest or {}
 
 function hRequest:Login(playerID) 
     local req = CreateHTTPRequestScriptVM("POST", "https://14769.playfabapi.com/Client/LoginWithCustomID")
@@ -303,3 +304,36 @@ function hRequest:updateplayerdata(session_ticket, goldnum)
         print(dataversion)
     end)
 end
+
+
+--[[
+
+[STATS] Received	
+{
+    "code":200,
+    "status":"OK",
+    "data":
+    {
+        "SessionTicket":"72C027DC81A14AEA--84DD21FD2ED670EE-14769-8D803D5761EB80A-+selbfvC1/yY79CNtmQpuF5+P/H5yvwGEjm8LgKBpnQ=",
+        "PlayFabId":"72C027DC81A14AEA",
+        "NewlyCreated":true,
+        "SettingsForUser":
+        {
+            "NeedsAttribution":false,
+            "GatherDeviceInfo":true,
+            "GatherFocusInfo":true
+            },
+        "EntityToken":
+        {
+            "EntityToken":"Mnx7ImkiOiIyMDIwLTA1LTI5VDEzOjM3OjQxLjc1NjcyNDJaIiwiaWRwIjoiQ3VzdG9tIiwiZSI6IjIwMjAtMDUtMzBUMTM6Mzc6NDEuNzU2NzI0MloiLCJoIjoiNUJEODY4NUQ4OEVFNTk2OCIsInMiOiJwZlFzRmN2UFVmeVdPSHZaV1BNb2psTExWUDdUQnRkK0NBUldYZzRobno4PSIsImVjIjoidGl0bGVfcGxheWVyX2FjY291bnQhREM5ODAzNEZFMkQ3MDY1Ni8xNDc2OS83MkMwMjdEQzgxQTE0QUVBLzNGODdFMDVBMUFDQUJGMkEvIiwiZWkiOiIzRjg3RTA1QTFBQ0FCRjJBIiwiZXQiOiJ0aXRsZV9wbGF5ZXJfYWNjb3VudCJ9",
+            "TokenExpiration":"2020-05-30T13:37:41.756Z",
+            "Entity":
+            {
+                "Id":"3F87E05A1ACABF2A",
+                "Type":"title_player_account",
+                "TypeString":"title_player_account"
+            }
+        },
+        "TreatmentAssignment":{"Variants":[],"Variables":[]}}}
+72C027DC81A14AEA--84DD21FD2ED670EE-14769-8D803D5761EB80A-+selbfvC1/yY79CNtmQpuF5+P/H5yvwGEjm8LgKBpnQ=
+]]

@@ -49,19 +49,22 @@ PlaysTopList    = {}
 WinsTopList     = {}
 HardWinsTopList = {}
 MyProfileArray  = {}
-_G.bonuses     = {}
-_G.bonuses[1]  = {}
-_G.bonuses[2]  = {}
-_G.bonuses[3]  = {}
-_G.bonuses[4]  = {}
-_G.bonuses[5]  = {}
-_G.bonuses[6]  = {}
-_G.bonuses[7]  = {}
+
+_G.hardmode    = 1	    	--默认游戏难度为简单
+_G.GAME_ROUND  = 0 		--初始化回合数
 _G.defaultpart = {}
+_G.bonuses = 
+    {
+        [1]  = {},
+        [2]  = {},
+        [3]  = {},
+        [4]  = {},
+        [5]  = {},
+        [6]  = {},
+        [7]  = {}
+    }
 
 
-_G.hardmode = 1	    	--默认游戏难度为简单
-_G.GAME_ROUND = 0 		--初始化回合数
 
 
 notforall = {

@@ -1,7 +1,7 @@
 --使Zodiac 为全局可用，Zodiac可自己改
 print ( '[Zodiac] be loadding' )
 
-Zodiac = Zodiac or {}
+Zodiac = Zodiac or class({})
 
 -- 此函数初始化游戏模式，并在任何人加载到游戏之前调用
 -- 可用于预先初始化以后需要的任何值/表
@@ -26,6 +26,13 @@ function Zodiac:new()
 
     
 end
+
+--[[
+    获取每队玩家数
+    比较得到玩家数最大的队伍，相同的向下对齐
+    MAX为本轮难度
+    设置所有玩家到队伍1
+]]
 
 function Zodiac:NanDuXuanZe(data)
     --玩家点击难度选项会经过此反馈给其他玩家，反馈还没有做好
@@ -79,7 +86,7 @@ function Zodiac:OnGameRulesStateChange( keys )
         CustomUI:DynamicHud_Create(-1,"psd","file://{resources}/layout/custom_game/uiscreen.xml",nil)--创建选择难度面板
 
     elseif newState == DOTA_GAMERULES_STATE_STRATEGY_TIME then  --玩家处于选择选完的准备界面
-
+        
         local unit = CreateUnitByName( "npc_dota_gold_spirit", Entities:FindByName( nil, "sweepbirth"):GetAbsOrigin(), true, nil, nil, DOTA_TEAM_GOODGUYS )
 
         for i=0, PlayerResource:GetPlayerCount()-1 do
@@ -144,7 +151,7 @@ function Zodiac:OnNPCSpawned(keys)
             npc:AddNewModifier(npc, nil, "modifier_easy_mode", {})
         end
 
-        hRequest:Login(id)
+        --hRequest:Login(id)
 
         --[[给资助的人一个宠物
         if _G.patreons[tostring(PlayerResource:GetSteamID(id))] ~= nil then

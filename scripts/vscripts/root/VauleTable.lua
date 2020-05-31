@@ -337,3 +337,45 @@ end
         "TreatmentAssignment":{"Variants":[],"Variables":[]}}}
 72C027DC81A14AEA--84DD21FD2ED670EE-14769-8D803D5761EB80A-+selbfvC1/yY79CNtmQpuF5+P/H5yvwGEjm8LgKBpnQ=
 ]]
+_G.patreons = {}
+function hRequest:Patreons()
+    print("Load Patreons")
+        local patreonreq = CreateHTTPRequestScriptVM( "GET", "https://pastebin.com/raw/Njy7mF0F")
+        patreonreq:Send(function(result)
+            print_r(result.Body)
+            print("..................")
+            for token in string.gmatch(result.Body, "([^|]*)|") do
+                print(token)
+                local id = ""
+                local lvl = ""
+                id, lvl = token:match("([^,]+),([^,]+)")
+                _G.patreons[id] = tonumber(lvl)
+            end
+            --print("Patreons Loaded")
+            --print_r(_G.patreons)
+            local pplc = PlayerResource:GetPlayerCount()
+            for i=0,pplc-1 do
+                local parts = CustomNetTables:GetTableValue("Particles_Tabel",tostring(i))
+                --print(parts)
+                
+                parts = parts or {}
+                --patreon particles
+                parts["11"] = "nill"
+                parts["12"] = "nill"
+                parts["13"] = "nill"
+                parts["14"] = "nill"
+                parts["15"] = "nill"
+                local plvl = _G.patreons[tostring(PlayerResource:GetSteamID(i))]
+                if plvl ~= nil then
+                    if plvl >= 1 then parts["11"] = "normal" end
+                    if plvl >= 2 then parts["12"] = "normal" end
+                    if plvl >= 3 then parts["13"] = "normal" end
+                    if plvl >= 4 then parts["14"] = "normal" end
+                    if plvl >= 5 then parts["15"] = "normal" end
+                end
+                DeepPrintTable(parts)
+                CustomNetTables:SetTableValue("Particles_Tabel",tostring(i),parts)
+                
+            end
+        end)
+    end

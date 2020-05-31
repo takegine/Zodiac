@@ -173,26 +173,32 @@ function Zodiac:OnConnectFull(keys)
     end
     
     -- 建立游戏模式的参数
-    GameRules:GetGameModeEntity():SetAnnouncerDisabled(true)--禁用播音员
-    GameRules:GetGameModeEntity():SetCustomHeroMaxLevel(MAX_LEVEL)--设定最高等级
-    GameRules:GetGameModeEntity():SetHudCombatEventsDisabled(true)--猜测：不显示左侧的战斗事件
-    GameRules:GetGameModeEntity():SetBuybackEnabled(BUYBACK_ENABLED)--设定玩家不能买活
-    GameRules:GetGameModeEntity():SetSelectionGoldPenaltyEnabled( false )--启用/禁用不选英雄的金币惩罚
-    GameRules:GetGameModeEntity():SetGoldSoundDisabled( DISABLE_GOLD_SOUNDS )--屏蔽金币的声音
-    GameRules:GetGameModeEntity():SetTopBarTeamValuesVisible( TOP_BAR_VISIBLE )
-    GameRules:GetGameModeEntity():SetUseCustomHeroLevels ( USE_CUSTOM_HERO_LEVELS )
-    GameRules:GetGameModeEntity():SetFogOfWarDisabled( DISABLE_FOG_OF_WAR_ENTIRELY)--取消战争迷雾
-    GameRules:GetGameModeEntity():SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
-    GameRules:GetGameModeEntity():SetTopBarTeamValuesOverride( USE_CUSTOM_TOP_BAR_VALUES )--自定义顶部数据栏
-    GameRules:GetGameModeEntity():SetCustomXPRequiredToReachNextLevel( XP_PER_LEVEL_TABLE )--经验值表单
-    GameRules:GetGameModeEntity():SetRecommendedItemsDisabled( RECOMMENDED_BUILDS_DISABLED )--禁用装备推荐
-    GameRules:GetGameModeEntity():SetCustomBuybackCostEnabled( CUSTOM_BUYBACK_COST_ENABLED )--自定义买活金额
-    GameRules:GetGameModeEntity():SetCustomBuybackCooldownEnabled( CUSTOM_BUYBACK_COOLDOWN_ENABLED )--自定义买活CD
-  --GameRules:GetGameModeEntity():SetTowerBackdoorProtectionEnabled( ENABLE_TOWER_BACKDOOR_PROTECTION )--取消塔防御
-  --GameRules:GetGameModeEntity():SetBotThinkingEnabled( USE_STANDARD_DOTA_BOT_THINKING )
-  --GameRules:GetGameModeEntity():SetCameraDistanceOverride( CAMERA_DISTANCE_OVERRIDE )--修改视野高度
+    mode = mode or GameRules:GetGameModeEntity()
+
+    mode:DisableHudFlip( true )--?禁用hub翻转，即小地图放在右边
+    mode:SetLoseGoldOnDeath( false )--死亡损失金钱
+    mode:SetAnnouncerDisabled(true)--禁用播音员
+    mode:SetCustomHeroMaxLevel(MAX_LEVEL)--设定最高等级
+    mode:SetHudCombatEventsDisabled(true)--猜测：不显示左侧的战斗事件
+    mode:SetBuybackEnabled(BUYBACK_ENABLED)--设定玩家不能买活
+    mode:SetSelectionGoldPenaltyEnabled( false )--启用/禁用不选英雄的金币惩罚
+    mode:SetGoldSoundDisabled( DISABLE_GOLD_SOUNDS )--屏蔽金币的声音
+    mode:SetTopBarTeamValuesVisible( TOP_BAR_VISIBLE )
+    mode:SetUseCustomHeroLevels ( USE_CUSTOM_HERO_LEVELS )
+    mode:SetFogOfWarDisabled( DISABLE_FOG_OF_WAR_ENTIRELY)--取消战争迷雾
+    mode:SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
+    mode:SetTopBarTeamValuesOverride( USE_CUSTOM_TOP_BAR_VALUES )--自定义顶部数据栏
+    mode:SetCustomXPRequiredToReachNextLevel( XP_PER_LEVEL_TABLE )--经验值表单
+    mode:SetRecommendedItemsDisabled( RECOMMENDED_BUILDS_DISABLED )--禁用装备推荐
+    mode:SetCustomBuybackCostEnabled( CUSTOM_BUYBACK_COST_ENABLED )--自定义买活金额
+    mode:SetCustomBuybackCooldownEnabled( CUSTOM_BUYBACK_COOLDOWN_ENABLED )--自定义买活CD
+    
+    mode:SetItemAddedToInventoryFilter( Dynamic_Wrap( self.game, "ItemAddedToInventoryFilter" ), self )--设置一个过滤器，用来控制物品被放入物品栏时的行为。
+  --mode:SetTowerBackdoorProtectionEnabled( ENABLE_TOWER_BACKDOOR_PROTECTION )--取消塔防御
+  --mode:SetBotThinkingEnabled( USE_STANDARD_DOTA_BOT_THINKING )
+  --mode:SetCameraDistanceOverride( CAMERA_DISTANCE_OVERRIDE )--修改视野高度
         
-    GameRules:GetGameModeEntity():SetHUDVisible(1,true)   --设置HUD元素，1元素可见
+    mode:SetHUDVisible(1,true)   --设置HUD元素，1元素可见
 
     local entIndex = keys.index+1                  -- 正在进入的用户 玩家实体
     local ply      = EntIndexToHScript(entIndex)

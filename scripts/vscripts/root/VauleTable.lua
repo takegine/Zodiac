@@ -5,7 +5,7 @@ CreateName = nil--"npc_dota_custom_creep_5_1"
 -- GameRules 的变量（Variables）在此改变dota默认值，将在后面调用
 ENABLE_HERO_RESPAWN = false              -- 允许英雄重生：英雄应该在计时器上自动重生还是保持死亡直到手动重生Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = true               -- 全商店模式：主商店应包含秘密商店物品还是常规物品Should the main shop contain Secret Shop items as well as regular items
-ALLOW_SAME_HERO_SELECTION = false        -- 允许选择重复的英雄Should we let people select the same hero as each other
+ALLOW_SAME_HERO_SELECTION = false        -- 英雄复选 Should we let people select the same hero as each other
 
 HERO_SELECTION_TIME = 30.0              -- 给多长时间选英雄How long should we let people select their hero?
 PRE_GAME_TIME = 10.0                    -- 选完英雄到游戏开始的倒数时间有多长How long after people select their heroes should the horn blow and the game start?

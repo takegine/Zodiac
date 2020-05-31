@@ -3,14 +3,19 @@ print ( '[GameMode] be loadding' )
 GameMode = GameMode or class({})
 
 function GameMode:InitGameMode()
+    GameRules:SetCustomGameSetupAutoLaunchDelay(0)--将自动启动延迟从默认值（30秒）更改为0秒
+    GameRules:SetHeroSelectPenaltyTime(0)--设置没有选择英雄的惩罚时间
+    GameRules:SetStrategyTime( 0 )--设置玩家在选择英雄和进入展示阶段之间的时间。
+    GameRules:SetShowcaseTime(0)--设置玩家在策略阶段和进入赛前阶段之间的时间
+    --GameRules:ForceGameStart(true)--将游戏状态转换为DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
     GameRules:SetPreGameTime(5)--设置选择英雄与开始游戏之间的倒数时间
     GameRules:SetStartingGold(450)--出门金币
-    GameRules:SetStrategyTime( 0 )--设置玩家在选择英雄和进入展示阶段之间的时间。
     GameRules:SetHeroSelectionTime(HERO_SELECTION_TIME)--设置选择英雄的时间
-    GameRules:SetHeroSelectPenaltyTime(0)--设置没有选择英雄的惩罚时间
     GameRules:SetUseUniversalShopMode(true)--商店范围内可以购买全部商品，不再限制家里还是边路还是秘密商店
     GameRules:SetHeroRespawnEnabled( false )-- 设定英雄不能重生
-    GameRules:SetCustomGameSetupAutoLaunchDelay(0)--将自动启动延迟从默认值（30秒）更改为0秒
+	GameRules:SetTreeRegrowTime( TREE_REGROW_TIME )
+	GameRules:SetPostGameTime( POST_GAME_TIME )--结束记分板展示时长
+	GameRules:SetSameHeroSelectionEnabled( ALLOW_SAME_HERO_SELECTION )--英雄复选
     GameRules:EnableCustomGameSetupAutoLaunch(true)--启用 (true)或禁用 (false) 自定义游戏的自动设置。
     GameRules:LockCustomGameSetupTeamAssignment(true)--锁定(true)或解锁(false)队伍分配.。如果队伍分配被锁定，玩家将不再能修改队伍
     GameRules:GetGameModeEntity():SetLoseGoldOnDeath(false)--死亡后自己不扣钱
@@ -29,7 +34,6 @@ function GameMode:InitGameMode()
     self.game=Zodiac()
     self.game:new()
 
-    GameRules:GetGameModeEntity():SetItemAddedToInventoryFilter( Dynamic_Wrap( self.game, "ItemAddedToInventoryFilter" ), self )--设置一个过滤器，用来控制物品被放入物品栏时的行为。
     GameRules:GetGameModeEntity():SetThink( "OnThink", self, 2 )--加一个计时器，输出游戏失败
     ListenToGameEvent("npc_spawned",                Dynamic_Wrap(self.game, "OnNPCSpawned"), self)--监听单位重生或者创建事件
     ListenToGameEvent("entity_killed",		       Dynamic_Wrap(self.game,"OnEntityKilled"), self)--单位被击杀

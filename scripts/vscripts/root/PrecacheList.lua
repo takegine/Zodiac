@@ -4,7 +4,6 @@ print ( '[root] be running' )
 require("root/questsystem")  --任务列表，倒计时
 require("root/Zodiac")			--主体程序
 require("root/timers")       --计时器
-require("root/round_units")   --每轮出怪数
 require("code")   --密钥
 require("root/VauleTable")
 require("root/bare_bones")

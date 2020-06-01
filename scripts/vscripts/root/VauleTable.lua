@@ -64,8 +64,9 @@ _G.bonuses =
         [7]  = {}
     }
 
-
-
+DropTable   = LoadKeyValues("scripts/kv/item_drops.kv") --怪物掉落的机率文件
+ROUND_UNITS = LoadKeyValues("scripts/kv/round_units.kv")--出怪数量表单
+ADDED_ITEM  = LoadKeyValues("scripts/kv/item_added.kv") --敌方附加装备
 
 notforall = {
     "item_ice",

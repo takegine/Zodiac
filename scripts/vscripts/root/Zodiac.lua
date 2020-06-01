@@ -22,8 +22,6 @@ function Zodiac:new()
     self.vBots     = {}
     self.vBroadcasters = {}
     _G.DedicatedServerKey = GetDedicatedServerKeyV2("2")
-
-
     
 end
 
@@ -66,9 +64,7 @@ function Zodiac:moshixuanze( data )
     
     for i = 1,4 do                            --循环难度
         if maxkey == "Mode"..i then           --判断投票最多的难度
-            GameRules.DropTable = LoadKeyValues("scripts/kv/item_drops_".."1"..".kv") --怪物掉落的机率文件
             _G.hardmode = i                                                         --难度系数，涉及怪物伤害，血量，变身时机及修饰器层数等
-            ROUND_UNITS = ROUND_UNIT_1                                              --出怪数量表单
             print("mode=".._G.hardmode.."......".."DropTable="..i.."......" )       --打印确认
             break
         end
@@ -510,10 +506,11 @@ function Zodiac:ShuaGuai(CreateName)
 
             --出怪，我的方案,
                 for i=1,3 do 															--每一关的三类怪，循环来确定
-                    local unitname=tostring("npc_dota_custom_creep_".._G.GAME_ROUND.."_"..i)--通关组合的方式得到怪物名字的字符串
-                    
-                    for k=1,ROUND_UNITS[i + (3*(_G.GAME_ROUND-1))] do
-                        --for k,keys in pairs(LoadKeyValues('scripts/npc/npc_units_custom.txt')) do 								--判断这个怪物是否在文件npc_units_custom中已创建
+                    local unitname="npc_dota_custom_creep_".._G.GAME_ROUND.."_"..i      --通关组合的方式得到怪物名字的字符串
+                    local unitnum =tonumber(ROUND_UNITS[unitname][tostring(_G.hardmode)]) or 0
+                   
+                    if ROUND_UNITS[unitname] then                                       --判断这个怪物是否在文件npc_units_custom中已创建
+                        for k=1,unitnum do
                             local unit = CreateUnitByName( unitname, point + RandomVector( RandomFloat( 0, 200 ) ), true, nil, nil, DOTA_TEAM_BADGUYS )
                             --unit:SetInitialGoalEntity( waypoint )						--设置该怪物的初始路径点。我没有创建这个路径点
                             --[[ for i = 1,2* (_G.hardmode - 1) do
@@ -524,7 +521,10 @@ function Zodiac:ShuaGuai(CreateName)
 
                                 --根据难度怪物会获得装备，件数为2* (_G.hardmode - 1)  有个装备列表，怪物随机获得其中装备
                             end]]
-
+                            if ADDED_ITEM[unitname] then
+                                table.foreach(ADDED_ITEM[unitname],function(item,hard)  if _G.hardmode > hard then unit:AddItemByName(item) end end)
+                            end
+                            --[[
                             if _G.hardmode > 1 then				         				--如果不是普通模式，给下列关卡的怪物加装备
                                 if _G.GAME_ROUND ==  4 then unit:AddItemByName("item_fire_earth_water") end
                                 if _G.GAME_ROUND == 11 then unit:AddItemByName("item_ice_fire_earth") end 
@@ -537,9 +537,9 @@ function Zodiac:ShuaGuai(CreateName)
                                 if _G.GAME_ROUND == 21 then unit:AddItemByName("item_echo_sabre") end
                                 if _G.GAME_ROUND == 22 then unit:AddItemByName("item_earth_s_and_y") end
                                 if _G.GAME_ROUND == 25 then unit:AddItemByName("item_energy_core") end
-                            end
+                            end]]
                         end
-                        --end
+                    end
                 end
                 
             --local heroes = GameMode:GetAllRealHeroes()--前面写了，我删掉看看能不能跑
@@ -577,16 +577,16 @@ end
 allelements = { "item_life","item_water","item_shadow","item_void","item_earth","item_fire","item_light","item_air","item_ice","item_energy"}
 needdropel  = {} --需要掉落的球
 function RollDrops(unit)
-    local DropInfo = GameRules.DropTable[unit:GetUnitName()]--获取死者掉落表单
+    local DropInfo = DropTable[unit:GetUnitName()]          --获取死者掉落表单
     if DropInfo then
-        for k,ItemTable in pairs(DropInfo) do 				--遍历掉落物品
-            local chance = ItemTable.Chance or 100 			--爆率
-            local max_drops = ItemTable.Multiple or 1 		--个数
-            local item_name = ItemTable.Item 				--掉落物品名字
-            print("/////item_name"..item_name.."/////max_drops"..max_drops.."/////chance"..chance)
-            for i=1,max_drops do 							--按掉落个数循环
+        for item_name,ItemTable in pairs(DropInfo) do 		--遍历掉落物品
+            local introll = ItemTable.roll or 100 			--爆率
+            local intmuch = ItemTable.much or 1 		    --个数
+            --local item_name = ItemTable.Item 				--掉落物品名字
+            print("RollDrops",unit:GetUnitName(),introll,intmuch,item_name)
+            for i=1,intmuch do 							    --按掉落个数循环
                 if item_name == "item_25gold" then 			--掉落钱袋
-                    if RollPercentage(chance) then                          --随机生成1-100内的数，小于等于给定数(爆率)则返回true
+                    if RollPercentage(introll) then                          --随机生成1-100内的数，小于等于给定数(爆率)则返回true
                         local item = CreateItem(item_name, nil, nil)            --实体一个掉落物
                         item:SetPurchaseTime(0)                                 --购买时间归零
                         CreateItemOnPositionSync( unit:GetAbsOrigin() , item )  --掉落在死者处
@@ -595,18 +595,21 @@ function RollDrops(unit)
 
                 elseif item_name == "item_elbol" then       --掉落 元素球
                     if #needdropel == 0 then                         --需要掉落的球
-                        for y=1,#allelements do
-                            table.insert(needdropel, allelements[y]) --插入值在“需要掉落的球”的表单中，这个表单在难度选择中
-                        end
+                        table.foreach(allelements,function(_,v) table.insert(needdropel,v) end)
+                        --for y=1,#allelements do
+                        --    table.insert(needdropel, allelements[y]) --插入值在“需要掉落的球”的表单中，这个表单在难度选择中
+                        --end
                     end
                     local rand = RandomInt( 1, #needdropel )         --按需要掉落的球中随机一个
-                    item_name = needdropel[rand]                     --把掉落品改为
-                    table.remove(needdropel, rand)                   --在“需要掉落的球”表单中删掉刚刚掉落的球
+                    local newb = needdropel[rand]                    --把掉落品改为
+                    table.remove(needdropel,rand)                    --在“需要掉落的球”表单中删掉刚刚掉落的球
                             
                     for z=0, PlayerResource:GetPlayerCount()-1 do
                         local myTable = CustomNetTables:GetTableValue("Elements_Tabel",tostring(z))--从网络表单获取元素球个数
-                        for y=1, #allelements do
-                            if allelements[y] == item_name then
+                        table.foreach(allelements,function(y,v)
+                        --for y=1, #allelements do
+                            --if allelements[y] == item_name then
+                            if v==newb then
                                 local partlist = {                       --掉落元素时的粒子特效
                                         "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
                                         "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8_arc.vpcf",
@@ -630,15 +633,16 @@ function RollDrops(unit)
                                             
                                 myTable[tostring(y)] = myTable[tostring(y)] + 1
                                 CustomNetTables:SetTableValue("Elements_Tabel",tostring(z),myTable) --上传元素球余额到网络表单中
-                                break
+                                --break
                             end
-                        end
+                        end)
                     end
-                elseif ItemTable.Relict == 1 then 			--掉落relic
+                elseif ItemTable.sins then 			--掉落relic
                     
-                    if RollPercentage(chance*PlayerResource:GetPlayerCount()) then  --随机生成1-100内的数，小于等于给定数（玩家数）则返回true
+                    if RollPercentage(introll*PlayerResource:GetPlayerCount()) then  --随机生成1-100内的数，小于等于给定数（玩家数）则返回true
                         local item = CreateItem(item_name, nil, nil)				--创建该掉落实体
-                                item:SetPurchaseTime(0)								--购买时间为0
+                        print("vooo",item_name)
+                              item:SetPurchaseTime(0)								--购买时间为0
                         CreateItemOnPositionSync( unit:GetAbsOrigin(), item )		--实现物品掉落
                         --在死亡地点增加一个 根据100/125随机一个浮点数产生的随机向量，把掉落物装备发射出去，防止装备相位卡住
                         item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin()+RandomVector(RandomFloat(110,140)))
@@ -721,7 +725,7 @@ function RollDrops(unit)
 
                 elseif item_name == "RS" then  ------掉落relic stone 宝石的------
                     
-                    if RollPercentage(chance*PlayerResource:GetPlayerCount()) then --随机一个100以内的数，如果小于爆率X玩家缺省数
+                    if RollPercentage(introll*PlayerResource:GetPlayerCount()) then --随机一个100以内的数，如果小于爆率X玩家缺省数
                         local PlayerIDs = {}
                         local Heroes = GameMode:GetAllRealHeroes()
                         for _,Hero in pairs ( Heroes ) do
@@ -756,7 +760,7 @@ function RollDrops(unit)
                             ininvid = "001"
                         end
 
-                        local rares = ItemTable.Rares
+                        local rares = ItemTable.level
 
                         local rsid = nil   --初始化一个宝石的序列号
                         if rares == 0 then     rsid =            "1"..RandomInt(0,9)..RandomInt(1,4)..RandomInt(1,7).."0000"..ininvid

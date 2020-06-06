@@ -524,6 +524,9 @@ function Zodiac:ShuaGuai(CreateName)
                             if ADDED_ITEM[unitname] then
                                 table.foreach(ADDED_ITEM[unitname],function(item,hard)  if _G.hardmode > hard then unit:AddItemByName(item) end end)
                             end
+                            if ADDED_ABLE[unitname] then
+                                table.foreach(ADDED_ABLE[unitname],function(_,able)  unit:AddAbility(able) end)
+                            end
                             --[[
                             if _G.hardmode > 1 then				         				--如果不是普通模式，给下列关卡的怪物加装备
                                 if _G.GAME_ROUND ==  4 then unit:AddItemByName("item_fire_earth_water") end

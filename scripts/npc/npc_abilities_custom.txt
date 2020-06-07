@@ -2974,7 +2974,7 @@
 	"my_schetchik"
 	{
 		"BaseClass"	"ability_lua"
-		"ScriptFile"	"skill/35_schetchik.lua"
+		"ScriptFile"	"skill/00_schetchik.lua"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 
@@ -4697,14 +4697,6 @@
 				"IsHidden"	"1"
 				"IsDebuff"	"0"
 				"IsPurgable"	"0"
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"skill/00_pick_gold.lua"
-						"Function"	"OnCreated"
-					}
-				}
 				"ThinkInterval"	"0.1"
 				"OnIntervalThink"
 				{

@@ -83,8 +83,8 @@ function Zodiac:OnGameRulesStateChange( keys )
 
     elseif newState == DOTA_GAMERULES_STATE_STRATEGY_TIME then  --玩家处于选择选完的准备界面
         
-        local unit = CreateUnitByName( "npc_dota_gold_spirit", Entities:FindByName( nil, "sweepbirth"):GetAbsOrigin(), true, nil, nil, DOTA_TEAM_GOODGUYS )
-
+        local unit = CreateUnitByName( "npc_dota_gold_spirit", Vector(0,0,0), true, nil, nil, DOTA_TEAM_GOODGUYS )-- Entities:FindByName( nil, "sweepbirth"):GetAbsOrigin()
+        table.foreach(ADDED_ABLE[unit:GetUnitName()],function(_,able)  unit:AddAbility(able):SetLevel(1) end)
         for i=0, PlayerResource:GetPlayerCount()-1 do
             if PlayerResource:HasSelectedHero(i) == false then
                 PlayerResource:GetPlayer(i):MakeRandomHeroSelection()
@@ -525,7 +525,7 @@ function Zodiac:ShuaGuai(CreateName)
                                 table.foreach(ADDED_ITEM[unitname],function(item,hard)  if _G.hardmode > hard then unit:AddItemByName(item) end end)
                             end
                             if ADDED_ABLE[unitname] then
-                                table.foreach(ADDED_ABLE[unitname],function(_,able)  unit:AddAbility(able) end)
+                                table.foreach(ADDED_ABLE[unitname],function(_,able)  unit:AddAbility(able):SetLevel(1) end)
                             end
                             --[[
                             if _G.hardmode > 1 then				         				--如果不是普通模式，给下列关卡的怪物加装备

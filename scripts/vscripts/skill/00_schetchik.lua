@@ -1,5 +1,5 @@
 my_schetchik = class({})
-LinkLuaModifier( "mod_schetchik", "skill/35_schetchik", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "mod_schetchik", "skill/00_schetchik", LUA_MODIFIER_MOTION_NONE )
 
 function my_schetchik:GetIntrinsicModifierName()
 	return "mod_schetchik"
@@ -9,13 +9,9 @@ end
 
 mod_schetchik = class({})
 
-function mod_schetchik:IsHidden() 
-	return true
-end
+function mod_schetchik:IsHidden()  return true end
 
-function mod_schetchik:IsPurgable()
-	return false
-end
+function mod_schetchik:IsPurgable()	return false end
 
 function mod_schetchik:DeclareFunctions()
 	local funcs = 

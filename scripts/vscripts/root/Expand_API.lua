@@ -130,3 +130,7 @@ function CDOTA_BaseNPC:GetDamageBlock()
         return damage_block
     end
 end
+
+function testunit(CreateName)
+    CreateUnitByName(CreateName,Entities:FindByName( nil, "sweepbirth"):GetAbsOrigin(),false,nil,nil,DOTA_TEAM_NEUTRALS):AddNewModifier(nil, nil, "modifier_phased", {duration=0.1})
+end

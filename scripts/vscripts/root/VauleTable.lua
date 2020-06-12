@@ -1,6 +1,4 @@
 print ( '[ValueTable] be running' )
---如果要测试哪个怪就写哪个怪
-CreateName = nil--"npc_dota_custom_creep_5_1"
 
 -- GameRules 的变量（Variables）在此改变dota默认值，将在后面调用
 ENABLE_HERO_RESPAWN = false              -- 允许英雄重生：英雄应该在计时器上自动重生还是保持死亡直到手动重生Should the heroes automatically respawn on a timer or stay dead until manually respawned
@@ -68,6 +66,25 @@ DropTable   = LoadKeyValues("scripts/kv/item_drops.kv") --怪物掉落的机率�
 ROUND_UNITS = LoadKeyValues("scripts/kv/round_units.kv")--出怪数量表单
 ADDED_ITEM  = LoadKeyValues("scripts/kv/item_added.kv") --敌方附加装备
 ADDED_ABLE  = LoadKeyValues("scripts/kv/able_added.kv") --敌方添加技能
+
+LinkLuaModifier( "modifier_easy_mode", "modifiers/modifier_mode1", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_imba_generic_talents_handler", "modifiers/modifier_mode3", LUA_MODIFIER_MOTION_NONE )
+
+--allelements = { "item_jia","item_yi","item_bing","item_ding","item_wu","item_ji","item_geng","item_xin","item_ren","item_kui"}
+--all_elements = { "item_life","item_water","item_shadow","item_void","item_earth","item_fire","item_light","item_air","item_ice","item_energy"}
+need_drop_el = {}
+partlist = { 
+            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
+            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8_arc.vpcf",
+            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8_arc_b.vpcf",
+            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
+            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
+            "particles/units/heroes/hero_undying/undying_fg_portrait_mouthgas.vpcf",
+            "particles/units/heroes/hero_zeus/zeus_return_king_of_gods_head_style1_ambient.vpcf",
+            "particles/units/heroes/hero_tinker/laser_cutter_sparks_c.vpcf",
+            "particles/units/heroes/hero_techies/techies_stasis_trap_beams.vpcf",
+            "particles/econ/courier/courier_snail/courier_snail_ambient_flying.vpcf"
+                                }
 
 notforall = {
     "item_ice",

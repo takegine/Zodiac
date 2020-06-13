@@ -4,7 +4,6 @@ RelicStone = RelicStone or {}
 
 function RelicStone:listenList()
     CustomGameEventManager:RegisterListener("Buy_Relic",      Dynamic_Wrap(RelicStone, 'Buy_Relic'))--购买relic
-    CustomGameEventManager:RegisterListener("Buy_Element",    Dynamic_Wrap(RelicStone, 'Buy_Element'))--购买元素球
     CustomGameEventManager:RegisterListener("SniatRS",        Dynamic_Wrap(RelicStone, 'SniatRS'))--跳转了两个函数，和relicStone相关，功用未知
     CustomGameEventManager:RegisterListener("EqipRS",         Dynamic_Wrap(RelicStone, 'EqipRS'))--跳转了两个函数，和relicStone相关，功用未知
     CustomGameEventManager:RegisterListener("SetDefaultPart", Dynamic_Wrap(RelicStone, 'SetDefaultPart'))--猜测是分解粉末的按钮，存数据和CD
@@ -65,27 +64,6 @@ function RelicStone:Buy_Relic(event)
             end
         end
     end
-end
-
-function RelicStone:Buy_Element(event)
-    print("function RelicStone:Buy_Element()is working.")
-    local myTable = CustomNetTables:GetTableValue("Elements_Tabel",tostring(event.PlayerID))--在网络表单中 获取该英雄的元素表单
-    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)                       --获取他的英雄实体
-
-    for i=0,15 do
-        if  hero:GetItemInSlot(i) == nil and myTable[tostring(event.num)] > 0 then          --如果物品栏还有空格且元素表单还有库存
-            myTable[tostring(event.num)] =  myTable[tostring(event.num)] - 1                --该元素球的余额减1
-            CustomNetTables:SetTableValue("Elements_Tabel",tostring(event.PlayerID),myTable)--上传元素球余额到网络表单中
-            local itemname = allelements[event.num]                                         --物品名称按传来的数据键上
-            local item = CreateItem(itemname, hero, hero)
-            item:SetPurchaseTime(0)
-            item:SetPurchaser( hero )
-            EmitSoundOn( "General.Buy", hero )
-            hero:AddItem(item)
-
-            break--终止循环
-        end
-    end   
 end
 
 function RelicStone:SniatRS(event)
@@ -415,37 +393,6 @@ function RelicStone:LoadRelics(info)
     end
 end
 
-function RelicStone:SaveSet(event)
-    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-    if hero.sevesettimerok == nil then hero.sevesettimerok = true end
-    if hero.sevesettimerok == true then
-        hero.sevesettimerok = false
-        Timers:CreateTimer(30, function()
-            hero.sevesettimerok = true
-            CustomGameEventManager:Send_ServerToPlayer( PlayerResource:GetPlayer(event.PlayerID), "ReadySetButton", {})
-        end)
-        local rstr = ""
-        for i=1,8 do
-            if i ~= 8 then
-                rstr = rstr .. hero.rsslots[i] .. "|"
-            else
-                rstr = rstr .. hero.rsslots[i]
-            end
-        end
-        hero.rssaves[tonumber(event.num)] = rstr
-        local req = CreateHTTPRequestScriptVM( "POST", GameMode.gjfll2 .. "/relicstones1.php")
-        req:SetHTTPRequestGetOrPostParameter("id", tostring(PlayerResource:GetSteamID(event.PlayerID)))
-        req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
-        req:SetHTTPRequestGetOrPostParameter("savenum", tostring(event.num))
-        req:SetHTTPRequestGetOrPostParameter("slots", rstr)
-        req:Send(function(result)
-            print(result.Body)
-        end)
-        RelicStone:UpdateRS(event.PlayerID)
-        RelicStone:Levels(event)
-    end
-end
-
 function RelicStone:UpgradeRS(event)
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     for i=1,#hero.rsinv do
@@ -463,13 +410,11 @@ function RelicStone:UpgradeRS(event)
                 if hero.rsp >= cost then
                     hero.rsinv[i] = string.sub(event.rs, 1, 7) .. tonumber(qual)+1 .. string.sub(event.rs, 9)
                     hero.rsp = hero.rsp - cost
-                    local req = CreateHTTPRequestScriptVM( "POST", GameMode.gjfll2 .. "/relicstones1.php")
-                    req:SetHTTPRequestGetOrPostParameter("id", tostring(PlayerResource:GetSteamID(event.PlayerID)))
-                    req:SetHTTPRequestGetOrPostParameter("uprsid", event.rs)
-                    req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
-                    req:Send(function(result)
-                        print(result.Body)
-                    end)
+                    -- local req = CreateHTTPRequestScriptVM( "POST", GameMode.gjfll2 .. "/relicstones1.php")
+                    -- req:SetHTTPRequestGetOrPostParameter("id", tostring(PlayerResource:GetSteamID(event.PlayerID)))
+                    -- req:SetHTTPRequestGetOrPostParameter("uprsid", event.rs)
+                    -- req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
+                    -- req:Send(function(result) print(result.Body) end)
                 end
             end
             RelicStone:Levels(event)
@@ -478,7 +423,7 @@ function RelicStone:UpgradeRS(event)
     end
 end
 
-function RelicStone:SetColor(event)
+function RelicStone:SetColor(event)--设置颜色
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     if event.colorid ~= 1 then
         for i=1,#hero.sealcolors do
@@ -493,7 +438,7 @@ function RelicStone:SetColor(event)
     --print(hero.sealcolor)
 end
 
-function RelicStone:UpdateRS(id)
+function RelicStone:UpdateRS(id)--刷新石头
     local hero = PlayerResource:GetSelectedHeroEntity(id)
     _G.bonuses[1][id] = 0
     _G.bonuses[2][id] = 0
@@ -577,7 +522,7 @@ function RelicStone:UpdateRS(id)
 end
 
 puretimerok = true
-function RelicStone:PureRS(event)
+function RelicStone:PureRS(event)--粉碎石头
     if  puretimerok == true then
         puretimerok = false
         Timers:CreateTimer(30, function()
@@ -585,7 +530,6 @@ function RelicStone:PureRS(event)
             CustomGameEventManager:Send_ServerToPlayer( PlayerResource:GetPlayer(event.PlayerID), "PureButtonReady", {})
         end)
         local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
-        local pureok = false
         local inslot = false
         local newlist = {}
         local rspure = 0
@@ -596,22 +540,20 @@ function RelicStone:PureRS(event)
                     break
                 end
             end
-            for i=1,#hero.rsinv do
-                if hero.rsinv[i] == v then
-                    if inslot == false then
+            
+            if inslot == false then
+                for i=1,#hero.rsinv do
+                    if hero.rsinv[i] == v then
                         table.remove(hero.rsinv,i)
-                        pureok = true
+                        table.insert(newlist,v)
+                        local fchr = string.sub(v, 1, 1)
+                        if fchr == "1" then rspure = rspure + 1
+                        elseif fchr == "2" then rspure = rspure + 3
+                        elseif fchr == "3" then rspure = rspure + 15
+                        elseif fchr == "4" then rspure = rspure + 60
+                        end
+                        break
                     end
-                    break
-                end
-            end
-            if pureok then
-                table.insert(newlist,v)
-                local fchr = string.sub(v, 1, 1)
-                if fchr == "1" then rspure = rspure + 1
-                elseif fchr == "2" then rspure = rspure + 3
-                elseif fchr == "3" then rspure = rspure + 15
-                elseif fchr == "4" then rspure = rspure + 60
                 end
             end
         end
@@ -626,20 +568,49 @@ function RelicStone:PureRS(event)
                 end
             end
             --print(rstr)
-            local req = CreateHTTPRequestScriptVM( "POST", GameMode.gjfll2 .. "/relicstones1.php")
-            req:SetHTTPRequestGetOrPostParameter("id", tostring(PlayerResource:GetSteamID(event.PlayerID)))
-            req:SetHTTPRequestGetOrPostParameter("rsids", rstr)
-            req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
-            req:Send(function(result)
-                print(result.Body)
-            end)
+            local   req = CreateHTTPRequestScriptVM( "POST", GameMode.gjfll2 .. "/relicstones1.php")
+                    req:SetHTTPRequestGetOrPostParameter("id", tostring(PlayerResource:GetSteamID(event.PlayerID)))
+                    req:SetHTTPRequestGetOrPostParameter("rsids", rstr)
+                    req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
+                    req:Send(function(result) print(result.Body) end)
         end
         RelicStone:UpdateRS(event.PlayerID)
         RelicStone:Levels(event)
     end
 end
 
-function RelicStone:LoadSet(event)
+function RelicStone:SaveSet(event)
+    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+    if hero.sevesettimerok == nil then hero.sevesettimerok = true end
+    if hero.sevesettimerok == true then
+        hero.sevesettimerok = false
+        Timers:CreateTimer(30, function()
+            hero.sevesettimerok = true
+            CustomGameEventManager:Send_ServerToPlayer( PlayerResource:GetPlayer(event.PlayerID), "ReadySetButton", {})
+        end)
+        local rstr = ""
+        for i=1,8 do
+            if i ~= 8 then
+                rstr = rstr .. hero.rsslots[i] .. "|"
+            else
+                rstr = rstr .. hero.rsslots[i]
+            end
+        end
+        hero.rssaves[tonumber(event.num)] = rstr
+        local req = CreateHTTPRequestScriptVM( "POST", GameMode.gjfll2 .. "/relicstones1.php")
+        req:SetHTTPRequestGetOrPostParameter("id", tostring(PlayerResource:GetSteamID(event.PlayerID)))
+        req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
+        req:SetHTTPRequestGetOrPostParameter("savenum", tostring(event.num))
+        req:SetHTTPRequestGetOrPostParameter("slots", rstr)
+        req:Send(function(result)
+            print(result.Body)
+        end)
+        RelicStone:UpdateRS(event.PlayerID)
+        RelicStone:Levels(event)
+    end
+end
+
+function RelicStone:LoadSet(event)--加载设置
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     local thisslots = {}
     hero.rsslots = {"","","","","","","",""}

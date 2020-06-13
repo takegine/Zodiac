@@ -7,8 +7,9 @@ Zodiac = Zodiac or class({})
 -- 可用于预先初始化以后需要的任何值/表
 function Zodiac:new()
     print("print InitGameMode is loaded.")
-    
-    ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(Zodiac, 'OnNonPlayerUsedAbility'), self)--函数给大牛和凤凰的技能加魔免效果，用了修饰器，事件：当非玩家实体使用技能时
+
+    CustomGameEventManager:RegisterListener("Buy_Element",    Dynamic_Wrap(Zodiac, 'Buy_Element'))
+    ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(Zodiac, 'OnNonPlayerUsedAbility'), self)
     _G.hardmode=1
 
     self.vUserIds  = {}
@@ -530,11 +531,9 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
         item_shadow_cuirass = 4,
         item_ice_staff = 4
     }
-
+    
     if  hItem:GetPurchaser() ~= parent then
-            Timers:CreateTimer(0.01,function()
-                parent:DropItemAtPositionImmediate( hItem, parent:GetAbsOrigin() )
-            end)
+            Timer(0.01,function() parent:DropItemAtPositionImmediate( hItem, hItem:GetPurchaser():GetAbsOrigin()+RandomVector(20) ) end)
         end
     elseif rlcs[hItem:GetAbilityName()] then 
         for i=0, 9, 1 do
@@ -549,4 +548,27 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
         end
     --elseif notforall[itemA] then hItem:SetPurchaser( parent )
     end
+end
+
+function Zodiac:Buy_Element(event)
+    
+    local myTable = CustomNetTables:GetTableValue("Elements_Tabel",tostring(event.PlayerID))
+    if myTable[tostring(event.num)] <= 0 then return end
+    
+    local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
+
+    for i=0,15 do
+        if  not hero:GetItemInSlot(i) then
+            myTable[tostring(event.num)] =  myTable[tostring(event.num)] - 1
+            CustomNetTables:SetTableValue("Elements_Tabel",tostring(event.PlayerID),myTable)
+            local itemname = allelements[event.num]  
+            local item = CreateItem(itemname, hero, hero)
+                  item:SetPurchaseTime(0)
+                  item:SetPurchaser( hero )
+            EmitSoundOn( "General.Buy", hero )
+            hero:AddItem(item)
+
+            break
+        end
+    end   
 end

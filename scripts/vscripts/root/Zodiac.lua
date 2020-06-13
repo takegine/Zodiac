@@ -43,16 +43,19 @@ function Zodiac:OnConnectFull(keys)
     
     print("/////////////////////////////////////////////////////////////////////////////////////////////")
     local getboll = 10
-    if _G.hardmode== 2 then getboll = 6 end
+    if _G.hardmode== 2 then getboll = 4 end
     if _G.hardmode== 3 then getboll = 0 end
     
-    local value = {1,2,3,4,5,6,7,8,9,10}
-    while not (#value == getboll) do
-        local roll = RandomInt( 1, #value )
-        table.remove(value, roll)
-        table.insert(need_drop_el, roll)
+    local value = {}
+    while not (#need_drop_el==getboll) do
+        roll_no = RandomInt( 1, #need_drop_el )
+        print(roll_no)
+        value[need_drop_el[roll_no]]=1
+        table.remove(need_drop_el, roll_no)
     end
-    CustomNetTables:SetTableValue("Elements_Tabel",tostring(id),value)
+    for i=1,#need_drop_el do value[need_drop_el[i]]=0 end
+    Zodiac.firstbolltable=value
+    
     --DeepPrintTable(value)
 end
 
@@ -77,108 +80,108 @@ end
 
 function Zodiac:Continue()
     
-        local return_time = 60 + _G.GAME_ROUND -- 关卡之间的时间
-        local time_ = 1
-        
-        cheats = GameRules:IsCheatMode()
+    local return_time = 60 + _G.GAME_ROUND -- 关卡之间的时间
+    local time_ = 1
+    
+    cheats = GameRules:IsCheatMode()
 
-        local heroes = GameMode:GetAllRealHeroes()
-        
-        table.foreach(heroes,function(k,h)
-            if h.damage_schetchik then
-                if  h.oldwd then
-                    h.nowwd = math.ceil(h.damage_schetchik - h.oldwd)
-                    h.oldwd = math.ceil(h.damage_schetchik)
-                else
-                    h.nowwd = math.ceil(h.damage_schetchik)
-                    h.oldwd = math.ceil(h.damage_schetchik)
-                end
+    local heroes = GameMode:GetAllRealHeroes()
+    
+    table.foreach(heroes,function(k,h)
+        if h.damage_schetchik then
+            if  h.oldwd then
+                h.nowwd = math.ceil(h.damage_schetchik - h.oldwd)
+                h.oldwd = math.ceil(h.damage_schetchik)
             else
-                h.oldwd = 0
-                h.nowwd = 0
+                h.nowwd = math.ceil(h.damage_schetchik)
+                h.oldwd = math.ceil(h.damage_schetchik)
             end
-            
-            if not h:IsAlive() then h:RespawnUnit() end
-            h:SetHealth(h:GetMaxHealth())
-            h:SetMana(h:GetMaxMana())
-            h:FindItemInInventory("item_bottle"):SetCurrentCharges(math.ceil(2+_G.GAME_ROUND/5))
-        end)
-        
-        local dlist  = {}
-        local myneedheroes = GameMode:GetAllRealHeroes()
-        for i= #myneedheroes,1,-1 do
-            local maxdh = nil
-            local maxdmg = -1
-            for n=1, #myneedheroes do
-                if myneedheroes[n] and myneedheroes[n].nowwd > maxdmg then
-                    maxdmg = myneedheroes[n].nowwd
-                    maxdh  = n
-                end
-            end
-            
-            dlist["hero"..i]=myneedheroes[maxdh]:GetName()
-            dlist["damage"..i]=myneedheroes[maxdh].nowwd
-            table.remove(myneedheroes,maxdh)
+        else
+            h.oldwd = 0
+            h.nowwd = 0
         end
-        CustomGameEventManager:Send_ServerToAllClients( "Open_DamageTop", dlist)
         
-        local heronametab = {}
-        for i = 1,10 do
-            if i <= #heroes then heronametab["hero"..i]=heroes[i]:GetName()
-            else heronametab["hero"..i]=""
+        if not h:IsAlive() then h:RespawnUnit() end
+        h:SetHealth(h:GetMaxHealth())
+        h:SetMana(h:GetMaxMana())
+        local bottle = h:FindItemInInventory("item_bottle")
+        if bottle then bottle:SetCurrentCharges(math.ceil(2+_G.GAME_ROUND/5)) end
+    end)
+    
+    local dlist  = {}
+    local myneedheroes = GameMode:GetAllRealHeroes()
+    for i= #myneedheroes,1,-1 do
+        local maxdh = nil
+        local maxdmg = -1
+        for n=1, #myneedheroes do
+            if myneedheroes[n] and myneedheroes[n].nowwd > maxdmg then
+                maxdmg = myneedheroes[n].nowwd
+                maxdh  = n
             end
         end
-        CustomGameEventManager:Send_ServerToAllClients( "Display_RoundVote",heronametab)
         
-        QuestSystem:CreateQuest("PrepTime","#QuestPanel",1,return_time,nil,_G.GAME_ROUND + 1)
+        dlist["hero"..i]=myneedheroes[maxdh]:GetName()
+        dlist["damage"..i]=myneedheroes[maxdh].nowwd
+        table.remove(myneedheroes,maxdh)
+    end
+    CustomGameEventManager:Send_ServerToAllClients( "Open_DamageTop", dlist)
+    
+    local heronametab = {}
+    for i = 1,10 do
+        if i <= #heroes then heronametab["hero"..i]=heroes[i]:GetName()
+        else heronametab["hero"..i]=""
+        end
+    end
+    CustomGameEventManager:Send_ServerToAllClients( "Display_RoundVote",heronametab)
+    
+    QuestSystem:CreateQuest("PrepTime","#QuestPanel",1,return_time,nil,_G.GAME_ROUND + 1)
 
-        Timer(function()
-            local gogame = 0
-            for i=0,#heroes do
-                local InBox = Entities:FindByName(nil,"neutral_camp"):IsTouching(heroes[i])
-                if InBox then gogame=gogame+1 end
-                print(".."..i.."..".."false",tostring(InBox))
-                --CustomGameEventManager:Send_ServerToAllClients("changevote",{hero=heroes[i]:GetName(),bool=tostring(InBox)})
-        
-                print(".."..i.."..".."false")
-            end
-        
-            if time_ <= return_time and gogame ~= PlayerResource:GetPlayerCount() then
-                QuestSystem:RefreshQuest("PrepTime",time_,return_time,_G.GAME_ROUND + 1)
-                print("countdown wait time_: ",time_)
-                time_ = time_ + 1
-                return 1 
-            else
-        
-                _G.GAME_ROUND = _G.GAME_ROUND + 1
-                QuestSystem:DelQuest("PrepTime")
-                CustomNetTables:SetTableValue("Hero_Stats","wave",{_G.GAME_ROUND})
-                CustomGameEventManager:Send_ServerToAllClients( "Close_DamageTop", {})
-                CustomGameEventManager:Send_ServerToAllClients( "Close_RoundVote", {})
-                EmitGlobalSound("Tutorial.Quest.complete_01")
-        
-                print("..................round:",_G.GAME_ROUND,".....................")
-                
-                for i=1,3 do
-                    local unitname = "npc_dota_custom_creep_".._G.GAME_ROUND.."_"..i
+    Timer(function()
+        local gogame = 0
+        for i=0,#heroes do
+            local InBox = Entities:FindByName(nil,"neutral_camp"):IsTouching(heroes[i])
+            if InBox then gogame=gogame+1 end
+            print(".."..i.."..".."false",tostring(InBox))
+            --CustomGameEventManager:Send_ServerToAllClients("changevote",{hero=heroes[i]:GetName(),bool=tostring(InBox)})
+    
+            print(".."..i.."..".."false")
+        end
+    
+        if time_ <= return_time and gogame ~= PlayerResource:GetPlayerCount() then
+            QuestSystem:RefreshQuest("PrepTime",time_,return_time,_G.GAME_ROUND + 1)
+            print("countdown wait time_: ",time_)
+            time_ = time_ + 1
+            return 1 
+        else
+    
+            _G.GAME_ROUND = _G.GAME_ROUND + 1
+            QuestSystem:DelQuest("PrepTime")
+            CustomNetTables:SetTableValue("Hero_Stats","wave",{_G.GAME_ROUND})
+            CustomGameEventManager:Send_ServerToAllClients( "Close_DamageTop", {})
+            CustomGameEventManager:Send_ServerToAllClients( "Close_RoundVote", {})
+            EmitGlobalSound("Tutorial.Quest.complete_01")
+    
+            print("..................round:",_G.GAME_ROUND,".....................")
+            
+            for i=1,3 do
+                local unitname = "npc_dota_custom_creep_".._G.GAME_ROUND.."_"..i
+                if ROUND_UNITS[unitname] then
                     local unitnum  = tonumber(ROUND_UNITS[unitname][tostring(_G.hardmode)]) or 0
                     local point    = Entities:FindByName( nil, "sweepbirth"):GetAbsOrigin() + RandomVector( RandomFloat( 0, 200 ) )
-                    if ROUND_UNITS[unitname] then
-                        for k=1,unitnum do
-                            CreateUnitByName( unitname, point, true, nil, nil, DOTA_TEAM_BADGUYS ).enemy=true
-                        end
-                    end
-                end
-                
-                print("refresh all modifiers on hero")
-                for i=1, #heroes do
-                    if PlayerResource:GetConnectionState(heroes[i]:GetPlayerOwnerID()) == 2 then
-                        table.foreach( heroes[i]:FindAllModifiers(),function(_,b) if b:GetAbility() and b.needupwawe then b:OnWaweChange(_G.GAME_ROUND) end end)
+                    for k=1,unitnum do
+                        CreateUnitByName( unitname, point, true, nil, nil, DOTA_TEAM_BADGUYS ).enemy=true
                     end
                 end
             end
-        end)
-    end
+            
+            print("refresh all modifiers on hero")
+            for i=1, #heroes do
+                if PlayerResource:GetConnectionState(heroes[i]:GetPlayerOwnerID()) == 2 then
+                    table.foreach( heroes[i]:FindAllModifiers(),function(_,b) if b:GetAbility() and b.needupwawe then b:OnWaweChange(_G.GAME_ROUND) end end)
+                end
+            end
+        end
+    end)
 end
 
 function Zodiac:OnNPCSpawned(keys)
@@ -186,41 +189,41 @@ function Zodiac:OnNPCSpawned(keys)
     local npc = EntIndexToHScript(keys.entindex)
     print("[Zodiac] NPC Spawned ",npc:GetUnitName())
 
-    if not  npc.bFirstSpawned then npc.bFirstSpawned = true
-        if  npc:IsRealHero() then
-            npc.immortalbuffs = {}
-            npc:AddExperience(100,1,false,false)
-            npc:AddNewModifier(npc, nil, "modifier_imba_generic_talents_handler", {})
-            
-            local id = npc:GetPlayerID()
-            _G.bonuses[1][id] = 0
-            _G.bonuses[2][id] = 0
-            _G.bonuses[3][id] = 0
-            _G.bonuses[4][id] = 0
-            _G.bonuses[5][id] = 0
-            _G.bonuses[6][id] = 0
-            _G.bonuses[7][id] = 0
-            npc.sealcolor = 1
-            npc.rsp = 0
-            local info = {}
-            info.PlayerID = id
-            Timers:CreateTimer(1, function()
-                RelicStone:LoadRelics(info)
-            end)
 
-            if _G.hardmode == 1 then
-                npc:AddNewModifier(npc, nil, "modifier_easy_mode", {})
+    if npc.bFirstSpawned then return end
+        
+    npc.bFirstSpawned = true
+    if  npc:IsRealHero() then
+        npc.immortalbuffs = {}
+        npc:AddExperience(100,1,false,false)
+        npc:AddNewModifier(npc, nil, "modifier_imba_generic_talents_handler", {})
+        
+        local id = npc:GetPlayerID()
+        _G.bonuses[1][id] = 0
+        _G.bonuses[2][id] = 0
+        _G.bonuses[3][id] = 0
+        _G.bonuses[4][id] = 0
+        _G.bonuses[5][id] = 0
+        _G.bonuses[6][id] = 0
+        _G.bonuses[7][id] = 0
+        npc.sealcolor = 1
+        npc.rsp = 0
+        local info = {}
+        info.PlayerID = id
+        Timers:CreateTimer(1, function() RelicStone:LoadRelics(info) end)
+
+        if _G.hardmode == 1 then npc:AddNewModifier(npc, nil, "modifier_easy_mode", {}) end
+    
+        CustomNetTables:SetTableValue("Elements_Tabel",tostring(id), Zodiac.firstbolltable)
+        --hRequest:Login(id)
+
+        --[[给资助的人一个宠物
+        if _G.patreons[tostring(PlayerResource:GetSteamID(id))] ~= nil then
+            if _G.patreons[tostring(PlayerResource:GetSteamID(id))] > 3 then
+                info.hero = npc
+                Pets.CreatePet( info )
             end
-
-            --hRequest:Login(id)
-
-            --[[给资助的人一个宠物
-            if _G.patreons[tostring(PlayerResource:GetSteamID(id))] ~= nil then
-                if _G.patreons[tostring(PlayerResource:GetSteamID(id))] > 3 then
-                    info.hero = npc
-                    Pets.CreatePet( info )
-                end
-            end]]
+        end]]
     else
         local unitname = npc:GetUnitName()
         --[[ for i = 1,2* (_G.hardmode - 1) do
@@ -232,10 +235,10 @@ function Zodiac:OnNPCSpawned(keys)
             --根据难度怪物会获得装备，件数为2* (_G.hardmode - 1)  有个装备列表，怪物随机获得其中装备
         end]]
         if ADDED_ITEM[unitname] then
-            table.foreach(ADDED_ITEM[unitname],function(item,hard)  if _G.hardmode > hard then unit:AddItemByName(item) end end)
+            table.foreach(ADDED_ITEM[unitname],function(item,hard)  if _G.hardmode > hard then npc:AddItemByName(item) end end)
         end
         if ADDED_ABLE[unitname] then
-            table.foreach(ADDED_ABLE[unitname],function(_,able)  unit:AddAbility(able):SetLevel(1) end)
+            table.foreach(ADDED_ABLE[unitname],function(_,able)  npc:AddAbility(able):SetLevel(1) end)
         end
     end
 end
@@ -266,7 +269,10 @@ function Zodiac:OnEntityKilled( keys )
             local getxp  = killedUnit:GetBaseDayTimeVisionRange()
             local heroes = GameMode:GetAllRealHeroes()
             if  getxp > 0 then
-                table.foreach(heroes,function(_,h) h:AddExperience(getxp / #heroes*(0.75+0.05*#heroes)),false,false) end )
+                table.foreach(heroes,function(_,h) 
+                    h:AddExperience(getxp / #heroes*(0.75+0.05*#heroes),
+                    false,false) 
+                end )
             end
         end
         if  killedUnit:IsCreature() then RollDrops(killedUnit) end
@@ -307,20 +313,20 @@ function RollDrops(unit)
                 if #need_drop_el == 0 then 
                     for g=1,10 do need_drop_el[g]=g end 
                 end
-                local rand = RandomInt( 1, #need_drop_el )
+                local roll_no = RandomInt( 1, #need_drop_el )
                 for z=0, PlayerResource:GetPlayerCount()-1 do
                     local myTable  = CustomNetTables:GetTableValue("Elements_Tabel",tostring(z))
-                    local nFXIndex = ParticleManager:CreateParticle( partlist[need_drop_el[rand]], PATTACH_OVERHEAD_FOLLOW, unit )--特效--原参数2 PATTACH_ABSORIGIN
-                    --ParticleManager:SetParticleControl( nFXIndex, 0, drop_item:GetAbsOrigin() )
-                    --ParticleManager:SetParticleControl( nFXIndex, 1, containedItem:GetPurchaser():GetAbsOrigin() )
-                    ParticleManager:SetParticleControlEnt( nFXIndex, 1, PlayerResource:GetSelectedHeroEntity(z), PATTACH_POINT_FOLLOW, "attach_hitloc", PlayerResource:GetSelectedHeroEntity(z):GetOrigin(), true )
-                    --SetParticleControlEnt(particle: ParticleID, controlPoint: int, unit: CDOTA_BaseNPC, particleAttach: ParticleAttachment_t, attachment: string, offset: Vector, lockOrientation: bool)
-                    --设置CP点参数
-                    ParticleManager:ReleaseParticleIndex( nFXIndex )--释放特效
-                    myTable[tostring(need_drop_el[rand])] = myTable[tostring(need_drop_el[rand])] + 1
+                    -- local nFXIndex = ParticleManager:CreateParticle( partlist[need_drop_el[roll_no]], PATTACH_OVERHEAD_FOLLOW, unit )--特效--原参数2 PATTACH_ABSORIGIN
+                    -- --ParticleManager:SetParticleControl( nFXIndex, 0, drop_item:GetAbsOrigin() )
+                    -- --ParticleManager:SetParticleControl( nFXIndex, 1, containedItem:GetPurchaser():GetAbsOrigin() )
+                    -- ParticleManager:SetParticleControlEnt( nFXIndex, 1, PlayerResource:GetSelectedHeroEntity(z), PATTACH_POINT_FOLLOW, "attach_hitloc", PlayerResource:GetSelectedHeroEntity(z):GetOrigin(), true )
+                    -- --SetParticleControlEnt(particle: ParticleID, controlPoint: int, unit: CDOTA_BaseNPC, particleAttach: ParticleAttachment_t, attachment: string, offset: Vector, lockOrientation: bool)
+                    -- --设置CP点参数
+                    -- ParticleManager:ReleaseParticleIndex( nFXIndex )--释放特效
+                    myTable[tostring(need_drop_el[roll_no])] = myTable[tostring(need_drop_el[roll_no])] + 1
                     CustomNetTables:SetTableValue("Elements_Tabel",tostring(z),myTable)
                 end
-                table.remove(need_drop_el,rand) 
+                table.remove(need_drop_el,roll_no) 
 
             elseif ItemTable.sins then
                 if RollPercentage(introll*PlayerResource:GetPlayerCount()) then
@@ -504,71 +510,43 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
     end
 
     local hItem = EntIndexToHScript( filterTable["item_entindex_const"] )
-    local hInventoryParent = EntIndexToHScript( filterTable["inventory_parent_entindex_const"] )
+    local parent = EntIndexToHScript( filterTable["inventory_parent_entindex_const"] )
     
-    if  hItem ~= nil and hInventoryParent ~= nil 
-    and hItem:GetAbilityName() ~= "item_tombstone" 
-    and hInventoryParent:IsRealHero() then
-        local rlcs = {
-            item_relic_damage = 1,
-            item_relic_armor = 1,
-            item_relic_magres = 1,
-            item_relic_attackspeed = 1,
-            item_relic_allsatas = 1,
-            item_relic_magvam = 1,
-            item_relic_magdam = 1,
-            item_book = 1,
-            item_redemption_ticket = 1,
-            item_proved = 2,
-            item_finalbook = 3,
-            item_op_staff = 4,
-            item_shadow_cuirass = 4,
-            item_ice_staff = 4
-        }
-        if rlcs[hItem:GetAbilityName()] == nil then --当获得的装备不在上表中
-            local est2 = false                      --是否是元素装备
-            for _, v in pairs(notforall) do
-                if v == hItem:GetAbilityName() then --当获得的装备在上表中
-                    est2 = true
-                end
-            end
-            if  est2 == false then
-                hItem:SetPurchaser( hInventoryParent )--既不是元素装备也不是遗物，那么设置他为购买者
-            else
-                if  hItem:GetPurchaser() ~= hInventoryParent then--不是自己的元素装备不能拾起，下一帧掉落
-                    Timers:CreateTimer(0.01,function()
-                        hInventoryParent:DropItemAtPositionImmediate( hItem, hInventoryParent:GetAbsOrigin() )
-                    end)
-                end
-            end
-        else
-            if hItem:GetPurchaser() ~= hInventoryParent then --不是自己的元素装备不能拾起，下一帧掉落
-                Timers:CreateTimer(0.01,function()
-                    hInventoryParent:DropItemAtPositionImmediate( hItem, hInventoryParent:GetAbsOrigin() )
-                end)
-            else
-                for i=0, 9, 1 do
-                    local current_item = hInventoryParent:GetItemInSlot(i)
-                    if current_item ~= nil then
-                        if rlcs[current_item:GetAbilityName()] ~= nil then
-                            if rlcs[hItem:GetAbilityName()] > rlcs[current_item:GetAbilityName()] then
-                                    hInventoryParent:RemoveItem(current_item)
+    if not hItem or not parent or hItem:GetAbilityName() == "item_tombstone" or not parent:IsRealHero() then return true end
 
-                            elseif rlcs[hItem:GetAbilityName()] < rlcs[current_item:GetAbilityName()] then
-                                Timers:CreateTimer(0.01,function()
-                                    hInventoryParent:RemoveItem(hItem)
-                                    end)
+    local rlcs = {
+        item_relic_damage = 1,
+        item_relic_armor = 1,
+        item_relic_magres = 1,
+        item_relic_attackspeed = 1,
+        item_relic_allsatas = 1,
+        item_relic_magvam = 1,
+        item_relic_magdam = 1,
+        item_book = 1,
+        item_redemption_ticket = 1,
+        item_proved = 2,
+        item_finalbook = 3,
+        item_op_staff = 4,
+        item_shadow_cuirass = 4,
+        item_ice_staff = 4
+    }
 
-                            elseif hItem:GetAbilityName() == current_item:GetAbilityName() then
-                                Timers:CreateTimer(0.01,function()
-                                    hInventoryParent:RemoveItem(hItem)
-                                    end)
-                            end
-                        end
-                    end
+    if  hItem:GetPurchaser() ~= parent then
+            Timers:CreateTimer(0.01,function()
+                parent:DropItemAtPositionImmediate( hItem, parent:GetAbsOrigin() )
+            end)
+        end
+    elseif rlcs[hItem:GetAbilityName()] then 
+        for i=0, 9, 1 do
+            local current_item = parent:GetItemInSlot(i)
+            if current_item and rlcs[current_item:GetAbilityName()] then
+                if hItem:GetAbilityName() == current_item:GetAbilityName() then local reitem = hItem
+                elseif rlcs[hItem:GetAbilityName()] < rlcs[current_item:GetAbilityName()] then local reitem = hItem
+                elseif rlcs[hItem:GetAbilityName()] > rlcs[current_item:GetAbilityName()] then local reitem = current_item 
                 end
+                if reitem then parent:RemoveItem(reitem) end
             end
         end
+    --elseif notforall[itemA] then hItem:SetPurchaser( parent )
     end
-    return true
 end

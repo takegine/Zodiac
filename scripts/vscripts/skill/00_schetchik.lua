@@ -22,7 +22,7 @@ function mod_schetchik:DeclareFunctions()
 	return funcs
 end
 
-function mod_schetchik:OnTakeDamage(event)
+function mod_schetchik:OnTakeDamage(event)--记录伤害用的
     if event.attacker:IsRealHero() then
         if event.attacker ~= event.unit and not event.unit:IsIllusion() and event.attacker ~= nil then
             if event.attacker.damage_schetchik == nil then

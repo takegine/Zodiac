@@ -23,7 +23,7 @@ XP_PER_LEVEL_TABLE = {}--初始化经验表单，会在难度选择函数中更�
     mode:SetRecommendedItemsDisabled( true )--禁用装备推荐
     mode:SetCustomBuybackCostEnabled( true )
     mode:SetCustomBuybackCooldownEnabled( true )
-    
+    mode:SetSendToStashEnabled( false )
         
   mode:SetHUDVisible(1,true)
   mode:SetHUDVisible(4,false)

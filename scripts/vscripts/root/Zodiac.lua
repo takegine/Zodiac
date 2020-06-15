@@ -512,7 +512,7 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
 
     local hItem = EntIndexToHScript( filterTable["item_entindex_const"] )
     local parent = EntIndexToHScript( filterTable["inventory_parent_entindex_const"] )
-    
+
     if not hItem or not parent or hItem:GetAbilityName() == "item_tombstone" or not parent:IsRealHero() then return true end
 
     local rlcs = {
@@ -547,6 +547,7 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
         end
     --elseif notforall[itemA] then hItem:SetPurchaser( parent )
     end
+    return true
 end
 
 function Zodiac:Buy_Element(event)

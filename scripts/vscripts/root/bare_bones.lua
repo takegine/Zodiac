@@ -48,6 +48,11 @@ function GameMode:InitGameMode()
     
     Convars:RegisterCommand( "getfullrelic", Dynamic_Wrap(self, 'GetFullRelic'),         " 1", 0 )--注册一个控制台指令，给自己全部遗物
     Convars:RegisterCommand( "getrelicstones", Dynamic_Wrap(self, 'GetRelicStones'),     " 1", 0 )--注册一个控制台指令，给自己RS石头
+    
+    self.vUserIds  = {}
+    self.vSteamIds = {}
+    self.vBots     = {}
+    self.vBroadcasters = {}
 end
 
 function GameMode:OnThink()
@@ -72,12 +77,11 @@ function GameMode:NeedSteamIds(data)--获取STEAMID发给客户端
     local result = {}
     
     for i=0,PlayerResource:GetPlayerCount()-1 do
-        local arr={}
-        table.insert(arr,PlayerResource:GetSteamID(i))
+        result[i] = {}
+        table.insert(result[i],PlayerResource:GetSteamID(i))
         if PlayerResource:HasSelectedHero(i) then
-            table.insert(arr,PlayerResource:GetSelectedHeroName(i))
+            table.insert(result[i],PlayerResource:GetSelectedHeroName(i))
         end
-        result[i] = arr;
       --result[i]={ PlayerResource:GetSteamID(i), PlayerResource:GetSelectedHeroName(i) }
     end
     CustomGameEventManager:Send_ServerToPlayer( PlayerResource:GetPlayer(data.PlayerID), "SteamIds", result)

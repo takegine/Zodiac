@@ -13,7 +13,7 @@ TREE_REGROW_TIME = 30.0                 -- 树木重生的周期How long should 
 GOLD_PER_TICK = 0                       -- 玩家工资多少 How much gold should players get per tick?
 GOLD_TICK_TIME = 999999.0               -- 发工资的频率 How long should we wait in seconds between gold ticks?
 
-RECOMMENDED_BUILDS_DISABLED = false     -- 禁用装备推荐 Should we disable the recommened builds for heroes (Note: this is not working currently I believe)
+
 CAMERA_DISTANCE_OVERRIDE = 1134.0       -- 视角高度，1134是默认值 How far out should we allow the camera to go?  1134 is the default in Dota
 
 MINIMAP_ICON_SIZE = 1                   -- 英雄图标尺寸What icon size should we use for our heroes?
@@ -21,25 +21,17 @@ MINIMAP_CREEP_ICON_SIZE = 1             -- 野怪图标尺寸What icon size shou
 MINIMAP_RUNE_ICON_SIZE = 1              -- 神符图标尺寸What icon size should we use for runes?
 
 RUNE_SPAWN_TIME = 120                   -- 刷新神符的时间间隔 秒 How long in seconds should we wait between rune spawns?
-CUSTOM_BUYBACK_COST_ENABLED = true      -- 使用自定义买活金额 Should we use a custom buyback cost setting?
-CUSTOM_BUYBACK_COOLDOWN_ENABLED = true  -- 使用自定义买活冷却 Should we use a custom buyback time?
-BUYBACK_ENABLED = false                 -- 允许买活吗 Should we allow people to buyback when they die?
 
-DISABLE_FOG_OF_WAR_ENTIRELY = true      -- 禁用双方的战争迷雾 Should we disable fog of war entirely for both teams?
 USE_STANDARD_HERO_GOLD_BOUNTY = false   -- 使用标准的赏金规则 Should we give gold for hero kills the same as in Dota, or allow those values to be changed?
 
-USE_CUSTOM_TOP_BAR_VALUES = true        -- 使用自定义顶部数据，否则使用默认的团队击杀数 Should we do customized top bar values or use the default kill count per team?
-TOP_BAR_VISIBLE = true                  -- 顶部数据栏（我猜是显示玩家KDA和补兵） Should we display the top bar score/count at all?
+
 SHOW_KILLS_ON_TOPBAR = true             -- Should we display kills only on the top bar? (No denies, suicides, kills by neutrals)  Requires USE_CUSTOM_TOP_BAR_VALUES
 
 ENABLE_TOWER_BACKDOOR_PROTECTION= false -- 我们应该为塔启用后门保护吗？ Should we enable backdoor protection for our towers?
-REMOVE_ILLUSIONS_ON_DEATH = true        -- Should we remove all illusions if the main hero dies?
-DISABLE_GOLD_SOUNDS = false             -- Should we disable the gold sound when players get gold?
 
 END_GAME_ON_KILLS = false               -- Should the game end after a certain number of kills?
 KILLS_TO_END_GAME_FOR_TEAM = 50         -- How many kills for a team should signify an end of game?
 
-USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom levels?
 MAX_LEVEL = 200                         -- 设置英雄满级 What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 

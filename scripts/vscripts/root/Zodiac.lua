@@ -12,10 +12,6 @@ function Zodiac:new()
     ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(Zodiac, 'OnNonPlayerUsedAbility'), self)
     _G.hardmode=1
 
-    self.vUserIds  = {}
-    self.vSteamIds = {}
-    self.vBots     = {}
-    self.vBroadcasters = {}
     _G.DedicatedServerKey = GetDedicatedServerKeyV2("2")
     
     cheats = GameRules:IsCheatMode()

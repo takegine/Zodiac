@@ -63,7 +63,7 @@ LinkLuaModifier( "modifier_easy_mode", "modifiers/modifier_mode1", LUA_MODIFIER_
 LinkLuaModifier( "modifier_imba_generic_talents_handler", "modifiers/modifier_mode3", LUA_MODIFIER_MOTION_NONE )
 
 --allelements = { "item_jia","item_yi","item_bing","item_ding","item_wu","item_ji","item_geng","item_xin","item_ren","item_kui"}
---all_elements = { "item_life","item_water","item_shadow","item_void","item_earth","item_fire","item_light","item_air","item_ice","item_energy"}
+all_elements = { "item_life","item_water","item_shadow","item_void","item_earth","item_fire","item_light","item_air","item_ice","item_energy"}
 need_drop_el = {1,2,3,4,5,6,7,8,9,10}
 partlist = { 
             "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",

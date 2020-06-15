@@ -7,7 +7,7 @@ require("root/timers")       --计时器
 require("code")   --密钥
 require("root/VauleTable")
 require("root/bare_bones")
-require("root/RelicStone")
+--require("root/RelicStone")
 require("root/Expand_API")
 require("root/ToolsFromX")
 

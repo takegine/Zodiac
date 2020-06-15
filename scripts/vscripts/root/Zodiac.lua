@@ -12,7 +12,11 @@ function Zodiac:new()
     ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(Zodiac, 'OnNonPlayerUsedAbility'), self)
     _G.hardmode=1
 
-    _G.DedicatedServerKey = GetDedicatedServerKeyV2("2")
+    -- self.vUserIds  = {}
+    -- self.vSteamIds = {}
+    -- self.vBots     = {}
+    -- self.vBroadcasters = {}
+    -- _G.DedicatedServerKey = GetDedicatedServerKeyV2("2")
     
     cheats = GameRules:IsCheatMode()
 end
@@ -27,19 +31,19 @@ function Zodiac:OnConnectFull(keys)
 
     local playerID = ply:GetPlayerID()             -- 正在进入的用户 玩家ID
 
-    self.game.vUserIds[keys.userid] = ply               -- 使用此用户ID更新用户ID表
+    -- self.game.vUserIds[keys.userid] = ply               -- 使用此用户ID更新用户ID表
 
-    self.game.vSteamIds[PlayerResource:GetSteamAccountID(playerID)] = ply  -- 更新Steam ID表
+    -- self.game.vSteamIds[PlayerResource:GetSteamAccountID(playerID)] = ply  -- 更新Steam ID表
 
-    -- If the player is a broadcaster flag it in the Broadcasters table
-    if PlayerResource:IsBroadcaster(playerID) then -- 
-        self.game.vBroadcasters[keys.userid] = 1
-        return
-    end
+    -- -- If the player is a broadcaster flag it in the Broadcasters table
+    -- if PlayerResource:IsBroadcaster(playerID) then -- 
+    --     self.game.vBroadcasters[keys.userid] = 1
+    --     return
+    -- end
 
     
     print("/////////////////////////////////////////////////////////////////////////////////////////////")
-    local getboll = 10
+    local getboll = 0
     if _G.hardmode== 2 then getboll = 4 end
     if _G.hardmode== 3 then getboll = 0 end
     
@@ -207,7 +211,7 @@ function Zodiac:OnNPCSpawned(keys)
         npc.rsp = 0
         local info = {}
         info.PlayerID = id
-        Timers:CreateTimer(1, function() RelicStone:LoadRelics(info) end)
+        --Timers:CreateTimer(1, function() RelicStone:LoadRelics(info) end)
 
         if _G.hardmode == 1 then npc:AddNewModifier(npc, nil, "modifier_easy_mode", {}) end
     
@@ -530,7 +534,6 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
     
     if  hItem:GetPurchaser() ~= parent then
             Timer(0.01,function() parent:DropItemAtPositionImmediate( hItem, hItem:GetPurchaser():GetAbsOrigin()+RandomVector(20) ) end)
-        end
     elseif rlcs[hItem:GetAbilityName()] then 
         for i=0, 9, 1 do
             local current_item = parent:GetItemInSlot(i)
@@ -557,7 +560,7 @@ function Zodiac:Buy_Element(event)
         if  not hero:GetItemInSlot(i) then
             myTable[tostring(event.num)] =  myTable[tostring(event.num)] - 1
             CustomNetTables:SetTableValue("Elements_Tabel",tostring(event.PlayerID),myTable)
-            local itemname = allelements[event.num]  
+            local itemname = all_elements[event.num]  
             local item = CreateItem(itemname, hero, hero)
                   item:SetPurchaseTime(0)
                   item:SetPurchaser( hero )

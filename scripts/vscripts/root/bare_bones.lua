@@ -49,10 +49,6 @@ function GameMode:InitGameMode()
     Convars:RegisterCommand( "getfullrelic", Dynamic_Wrap(self, 'GetFullRelic'),         " 1", 0 )--注册一个控制台指令，给自己全部遗物
     Convars:RegisterCommand( "getrelicstones", Dynamic_Wrap(self, 'GetRelicStones'),     " 1", 0 )--注册一个控制台指令，给自己RS石头
     
-    self.vUserIds  = {}
-    self.vSteamIds = {}
-    self.vBots     = {}
-    self.vBroadcasters = {}
 end
 
 function GameMode:OnThink()
@@ -61,7 +57,7 @@ function GameMode:OnThink()
    end
 
 function GameMode:UpdateProfiles(data)--更新玩家历史游戏记录
-    RelicStone:Levels(data)
+    --RelicStone:Levels(data)
 
     GameMode:NeedSteamIds(data)--得到steamID
 

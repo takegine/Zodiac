@@ -8,8 +8,8 @@ Zodiac = Zodiac or class({})
 function Zodiac:new()
     print("print InitGameMode is loaded.")
 
-    CustomGameEventManager:RegisterListener("Buy_Element",    Dynamic_Wrap(Zodiac, 'Buy_Element'))
-    ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(Zodiac, 'OnNonPlayerUsedAbility'), self)
+    CustomGameEventManager:RegisterListener("Buy_Element",    Dynamic_Wrap(self, 'Buy_Element'))
+    ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(self, 'OnNonPlayerUsedAbility'), self)
     _G.hardmode=1
 
     -- self.vUserIds  = {}
@@ -26,7 +26,7 @@ function Zodiac:OnConnectFull(keys)
     --DeepPrintTable(keys)
     require('root/GameMode')
     
-    mode:SetItemAddedToInventoryFilter( Dynamic_Wrap( self.game, "ItemAddedToInventoryFilter" ), self )--设置一个过滤器，用来控制物品被放入物品栏时的行为。
+    mode:SetItemAddedToInventoryFilter( Dynamic_Wrap( self, "ItemAddedToInventoryFilter" ), self )--设置一个过滤器，用来控制物品被放入物品栏时的行为。
     local ply      = EntIndexToHScript(keys.index+1)-- 正在进入的用户 玩家实体
 
     local playerID = ply:GetPlayerID()             -- 正在进入的用户 玩家ID

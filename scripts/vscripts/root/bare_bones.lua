@@ -31,15 +31,17 @@ function GameMode:InitGameMode()
     ListenToGameEvent("dota_item_purchased",Dynamic_Wrap(Zodiac, "OnDotaItemPurchased"), self)--监听物品被购买的事件
     ListenToGameEvent("player_chat", 		Dynamic_Wrap(Zodiac, "PlayerChat"), self)--监听玩家聊天事件
     ]]
+    
+    if GetMapName()=="rectangle" then require("root/rectangle") end
     self.game=Zodiac()
     self.game:new()
 
     GameRules:GetGameModeEntity():SetThink( "OnThink", self, 2 )--加一个计时器，输出游戏失败
-    ListenToGameEvent("npc_spawned",                Dynamic_Wrap(self.game, "OnNPCSpawned"), self)--监听单位重生或者创建事件
-    ListenToGameEvent("entity_killed",		       Dynamic_Wrap(self.game,"OnEntityKilled"), self)--单位被击杀
-    ListenToGameEvent('player_connect_full',       Dynamic_Wrap(self.game, 'OnConnectFull'), self)--所有玩家连入后加载玩家信息，加载游戏模式，
-    ListenToGameEvent('dota_player_gained_level',Dynamic_Wrap(self.game, 'OnPlayerLevelUp'), self)--玩家升级
-    ListenToGameEvent("game_rules_state_change",Dynamic_Wrap(self.game,"OnGameRulesStateChange"), self) --游戏阶段改变
+    ListenToGameEvent("npc_spawned",                Dynamic_Wrap(self.game, "OnNPCSpawned"), self.game)--监听单位重生或者创建事件
+    ListenToGameEvent("entity_killed",		       Dynamic_Wrap(self.game,"OnEntityKilled"), self.game)--单位被击杀
+    ListenToGameEvent('player_connect_full',       Dynamic_Wrap(self.game, 'OnConnectFull'), self.game)--所有玩家连入后加载玩家信息，加载游戏模式，
+    ListenToGameEvent('dota_player_gained_level',Dynamic_Wrap(self.game, 'OnPlayerLevelUp'), self.game)--玩家升级
+    ListenToGameEvent("game_rules_state_change",Dynamic_Wrap(self.game,"OnGameRulesStateChange"), self.game) --游戏阶段改变
 
     
     CustomGameEventManager:RegisterListener("UpdateProfiles", Dynamic_Wrap(self, 'UpdateProfiles'))--刷新玩家历史记录数据

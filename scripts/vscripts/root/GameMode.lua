@@ -27,7 +27,7 @@ XP_PER_LEVEL_TABLE = {}--初始化经验表单，会在难度选择函数中更�
         
   mode:SetHUDVisible(1,true)
   mode:SetHUDVisible(4,false)
-  mode:SetHUDVisible(9, false)
+  mode:SetHUDVisible(9,false)
 
         
     

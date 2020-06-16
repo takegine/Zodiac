@@ -1,10 +1,9 @@
 -- 修改1：引入文件
 
 print ( '[root] be running' )
-require("root/questsystem")  --任务列表，倒计时
-require("root/Zodiac")			--主体程序
-require("root/timers")       --计时器
-require("code")   --密钥
+require("root/questsystem")
+require("root/timers")
+--require("code")
 require("root/VauleTable")
 require("root/bare_bones")
 --require("root/RelicStone")

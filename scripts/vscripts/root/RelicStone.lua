@@ -129,7 +129,7 @@ function RelicStone:SetDefaultPart(event)
         local req = CreateHTTPRequestScriptVM( "POST", RelicStone.gjfll2 .. "/data.php") --创建一个到存储服务器的请求
         req:SetHTTPRequestGetOrPostParameter("inid", tostring(PlayerResource:GetSteamID(event.PlayerID)))
         req:SetHTTPRequestGetOrPostParameter("part", "defaults")
-        req:SetHTTPRequestGetOrPostParameter("reson", tostring(event.part))
+        req:SetHTTPRequestGetOrPostParameter( "reson", tostring(event.part) )
         req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)
         req:Send(function(result)
             print(result.Body)
@@ -678,3 +678,31 @@ function GameMode:_Stats(iswin)
         req:Send(function(result) print(result.Body) end)
     end
 end
+
+
+-- local req = CreateHTTPRequestScriptVM( "POST", gjfll2 .. "/data.php") 
+-- req:SetHTTPRequestGetOrPostParameter( "inid" , tostring(PlayerResource:GetSteamID(event.PlayerID)))
+-- req:SetHTTPRequestGetOrPostParameter( "part" , "defaults")
+-- req:SetHTTPRequestGetOrPostParameter( "reson", tostring(event.part) )
+-- req:SetHTTPRequestGetOrPostParameter( "v"    , GetDedicatedServerKeyV2("2"))
+-- req:Send(function(result)
+--     print(result.Body)
+-- end)
+
+-- -----------------------------------------------------------------------------------------
+
+-- local req = CreateHTTPRequestScriptVM( "POST", gjfll2 .. "/data.php") 
+-- req:SetHTTPRequestHeaderValue("Content-Type", "application/json")
+
+-- local encoded = {}
+-- encoded.inid  = tostring(PlayerResource:GetSteamID(playerID))
+-- encoded.part  = 'defaults'
+-- encoded.reson = tostring(event.part) 
+-- encode.v      = GetDedicatedServerKeyV2("2")
+
+-- req:SetHTTPRequestRawPostBody("application/json", json.encode( encoded ) )
+-- req:Send(function(result)
+--     print(result.Body)
+-- end)
+
+

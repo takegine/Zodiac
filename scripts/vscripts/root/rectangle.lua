@@ -120,9 +120,7 @@ function Zodiac:Continue()
     
     local heronametab = {}
     for i = 1,10 do
-        if i <= #heroes then heronametab["hero"..i]=heroes[i]:GetName()
-        else heronametab["hero"..i]=""
-        end
+        heronametab["hero"..i] = (i <= #heroes) and heroes[i]:GetName() or ""
     end
     CustomGameEventManager:Send_ServerToAllClients( "Display_RoundVote",heronametab)
     
@@ -130,19 +128,17 @@ function Zodiac:Continue()
 
     Timer(function()
         local gogame = 0
-        for i=0,#heroes do
-            local InBox = Entities:FindByName(nil,"neutral_camp"):IsTouching(heroes[i])
-            if InBox then gogame=gogame+1 end
-            print(".."..i.."..".."false",tostring(InBox))
-            --CustomGameEventManager:Send_ServerToAllClients("changevote",{hero=heroes[i]:GetName(),bool=tostring(InBox)})
-    
-            print(".."..i.."..".."false")
-        end
+        table.foreach(heroes,function(_,h)
+            local InBox = Entities:FindByName(nil,"neutral_camp"):IsTouching(h)
+            print(InBox)
+            gogame = InBox and gogame+1 or gogame
+            CustomGameEventManager:Send_ServerToAllClients("changevote",{ h:GetName(), bool=tostring(InBox)})
+        end)
     
         if time_ <= return_time and gogame ~= PlayerResource:GetPlayerCount() then
-            QuestSystem:RefreshQuest("PrepTime",time_,return_time,_G.GAME_ROUND + 1)
-            print("countdown wait time_: ",time_)
-            time_ = time_ + 1
+            QuestSystem:RefreshQuest("PrepTime", time_, return_time, _G.GAME_ROUND + 1)
+            print("countdown wait time_: ", string.format("%02d",time_))
+            time_ = GameRules:IsGamePaused() and time_ or time_ + 1
             return 1 
         else
     
@@ -153,7 +149,7 @@ function Zodiac:Continue()
             CustomGameEventManager:Send_ServerToAllClients( "Close_RoundVote", {})
             EmitGlobalSound("Tutorial.Quest.complete_01")
     
-            print("..................round:",_G.GAME_ROUND,".....................")
+            print("..................round:" , _G.GAME_ROUND , ".....................")
             
             for i=1,3 do
                 local unitname = "npc_dota_custom_creep_".._G.GAME_ROUND.."_"..i

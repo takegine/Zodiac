@@ -23,25 +23,14 @@ function mod_schetchik:DeclareFunctions()
 end
 
 function mod_schetchik:OnTakeDamage(event)--记录伤害用的
-    if event.attacker:IsRealHero() then
-        if event.attacker ~= event.unit and not event.unit:IsIllusion() and event.attacker ~= nil then
-            if event.attacker.damage_schetchik == nil then
-                event.attacker.damage_schetchik = 0
-            end
-            event.attacker.damage_schetchik = event.attacker.damage_schetchik + event.damage
-        end
-    else
-        local own = event.attacker:GetPlayerOwnerID()
-        if own ~= nil then
-            local atthero = PlayerResource:GetSelectedHeroEntity(own)
-            if atthero ~= nil then
-                if atthero ~= event.unit and not event.unit:IsIllusion() then
-                    if atthero.damage_schetchik == nil then
-                        atthero.damage_schetchik = 0
-                    end
-                    atthero.damage_schetchik = atthero.damage_schetchik + event.damage
-                end
-            end
-        end
+    
+    local atthero = event.attacker:IsRealHero() and event.attacker or event.attacker:GetPlayerOwnerID() and PlayerResource:GetSelectedHeroEntity(event.attacker:GetPlayerOwnerID())
+
+    if  atthero and atthero ~= event.unit and not event.unit:IsIllusion() then
+        atthero.damage_schetchik = ( atthero.damage_schetchik or 0 ) + event.damage
     end
+
+    atthero.fist_dam_time = atthero.fist_dam_time or GameRules:GetGameTime()
+
+    atthero.dam_dps = atthero.damage_schetchik/(GameRules:GetGameTime()-atthero.fist_dam_time+1)
 end

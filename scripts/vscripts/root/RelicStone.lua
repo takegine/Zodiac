@@ -698,7 +698,7 @@ end
 -- encoded.inid  = tostring(PlayerResource:GetSteamID(playerID))
 -- encoded.part  = 'defaults'
 -- encoded.reson = tostring(event.part) 
--- encode.v      = GetDedicatedServerKeyV2("2")
+-- encoded.v     = GetDedicatedServerKeyV2("2")
 
 -- req:SetHTTPRequestRawPostBody("application/json", json.encode( encoded ) )
 -- req:Send(function(result)

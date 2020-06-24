@@ -37,6 +37,7 @@ function GameMode:InitGameMode()
     self.game:new()
 
     GameRules:GetGameModeEntity():SetThink( "OnThink", self, 2 )--加一个计时器，输出游戏失败
+    ListenToGameEvent("entity_hurt",                 Dynamic_Wrap(self.game, "entity_hurt"), self.game)
     ListenToGameEvent("npc_spawned",                Dynamic_Wrap(self.game, "OnNPCSpawned"), self.game)--监听单位重生或者创建事件
     ListenToGameEvent("entity_killed",		       Dynamic_Wrap(self.game,"OnEntityKilled"), self.game)--单位被击杀
     ListenToGameEvent('player_connect_full',       Dynamic_Wrap(self.game, 'OnConnectFull'), self.game)--所有玩家连入后加载玩家信息，加载游戏模式，

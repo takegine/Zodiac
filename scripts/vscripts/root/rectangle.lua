@@ -89,22 +89,13 @@ function Zodiac:Continue()
     local heroes = GameMode:GetAllRealHeroes()
     
     table.foreach(heroes,function(k,h)
-        if h.damage_schetchik then
-            if  h.oldwd then
-                h.nowwd = math.ceil(h.damage_schetchik - h.oldwd)
-                h.oldwd = math.ceil(h.damage_schetchik)
-            else
-                h.nowwd = math.ceil(h.damage_schetchik)
-                h.oldwd = math.ceil(h.damage_schetchik)
-            end
-        else
-            h.oldwd = 0
-            h.nowwd = 0
-        end
-        
         if not h:IsAlive() then h:RespawnUnit() end
+
         h:SetHealth(h:GetMaxHealth())
         h:SetMana(h:GetMaxMana())
+        h.nowwd = not h.total_dmg_deal and 0 or math.ceil(h.total_dmg_deal - h.nowwd)
+        h.fist_dam_time = nil
+        
         local bottle = h:FindItemInInventory("item_bottle")
         if bottle then bottle:SetCurrentCharges(math.ceil(2+_G.GAME_ROUND/5)) end
     end)
@@ -478,6 +469,24 @@ function RollDrops(unit)
     end)
 end
 
+function Zodiac:entity_hurt(keys)
+    local killedUnit = EntIndexToHScript( keys.entindex_killed   )
+    local killerUnit = EntIndexToHScript( keys.entindex_attacker )
+
+    local atthero = killerUnit:IsRealHero() and killerUnit or killerUnit:GetPlayerOwnerID() and PlayerResource:GetSelectedHeroEntity(killerUnit:GetPlayerOwnerID())
+    local beahero = killedUnit:IsRealHero() and killedUnit or nil
+
+    if  atthero and atthero ~= killedUnit and not killedUnit:IsIllusion() then
+        atthero.total_dmg_deal = ( atthero.total_dmg_deal or 0 ) + keys.damage
+        atthero.fist_dam_time  = atthero.fist_dam_time or GameRules:GetGameTime()
+        atthero.dam_dps        = atthero.total_dmg_deal/(GameRules:GetGameTime()-atthero.fist_dam_time+1)
+    end
+
+    if  beahero then
+        beahero.total_dmg_take = ( beahero.total_dmg_take or 0 ) + keys.damage
+    end
+
+end
 -------------------------------------------------------------游戏补充--------------------------------------------------------------------------------------
 
 -- 非玩家实体使用了技能 A non-player entity (necro-book, chen creep, etc) used an ability

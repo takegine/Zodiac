@@ -97,9 +97,6 @@ function FindOrCreatePanelForPlayer(playerId, parent) {
     var newPlayerPanel = $.CreatePanel("Panel", parent, "player_root" + playerId);
         newPlayerPanel.SetAttributeInt("player_id", playerId);
         newPlayerPanel.AddClass("player_root");
-
-        //newPlayerPanel.BLoadLayout("file://{resources}/layout/custom_game/team_select_player.xml", false, false);
-
         newPlayerPanel.BLoadLayoutSnippet('PlayerSnip');
         newPlayerPanel.FindChildInLayoutFile("PlayerLeaveTeamButton").SetPanelEvent('onactivate',function() { Game.PlayerJoinTeam(6); }  ) ;
         OnPlayerDetailsChanged(newPlayerPanel);
@@ -170,7 +167,7 @@ function UpdateTeamPanel(teamPanel) {
         if (playerSlot.GetChildCount() == 0) {
             var empty_slot = $.CreatePanel("Panel", playerSlot, "");
                 empty_slot.AddClass("player_root");
-                empty_slot.BLoadLayout("file://{resources}/layout/custom_game/team_select_empty_slot.xml", false, false);
+                // empty_slot.BLoadLayoutSnippet('EmptySnip');
         }
     }
 

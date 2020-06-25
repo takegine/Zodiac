@@ -13,7 +13,7 @@
 			class是CSS匹配的关键词 
 			text是文字内容 
 			#可以多语言设置，在localization/addon_english.txt里面-->
-		<Label class="bb" text="#addon_game_name"/>
+		<!-- <Label class="bb" text="#addon_game_name"/> -->
 	</Panel>
 
 </root>

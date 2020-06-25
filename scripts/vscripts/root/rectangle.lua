@@ -116,7 +116,7 @@ function Zodiac:Continue()
 
         h:SetHealth(h:GetMaxHealth())
         h:SetMana(h:GetMaxMana())
-        h.nowwd = not h.total_dmg_deal and 0 or math.ceil(h.total_dmg_deal - h.nowwd)
+        h.nowwd = not h.total_dmg_deal and 0 or math.ceil(h.total_dmg_deal - (h.nowwd or 0))
         h.fist_dam_time = nil
         
         local bottle = h:FindItemInInventory("item_bottle")

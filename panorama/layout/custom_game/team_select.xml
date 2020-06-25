@@ -105,7 +105,7 @@
                     <Label class='hidden' id="TimerLabelGameStart" text="#custom_game_team_select_starting" />
                     </Panel>
                 </Panel>
-                <!-- <Panel id="UnassignedPlayerPanel" >
+                <Panel id="UnassignedPlayerPanel" >
                     <Button id="UnassignedPlayersButton" onactivate="OnLeaveTeamPressed()">
                         <Panel id="UnassignedPlayersHeader">
                             <Label text="#custom_game_team_select_unassigned_players" />
@@ -113,7 +113,7 @@
                         <Panel id="UnassignedPlayersDivider" />
                         <Panel id="UnassignedPlayersContainer" />
                     </Button>
-                </Panel> -->
+                </Panel>
                 <!--启动与锁定-->
                 <Button id="LockAndStartButton" class="PlayButton" onactivate="OnLockAndStartPressed()">
                     <Label text="#custom_game_team_select_lock_start" />

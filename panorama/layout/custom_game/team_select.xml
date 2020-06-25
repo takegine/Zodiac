@@ -20,7 +20,10 @@
                 </Panel>
                 <Panel id="TeamHeader">
                     <Panel id="TeamBackgroundGradient" />
-                    <Panel id="TeamLogo" />
+                    <Panel id="TeamLogo" >
+                        <Image id="TeamIcon" src="" />
+                        <Image id="TeamIconLow" src="" />
+                    </Panel>
                     <Label id="TeamNameLabel" text="TEAM_NAME" />
                 </Panel>
                 <Panel id="PlayerList" />
@@ -34,6 +37,13 @@
                 <Label id="PlayerName" text="PLAYER_NAME" />
                 <Label id="PlayerTitle" style="text-shadow: 0px 1px 3px 4 #49161570; margin-top: 7px; color: gradient( linear, 0% 0%, 0% 100%, from( #f6e6d6 ), to( #db5c4d ) ); opacity: 1 vertical-align: center; margin-right: 15px;" text=""/>
                 <Button id="PlayerLeaveTeamButton"  />
+            </Panel>
+		</snippet>
+
+		<snippet name="EmptySnip">
+            <Panel class="TeamSelectEmptySlot">
+                <Panel id="EmptySlotIcon" />
+                <Label id="PlayerName" text="#custom_game_team_select_empty_slot" />
             </Panel>
 		</snippet>
 
@@ -95,7 +105,7 @@
                     <Label class='hidden' id="TimerLabelGameStart" text="#custom_game_team_select_starting" />
                     </Panel>
                 </Panel>
-                <Panel id="UnassignedPlayerPanel" >
+                <!-- <Panel id="UnassignedPlayerPanel" >
                     <Button id="UnassignedPlayersButton" onactivate="OnLeaveTeamPressed()">
                         <Panel id="UnassignedPlayersHeader">
                             <Label text="#custom_game_team_select_unassigned_players" />
@@ -103,7 +113,7 @@
                         <Panel id="UnassignedPlayersDivider" />
                         <Panel id="UnassignedPlayersContainer" />
                     </Button>
-                </Panel>
+                </Panel> -->
                 <!--启动与锁定-->
                 <Button id="LockAndStartButton" class="PlayButton" onactivate="OnLockAndStartPressed()">
                     <Label text="#custom_game_team_select_lock_start" />

@@ -9,7 +9,7 @@ var g_PlayerPanels = [];
 
 var g_TEAM_SPECATOR = 1;
 
-var min_wait_time = Game.GetAllPlayerIDs().length == 1 ? 0 : 20;
+var min_wait_time = Game.GetAllPlayerIDs().length == 1 ? 0 : 5;
 
 var startTime = Game.GetGameTime();
 
@@ -39,8 +39,11 @@ function OnLockAndStartPressed() {
     // Disable the auto start count down
     Game.SetAutoLaunchEnabled(false);
 
+    
+    GameEvents.SendCustomGameEventToServer( "Launch_team_change", {} );
     // Set the remaining time before the game starts
-    Game.SetRemainingSetupTime(15);
+    Game.SetRemainingSetupTime(3);
+
 }
 
 
@@ -168,6 +171,7 @@ function UpdateTeamPanel(teamPanel) {
             var empty_slot = $.CreatePanel("Panel", playerSlot, "");
                 empty_slot.AddClass("player_root");
                 // empty_slot.BLoadLayoutSnippet('EmptySnip');
+                
         }
     }
 
@@ -297,14 +301,6 @@ function CreateTeam(teamId) {
         teamNode.SetAttributeInt("team_id", teamId);
     var teamDetails = Game.GetTeamDetails(teamId);
 
-    // 将团队徽标添加到面板
-    var logo_xml = GameUI.CustomUIConfig().team_logo_xml;
-    if (logo_xml) {
-        var teamLogoPanel = teamNode.FindChildInLayoutFile("TeamLogo");
-            teamLogoPanel.SetAttributeInt("team_id", teamId);
-            teamLogoPanel.BLoadLayout(logo_xml, false, false);
-    }
-
     // 设定团队名称
     var teamDetails = Game.GetTeamDetails(teamId);
     teamNode.FindChildInLayoutFile("TeamNameLabel").text = $.Localize(teamDetails.team_name);
@@ -322,12 +318,26 @@ function CreateTeam(teamId) {
     }
 
     if (GameUI.CustomUIConfig().team_colors) {
-        var teamColor = GameUI.CustomUIConfig().team_colors[teamId].replace(";", "");
+        var teamColor = GameUI.CustomUIConfig().team_colors[teamId];
 
-        teamNode.FindChildInLayoutFile("TeamBackgroundGradient").style.backgroundColor = teamColor + ';';
-        teamNode.FindChildInLayoutFile("TeamBackgroundGradientHighlight").style.backgroundColor =  teamColor + ';';
+        teamNode.FindChildInLayoutFile("TeamNameLabel").style.color = teamColor;
+        teamNode.FindChildInLayoutFile("TeamIconLow").style.washColor = teamColor;
+        teamNode.FindChildInLayoutFile("TeamBackgroundGradient").style.backgroundColor = teamColor;
+        teamNode.FindChildInLayoutFile("TeamBackgroundGradientHighlight").style.backgroundColor =  teamColor;
         // var gradientText = 'gradient( linear, -800% -1600%, 90% 100%, from( ' + teamColor + ' ), to( #00000088 ) );';
-        //teamNode.FindChildInLayoutFile("TeamNameLabel").style.color = teamColor + ';';
+    }
+
+    if ( GameUI.CustomUIConfig().team_icons )
+    {
+        var teamIcon = GameUI.CustomUIConfig().team_icons[ teamId ];
+        if ( teamIcon )
+        {
+            teamNode.FindChildInLayoutFile("TeamIcon").SetImage( teamIcon );
+            teamNode.FindChildInLayoutFile("TeamIconLow").SetImage( teamIcon );
+            // teamNode.FindChildInLayoutFile("TeamIconLow").SetImage( "s2r://panorama/images/custom_game/quest_"+(teamid-5)+".png" );
+            
+            // teamNode.FindChildInLayoutFile("TeamIconLow").style.backgroundImage= teamIcon +";" ;
+        }
     }
 
     //将团队面板添加到全局列表中，以便我们稍后可以轻松进行更新

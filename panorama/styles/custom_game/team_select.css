@@ -546,24 +546,57 @@ DropDownMenu {
 
 #TeamLogo{
     
+    width: 100%;
+    height: 100%;
     horizontal-align: center;
 }
-#TeamNameLabel {
-    font-size: 64px;
+
+#TeamIcon {
+
+    width: 180px;
+    height: 180px;
     horizontal-align: center;
-    margin-top: 70px;
+    opacity: 1;
+}
+
+.teams_unlocked .TeamSelectTeam:hover #TeamIcon{ 
+    opacity: 0;
+    visibility: collapse;
+}
+#TeamIconLow {
+    width: 85px;
+    height: 80px;
+    horizontal-align: center;
+    opacity: 0;
+}
+
+.teams_unlocked .TeamSelectTeam:hover #TeamIconLow{ 
+    opacity: 1;
+}
+
+#TeamNameLabel {
+    font-size: 20px;
+    horizontal-align: center;
+    vertical-align: bottom;
+    margin-bottom: 5px;
     text-shadow: 2px 2px 2px black;
     text-transform: uppercase;
     white-space: nowrap;
     color: white;
 }
+
+.teams_unlocked .TeamSelectTeam:hover #TeamNameLabel{ 
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
 #TeamInfo {
     width: 100%;
      height: 200px;
     transform: translatey(100px);
+    box-shadow: fill #eeeeee09 0px 0px 16px 20px;
     transition-property: transform;
     transition-duration: 0.5s;
-    box-shadow: fill #eeeeee09 0px 0px 16px 20px;
     opacity: 0;
 }
 .teams_unlocked .TeamSelectTeam:hover #TeamInfo{ 
@@ -597,12 +630,17 @@ DropDownMenu {
     text-shadow: 2px 2px 2px black;
     text-transform: uppercase;
     color: white;
+    margin: 10px;
 }
 
 #PlayerList {
-    width: 100%;
-    flow-children: down;
-    width: 100%;
+    flow-children: right-wrap;
+    transform: translatey(-80px);
+    transition-property: transform;
+    transition-duration: 0.15s;
+}
+.teams_unlocked .TeamSelectTeam:hover #PlayerList{ 
+    transform: translatey(20px); 
 }
 
 .player_root {
@@ -610,25 +648,29 @@ DropDownMenu {
 }
 
 .player_slot {
-    height: 32px;
-    width: 100%;
-    flow-children: right;
-    margin-top: 2px;
-    margin-left: 7px;
+    height: 100px;
+    width: 50px;
+    flow-children: down;
+    margin: 4px;
 }
 
 .TeamSelectPlayer {
     width: 100%;
-    flow-children: right;
+    flow-children: down;
     vertical-align: middle;
-    flow-children: right;
 }
 
 DOTAAvatarImage {
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
     background-color: black;
-    vertical-align: middle;
+    border-radius: 100%;
+    horizontal-align: middle;
+    border: 2px solid #e0f00b;
+}
+
+.TeamSelectPlayer .player_has_host_privileges DOTAAvatarImage{
+    border: 2px solid #64ff0b;
 }
 
 #PlayerIsHostPanel {
@@ -638,20 +680,20 @@ DOTAAvatarImage {
     overflow: noclip;
     width: 24px;
     height: 24px;
-    visibility: collapse;
+    horizontal-align: middle;
     margin-top: 2px;
     margin-right: 4px;
     margin-left: 4px;
     visibility: collapse;
 }
 
-.TeamSelectPlayer.player_has_host_privileges #PlayerIsHostPanel {
+.TeamSelectPlayer .player_has_host_privileges #PlayerIsHostPanel {
     visibility: visible;
 }
 
 #PlayerName {
     color: white;
-    vertical-align: middle;
+    horizontal-align: middle;
     margin: 3px;
     text-shadow: 2px 2px 2px black;
     width: fill-parent-flow(1);
@@ -663,6 +705,7 @@ DOTAAvatarImage {
     width: 24px;
     height: 24px;
     wash-color: #aa0000ee;
+    horizontal-align: middle;
 
     background-image: url("file://{images}/control_icons/x_close.png");
     background-size: 24px 24px;
@@ -682,7 +725,7 @@ DOTAAvatarImage {
 }
 
 .TeamSelectEmptySlot {
-    flow-children: right;
+    flow-children: down;
 }
 
 .TeamSelectEmptySlot #PlayerName {

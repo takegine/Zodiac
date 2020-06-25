@@ -65,7 +65,7 @@
 }
 
 #TeamsList {
-    width: 400px;
+    width: 1000px;
     height: 950px;
     margin-top: 144px;
     flow-children: down;
@@ -74,6 +74,7 @@
     margin-left: 16px;
     animation-name: TeamsListAppear;
     animation-duration: 0.75s;
+    border: 1px solid #eeeeee;
 }
 
 @keyframes 'TeamsListAppear'
@@ -88,11 +89,11 @@
     }
 }
 
-#TeamsListGroup {
+#TeamsListGroup {border: 1px solid #eeeeee;
     width: 100%;
     vertical-align: center;
     flow-children: down;
-    margin-top: -88px;
+    /* margin-top: -88px; */
 }
 
 #TeamListHeader {}
@@ -109,9 +110,9 @@
 
 .teams_locked #TeamListLockedIcon {}
 
-#TeamsListRoot {
+#TeamsListRoot {border: 1px solid #eeeeee;
     width: 100%;
-    flow-children: down;
+    flow-children: right;
     overflow: clip scroll;
 }
 
@@ -569,7 +570,7 @@ DropDownMenu {
 
 
 .TeamSelectTeam {
-    width: 100%;
+    width: 20%;
     background-color: gradient(linear, 100% 0%, 100% 100%, from(#272b30), color-stop(0.6, #181a1e), to(#181a1e));
     border-radius: 8px;
     margin-top: 10px;
@@ -689,7 +690,7 @@ DropDownMenu {
     width: 100%;
 }
 
-#player_root {
+.player_root {
     width: 100%;
 }
 

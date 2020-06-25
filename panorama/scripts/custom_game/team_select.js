@@ -94,9 +94,15 @@ function FindOrCreatePanelForPlayer(playerId, parent) {
     }
 
     // Create a new player panel for the specified player id if an existing one was not found
-    var newPlayerPanel = $.CreatePanel("Panel", parent, "player_root");
+    var newPlayerPanel = $.CreatePanel("Panel", parent, "player_root" + playerId);
         newPlayerPanel.SetAttributeInt("player_id", playerId);
-        newPlayerPanel.BLoadLayout("file://{resources}/layout/custom_game/team_select_player.xml", false, false);
+        newPlayerPanel.AddClass("player_root");
+
+        //newPlayerPanel.BLoadLayout("file://{resources}/layout/custom_game/team_select_player.xml", false, false);
+
+        newPlayerPanel.BLoadLayoutSnippet('PlayerSnip');
+        newPlayerPanel.FindChildInLayoutFile("PlayerLeaveTeamButton").SetPanelEvent('onactivate',function() { Game.PlayerJoinTeam(6); }  ) ;
+        OnPlayerDetailsChanged(newPlayerPanel);
 
     // Add the panel to the global list of player planels so that we will find it next time
     g_PlayerPanels.push(newPlayerPanel);
@@ -104,6 +110,19 @@ function FindOrCreatePanelForPlayer(playerId, parent) {
     return newPlayerPanel;
 }
 
+function OnPlayerDetailsChanged(newPlayerPanel) {
+
+    var playerId = newPlayerPanel.GetAttributeInt("player_id", -1);
+    
+    var playerInfo = Game.GetPlayerInfo(playerId);
+    if (playerInfo) {
+        $("#PlayerName").text = playerInfo.player_name;
+        $("#PlayerAvatar").steamid = playerInfo.player_steamid;
+
+        newPlayerPanel.SetHasClass("player_is_local", playerInfo.player_is_local);
+        newPlayerPanel.SetHasClass("player_has_host_privileges", playerInfo.player_has_host_privileges);
+    }
+}
 
 //--------------------------------------------------------------------------------------------------
 // Find player slot n in the specified team panel
@@ -149,8 +168,9 @@ function UpdateTeamPanel(teamPanel) {
     for (var i = teamPlayers.length; i < nNumPlayerSlots; ++i) {
         var playerSlot = FindPlayerSlotInTeamPanel(teamPanel, i);
         if (playerSlot.GetChildCount() == 0) {
-            var empty_slot = $.CreatePanel("Panel", playerSlot, "player_root");
-            empty_slot.BLoadLayout("file://{resources}/layout/custom_game/team_select_empty_slot.xml", false, false);
+            var empty_slot = $.CreatePanel("Panel", playerSlot, "");
+                empty_slot.AddClass("player_root");
+                empty_slot.BLoadLayout("file://{resources}/layout/custom_game/team_select_empty_slot.xml", false, false);
         }
     }
 
@@ -359,4 +379,7 @@ function CreateTeam(teamId) {
 
     // 监听玩家选择队伍
     $.RegisterForUnhandledEvent("DOTAGame_PlayerSelectedCustomTeam", OnPlayerSelectedTeam);
+    
+    //监听玩家更改队伍
+    $.RegisterForUnhandledEvent("DOTAGame_PlayerDetailsChanged", OnPlayerDetailsChanged);
 })();

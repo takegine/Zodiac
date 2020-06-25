@@ -8,6 +8,7 @@ Zodiac = Zodiac or class({})
 function Zodiac:new()
     print("print InitGameMode is loaded.")
 
+    CustomGameEventManager:RegisterListener("Launch_team_change", Dynamic_Wrap(self, 'Launch_Change'))
     CustomGameEventManager:RegisterListener("Buy_Element",    Dynamic_Wrap(self, 'Buy_Element'))
     ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(self, 'OnNonPlayerUsedAbility'), self)
     _G.hardmode=1
@@ -60,12 +61,34 @@ function Zodiac:OnConnectFull(keys)
     --DeepPrintTable(value)
 end
 
+function Zodiac:Launch_Change()
+    local maxteam  = 6
+    local maxcount = 0 
+    for i=6,9 do
+        local teamcount = PlayerResource:GetPlayerCountForTeam(i)
+        if teamcount > maxcount then
+            maxcount = teamcount
+            maxteam  = i
+        end
+    end
+    for h=0,9 do
+        if  PlayerResource:IsValidPlayer(h) then
+        PlayerResource:SetCustomTeamAssignment(h,maxteam)
+        end
+    end
+end
+
 function Zodiac:OnGameRulesStateChange( keys ) 
     local newState = GameRules:State_Get() 
     print ("print  OnGameRulesStateChange is running."..newState)
 
     if     newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
-
+        GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 5 )
+        for h=0,9 do
+            if  PlayerResource:IsValidPlayer(h) then
+            PlayerResource:SetCustomTeamAssignment(h,DOTA_TEAM_GOODGUYS)
+            end
+        end
     elseif newState == DOTA_GAMERULES_STATE_STRATEGY_TIME then  --玩家处于选择选完的准备界面
         
         local unit = CreateUnitByName( "npc_dota_gold_spirit", Vector(0,0,0), true, nil, nil, DOTA_TEAM_GOODGUYS )

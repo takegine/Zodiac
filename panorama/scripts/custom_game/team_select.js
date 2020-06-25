@@ -95,8 +95,8 @@ function FindOrCreatePanelForPlayer(playerId, parent) {
 
     // Create a new player panel for the specified player id if an existing one was not found
     var newPlayerPanel = $.CreatePanel("Panel", parent, "player_root");
-    newPlayerPanel.SetAttributeInt("player_id", playerId);
-    newPlayerPanel.BLoadLayout("file://{resources}/layout/custom_game/team_select_player.xml", false, false);
+        newPlayerPanel.SetAttributeInt("player_id", playerId);
+        newPlayerPanel.BLoadLayout("file://{resources}/layout/custom_game/team_select_player.xml", false, false);
 
     // Add the panel to the global list of player planels so that we will find it next time
     g_PlayerPanels.push(newPlayerPanel);
@@ -271,6 +271,53 @@ function UpdateTimer()
     $.Schedule( 0.1, UpdateTimer );
 }
 
+function CreateTeam(teamId) {
+    
+    var teamNode = $.CreatePanel("Panel", $("#TeamsListRoot"), "team_" + teamId);
+        teamNode.BLoadLayoutSnippet('TeamSnip');
+        teamNode.AddClass("team_" + teamId);
+        teamNode.SetPanelEvent('onactivate',function() { Game.PlayerJoinTeam(teamId); }  ) ;
+        teamNode.SetAttributeInt("team_id", teamId);
+    var teamDetails = Game.GetTeamDetails(teamId);
+
+    // 将团队徽标添加到面板
+    var logo_xml = GameUI.CustomUIConfig().team_logo_xml;
+    if (logo_xml) {
+        var teamLogoPanel = teamNode.FindChildInLayoutFile("TeamLogo");
+            teamLogoPanel.SetAttributeInt("team_id", teamId);
+            teamLogoPanel.BLoadLayout(logo_xml, false, false);
+    }
+
+    // 设定团队名称
+    var teamDetails = Game.GetTeamDetails(teamId);
+    teamNode.FindChildInLayoutFile("TeamNameLabel").text = $.Localize(teamDetails.team_name);
+
+    // 获取玩家列表并添加玩家位置，以便有多达team_max_player位置
+    var playerListNode = teamNode.FindChildInLayoutFile("PlayerList");
+
+    var numPlayerSlots = teamDetails.team_max_players;
+    for (var i = 0; i < numPlayerSlots; ++i) {
+        // Add the slot itself
+        var slot = $.CreatePanel("Panel", playerListNode, "");
+            slot.AddClass("player_slot");
+            slot.SetAttributeInt("player_slot", i);
+    }
+
+    if (GameUI.CustomUIConfig().team_colors) {
+        var teamColor = GameUI.CustomUIConfig().team_colors[teamId].replace(";", "");
+
+        teamNode.FindChildInLayoutFile("TeamBackgroundGradient").style.backgroundColor = 'gradient( linear, 0% 0%, 70% 100%, from( ' + teamColor + '77 ), color-stop(0.75, #00000077), to( #00000077) );';
+        teamNode.FindChildInLayoutFile("TeamBackgroundGradientHighlight").style.backgroundColor = 'gradient( linear, 0% 0%, 80% 100%, from( ' + teamColor + 'AA ), color-stop(0.9, #00000088), to( #00000088 ) );';
+        // var gradientText = 'gradient( linear, -800% -1600%, 90% 100%, from( ' + teamColor + ' ), to( #00000088 ) );';
+        teamNode.FindChildInLayoutFile("TeamNameLabel").style.color = teamColor + ';';
+        
+    }
+
+    //将团队面板添加到全局列表中，以便我们稍后可以轻松进行更新
+    g_TeamPanels.push(teamNode); 
+}
+
+
 //--------------------------------------------------------------------------------------------------
 // Entry point called when the team select panel is created
 //--------------------------------------------------------------------------------------------------
@@ -279,51 +326,37 @@ function UpdateTimer()
     var bAutoAssignTeams = true;
 
 
-    // get any custom config
+    // 获取任何自定义配置
     if (GameUI.CustomUIConfig().team_select) {
         var cfg = GameUI.CustomUIConfig().team_select;
         if (cfg.bShowSpectatorTeam !== undefined) {
-            bShowSpectatorTeam = cfg.bShowSpectatorTeam;
+                bShowSpectatorTeam = cfg.bShowSpectatorTeam;
         }
         if (cfg.bAutoAssignTeams !== undefined) {
-            bAutoAssignTeams = cfg.bAutoAssignTeams;
+                bAutoAssignTeams = cfg.bAutoAssignTeams;
         }
     }
 
-    $("#TeamSelectContainer").SetAcceptsFocus(true); // Prevents the chat window from taking focus by default
-    var teamsListRootNode = $("#TeamsListRoot");
+    // 默认情况下阻止聊天窗口聚焦
+    $("#TeamSelectContainer").SetAcceptsFocus(true); 
 
-    // Construct the panels for each team
+    // 为每个团队构建面板
     var allTeamIDs = Game.GetAllTeamIDs();
+    if  (bShowSpectatorTeam) { allTeamIDs.unshift(g_TEAM_SPECATOR); }
+    for (var teamId of allTeamIDs) { CreateTeam(teamId) }
 
-    if (bShowSpectatorTeam) {
-        allTeamIDs.unshift(g_TEAM_SPECATOR);
-    }
+    // 自动将玩家分配到团队
+    if (bAutoAssignTeams) { Game.AutoAssignPlayersToTeams(); }
 
-    for (var teamId of allTeamIDs) {
-        var teamNode = $.CreatePanel("Panel", teamsListRootNode, "");
-        teamNode.AddClass("team_" + teamId); // team_1, etc.
-        teamNode.SetAttributeInt("team_id", teamId);
-        teamNode.BLoadLayout("file://{resources}/layout/custom_game/team_select_team.xml", false, false);
-
-        // Add the team panel to the global list so we can get to it easily later to update it
-        g_TeamPanels.push(teamNode);
-    }
-
-    // Automatically assign players to teams.
-    if (bAutoAssignTeams) {
-        Game.AutoAssignPlayersToTeams();
-    }
-
-    // Do an initial update of the player team assignment
+    // 对玩家队伍分配进行初步更新
     OnTeamPlayerListChanged();
 
-    // Start updating the timer, this function will schedule itself to be called periodically
+    // 开始更新计时器，此功能将安排自己定期调用
     UpdateTimer();
 
-    // Register a listener for the event which is brodcast when the team assignment of a player is actually assigned
+    // 监听当玩家分配队伍
     $.RegisterForUnhandledEvent("DOTAGame_TeamPlayerListChanged", OnTeamPlayerListChanged);
 
-    // Register a listener for the event which is broadcast whenever a player attempts to pick a team
+    // 监听玩家选择队伍
     $.RegisterForUnhandledEvent("DOTAGame_PlayerSelectedCustomTeam", OnPlayerSelectedTeam);
 })();

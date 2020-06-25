@@ -17,7 +17,7 @@
 
 
 
-.Bolls{
+#Bolls{
    horizontal-align:center;
    flow-children:right;
    margin-left:-20px;
@@ -46,20 +46,12 @@ margin-left:100px;background-image: url("file://{resources}/images/custom_game/z
 }
 
 .numb{/*按钮右侧个数*/
-  height:10px;width:10px;
+   height:30px;
+   width:30px;
    vertical-align: bottom;
 }
 /*顶部按钮内部文字*/
-#Boll0 {horizontal-align:center;vertical-align:center;}
-#Boll1 {horizontal-align:center;vertical-align:center;}
-#Boll2 {horizontal-align:center;vertical-align:center;}
-#Boll3 {horizontal-align:center;vertical-align:center;}
-#Boll4 {horizontal-align:center;vertical-align:center;}
-#Boll5 {horizontal-align:center;vertical-align:center;}
-#Boll6 {horizontal-align:center;vertical-align:center;}
-#Boll7 {horizontal-align:center;vertical-align:center;}
-#Boll8 {horizontal-align:center;vertical-align:center;}
-#Boll9 {horizontal-align:center;vertical-align:center;}
+.BollLabel {horizontal-align:center;vertical-align:center;}
 
 .btnleft{/*按钮集齐静态*/
          width :200px;

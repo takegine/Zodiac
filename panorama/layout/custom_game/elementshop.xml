@@ -7,49 +7,62 @@
         <include src="s2r://panorama/scripts/custom_game/elementshop.js" />
     </scripts>
     
+    <snippets>
+
+		<snippet name="BollSnip">
+            <Panel style='flow-children:right;'>
+                <Button class="btntop" >
+                    <Label hittest="false" text=""/>
+                </Button>
+                <Label class="numb" text=""/>
+            </Panel>
+		</snippet>
+
+	</snippets>
+
     <Panel hittest="false" class="ElementShopPanel">
         
-            <Panel class="Bolls" hittest="false"><!--顶部圆球.右下角标示剩余数字-->
+            <Panel id="Bolls" hittest="false"><!--顶部圆球.右下角标示剩余数字-->
                 <Button class="btntop" id="btntop0" onactivate='Buy(1)'>
-                    <Label hittest="false" id="Boll0" text="#dota_item_EA_0_1"/>
+                    <Label class='BollLabel' id="Boll0" text="#dota_item_EA_0_1"/>
                 </Button>
-                    <Label id="lvlmyitemtext1" calss="numb" text="x 0"/>
+                    <Label id="lvlmyitemtext1" class="numb" text="x 0"/>
                 <Button class="btntop" id="btntop1" onactivate='Buy(2)'>
-                    <Label id="Boll1" text="#dota_item_EA_1_1"/>
+                    <Label class='BollLabel' id="Boll1" text="#dota_item_EA_1_1"/>
                 </Button>
-                    <Label id="lvlmyitemtext2" text="x 0" calss="numb"/>
+                    <Label id="lvlmyitemtext2" text="x 0" class="numb"/>
                 <Button class="btntop" id="btntop2" onactivate='Buy(3)'>
-                    <Label id="Boll2" text="#dota_item_EA_2_1"/>
+                    <Label class='BollLabel' id="Boll2" text="#dota_item_EA_2_1"/>
                 </Button>
-                    <Label  id="lvlmyitemtext3" text="x 0" calss="numb"/>
+                    <Label  id="lvlmyitemtext3" text="x 0" class="numb"/>
                 <Button class="btntop" id="btntop3" onactivate='Buy(4)'>
-                    <Label id="Boll3" text="#dota_item_EA_3_1"/>
+                    <Label class='BollLabel' id="Boll3" text="#dota_item_EA_3_1"/>
                 </Button>
-                    <Label id="lvlmyitemtext4" text="x 0" calss="numb"/>
+                    <Label id="lvlmyitemtext4" text="x 0" class="numb"/>
                 <Button class="btntop" id="btntop4" onactivate='Buy(5)'>
-                    <Label id="Boll4" text="#dota_item_EA_4_1"/>
+                    <Label class='BollLabel' id="Boll4" text="#dota_item_EA_4_1"/>
                 </Button>
-                    <Label id="lvlmyitemtext5" text="x 0" calss="numb"/>
+                    <Label id="lvlmyitemtext5" text="x 0" class="numb"/>
                 <Button class="btntop" id="btntop5" onactivate='Buy(6)'>
-                    <Label id="Boll5" text="#dota_item_EA_5_1"/>
+                    <Label class='BollLabel' id="Boll5" text="#dota_item_EA_5_1"/>
                 </Button>
-                    <Label id="lvlmyitemtext6" text="x 0" calss="numb"/>
+                    <Label id="lvlmyitemtext6" text="x 0" class="numb"/>
                 <Button class="btntop" id="btntop6" onactivate='Buy(7)'>
-                    <Label  id="Boll6" text="#dota_item_EA_6_1"/>
+                    <Label class='BollLabel' id="Boll6" text="#dota_item_EA_6_1"/>
                 </Button>
-                    <Label id="lvlmyitemtext7" text="x 0" calss="numb"/>
+                    <Label id="lvlmyitemtext7" text="x 0" class="numb"/>
                 <Button class="btntop" id="btntop7" onactivate='Buy(8)'>
-                    <Label id="Boll7" text="#dota_item_EA_7_1"/>
+                    <Label class='BollLabel' id="Boll7" text="#dota_item_EA_7_1"/>
                 </Button>
-                    <Label  id="lvlmyitemtext8" text="x 0"  calss="numb"/>
+                    <Label  id="lvlmyitemtext8" text="x 0"  class="numb"/>
                 <Button class="btntop" id="btntop8" onactivate='Buy(9)'>
-                    <Label id="Boll8" text="#dota_item_EA_8_1"/>
+                    <Label class='BollLabel' id="Boll8" text="#dota_item_EA_8_1"/>
                 </Button>
-                    <Label id="lvlmyitemtext9" text="x 0" calss="numb"/>
+                    <Label id="lvlmyitemtext9" text="x 0" class="numb"/>
                 <Button class="btntop" id="btntop9" onactivate='Buy(10)'>
-                    <Label  id="Boll9" text="#dota_item_EA_9_1"/>
+                    <Label class='BollLabel' id="Boll9" text="#dota_item_EA_9_1"/>
                 </Button>
-                <Label id="lvlmyitemtext10" text="x 0" calss="numb"/>
+                <Label id="lvlmyitemtext10" text="x 0" class="numb"/>
             </Panel>
 
             <Button class="btnleft" id="ElementShop" onactivate='Yes()'>

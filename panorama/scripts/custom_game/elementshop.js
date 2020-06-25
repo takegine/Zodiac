@@ -84,22 +84,16 @@ function Yes()
     $("#ElementShop").RemoveClass("ElementShopText");//移除闪烁特效
 }
 
-function Buy(myint)
-{
-    //$.Msg( "Buy ", $("#myitem1").itemname);
+function Buy(myint) {
+    //$.Msg( "Buy ", myint);
     GameEvents.SendCustomGameEventToServer( "Buy_Element", { id: Players.GetLocalPlayer(),num:myint} );
 }
 
 var x3mode = false;
 function ToggleX3mode()
 {
-    if (  x3mode == true)
-        { x3mode = false
-        $("#ToggleX3mode").RemoveClass("selectedfilter");
-        }
-    else{ x3mode = true
-        $("#ToggleX3mode").AddClass("selectedfilter");
-        }
+    x3mode = ! x3mode
+    $("#ToggleX3mode").SetHasClass("selectedfilter", x3mode );
     UpdateShop( "Elements_Tabel", Players.GetLocalPlayer(), CustomNetTables.GetTableValue( "Elements_Tabel", Players.GetLocalPlayer() ) );
 }
 
@@ -110,51 +104,48 @@ function UpdateShop( table_name, key, data )
     if (ID == key)
     {
         //更新顶部剩余个数
-        for (var i = 1; i <= 10;i++)
-            { $("#btntop"+(i-1)).RemoveClass("offcraft");
-            if (data[i] == 0) {  $("#btntop"+(i-1)).AddClass("offcraft");  }
-            if (data[i] != null) {  $("#lvlmyitemtext"+i).text = "x "+data[i];  }        }
+        for (var i = 0; i < 10; i++) {
+            var Newboll= $("#Bolls");
+                Newboll.GetChild(2*i).SetHasClass("offcraft", data[i+1] == 0 );
+                Newboll.GetChild(2*i+1).text = "x "+data[i+1];       
+        }
 
-        for (var y = 1; y <= 30;y++)
-            {
-            $("#craft"+y).RemoveClass("offcraft");//移除灰色
-            for (var i = 0; i <= 2;i++)
-            {
-                if (x3mode == true) {//打开X3状态下，余量小于3就会添加灰色
-                    if (data[crafts[y-1][i]] < 3)
-                    {
-                        $("#craft"+y).AddClass("offcraft");
-                        break;
-                    }
-                }
-                else{//不是X3状态下，余量等于0就会添加灰色
-                    if (data[crafts[y-1][i]] == 0)
-                    {
-                        $("#craft"+y).AddClass("offcraft");
-                        break;
-                    }
-
-                }
+        for (var i = 0; i < 30;y++) {
+            for (var j = 0; j <= 2;i++) {
+                $("#craft"+i).SetHasClass( "offcraft", (!x3mode ||data[crafts[i][j]] < 3) &&( x3mode ||data[crafts[i][j]] == 0) );
             }
         }
     }
 }
+function CreateBolls() {
+    for (var i = 0; i < 30;i++) {
+        var mtop = 10+50*(i)-500*Math.floor((i)/10);//与顶部距离。
+        var mleft = 15+300*Math.floor((i)/10);
+        $("#ShopInfo" ).BCreateChildren("<Panel hittest='false' id='craft"+i+"'/>");//创建一个子面板
+        $("#craft"+ i ).BCreateChildren("<DOTAItemImage class='shopitem' itemname='"+elems[crafts[i][0]-1]+"' style='margin-top:"+mtop+"px; margin-left:"+mleft+"px;' onactivate='Buy("+crafts[i][0]+")'/>");
+        $("#craft"+ i ).BCreateChildren("<DOTAItemImage class='shopitem' itemname='"+elems[crafts[i][1]-1]+"' style='margin-top:"+mtop+"px; margin-left:"+(mleft+62)+"px;' onactivate='Buy("+crafts[i][1]+")'/>");
+        $("#craft"+ i ).BCreateChildren("<DOTAItemImage class='shopitem' itemname='"+elems[crafts[i][2]-1]+"' style='margin-top:"+mtop+"px; margin-left:"+(mleft+124)+"px;' onactivate='Buy("+crafts[i][2]+")'/>");
+        $("#craft"+ i ).BCreateChildren("<Label text='→' style='font-size:32px; color:#fff;margin-top:"+(mtop-7)+"px; margin-left:"+(mleft+186)+"px;'/>");
+        $("#craft"+ i ).BCreateChildren("<DOTAItemImage class='shopitem' itemname='"+items[i]+"' style='margin-top:"+mtop+"px; margin-left:"+(mleft+220)+"px;'/>");
+    }
 
+    // for (var i = 0; i < 10; i++) {
+
+    //     var Newboll = $.CreatePanel("Panel", $("#Bolls"), "boll_" + i);
+    //         Newboll.BLoadLayoutSnippet('BollSnip');
+    //         Newboll.GetChild(0).AddClass("btntop"+i);
+    //         Newboll.GetChild(0).SetAttributeInt("myint", i+1);
+    //         Newboll.GetChild(0).SetPanelEvent(`onactivate`,() => { Buy(); }  ) ;
+    //         Newboll.GetChild(0).GetChild(0).AddClass("BollLabel")
+    //         Newboll.GetChild(0).GetChild(0).text = $.Localize("#dota_item_EA_" + i + "_1");
+    //         Newboll.GetChild(1).text = 'x 0';
+    // }
+}
 (function()//立即执行的函数
 {
     CustomNetTables.SubscribeNetTableListener( "Elements_Tabel", UpdateShop );
 
     $("#ShopInfo").visible = false;
-    for (var i = 1; i <= 30;i++)
-    {
-        var mtop = 10+50*(i-1)-500*Math.floor((i-1)/10);//与顶部距离。
-        var mleft = 15+300*Math.floor((i-1)/10);
-        $("#ShopInfo").BCreateChildren("<Panel hittest='false' id='craft"+i+"'/>");//创建一个子面板
-        $("#craft"+i).BCreateChildren("<DOTAItemImage class='shopitem' itemname='"+elems[crafts[i-1][0]-1]+"' style='margin-top:"+mtop+"px; margin-left:"+mleft+"px;' onactivate='Buy("+crafts[i-1][0]+")'/>");
-        $("#craft"+i).BCreateChildren("<DOTAItemImage class='shopitem' itemname='"+elems[crafts[i-1][1]-1]+"' style='margin-top:"+mtop+"px; margin-left:"+(mleft+62)+"px;' onactivate='Buy("+crafts[i-1][1]+")'/>");
-        $("#craft"+i).BCreateChildren("<DOTAItemImage class='shopitem' itemname='"+elems[crafts[i-1][2]-1]+"' style='margin-top:"+mtop+"px; margin-left:"+(mleft+124)+"px;' onactivate='Buy("+crafts[i-1][2]+")'/>");
-        $("#craft"+i).BCreateChildren("<Label text='→' style='font-size:32px; color:#fff;margin-top:"+(mtop-7)+"px; margin-left:"+(mleft+186)+"px;'/>");
-        $("#craft"+i).BCreateChildren("<DOTAItemImage class='shopitem' itemname='"+items[i-1]+"' style='margin-top:"+mtop+"px; margin-left:"+(mleft+220)+"px;'/>");
-    }
+    CreateBolls()
     UpdateShop( "Elements_Tabel", Players.GetLocalPlayer(), CustomNetTables.GetTableValue( "Elements_Tabel", Players.GetLocalPlayer() ) )
 })();

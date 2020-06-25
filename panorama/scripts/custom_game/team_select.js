@@ -311,6 +311,7 @@ function CreateTeam(teamId) {
     // 设定团队名称
     var teamDetails = Game.GetTeamDetails(teamId);
     teamNode.FindChildInLayoutFile("TeamNameLabel").text = $.Localize(teamDetails.team_name);
+    teamNode.FindChildInLayoutFile("TeamInfoLabel").text = $.Localize('ModeInfo'+(teamId-5));
 
     // 获取玩家列表并添加玩家位置，以便有多达team_max_player位置
     var playerListNode = teamNode.FindChildInLayoutFile("PlayerList");
@@ -326,11 +327,10 @@ function CreateTeam(teamId) {
     if (GameUI.CustomUIConfig().team_colors) {
         var teamColor = GameUI.CustomUIConfig().team_colors[teamId].replace(";", "");
 
-        teamNode.FindChildInLayoutFile("TeamBackgroundGradient").style.backgroundColor = 'gradient( linear, 0% 0%, 70% 100%, from( ' + teamColor + '77 ), color-stop(0.75, #00000077), to( #00000077) );';
-        teamNode.FindChildInLayoutFile("TeamBackgroundGradientHighlight").style.backgroundColor = 'gradient( linear, 0% 0%, 80% 100%, from( ' + teamColor + 'AA ), color-stop(0.9, #00000088), to( #00000088 ) );';
+        teamNode.FindChildInLayoutFile("TeamBackgroundGradient").style.backgroundColor = teamColor + ';';
+        teamNode.FindChildInLayoutFile("TeamBackgroundGradientHighlight").style.backgroundColor =  teamColor + ';';
         // var gradientText = 'gradient( linear, -800% -1600%, 90% 100%, from( ' + teamColor + ' ), to( #00000088 ) );';
-        teamNode.FindChildInLayoutFile("TeamNameLabel").style.color = teamColor + ';';
-        
+        //teamNode.FindChildInLayoutFile("TeamNameLabel").style.color = teamColor + ';';
     }
 
     //将团队面板添加到全局列表中，以便我们稍后可以轻松进行更新

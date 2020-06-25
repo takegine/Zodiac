@@ -9,23 +9,21 @@
             <!--include src="s2r://panorama/scripts/custom_game/legion_options.vjs_c" /-->
     </scripts>
 
-
-
     <snippets>
 
 		<snippet name="TeamSnip">
             <Button class="TeamSelectTeam" >
-                <Panel id="TeamBackgroundGradient" />
-                <Panel id="TeamBackgroundGradientHighlight" />
-                <Panel id="TeamGroup" >
-                    <Panel id="TeamHeader">
-                        <Panel id="TeamLogo" />
-                        <Label id="TeamNameLabel" text="TEAM_NAME" />
-                        <Label id="JoinTeamLabel" text="#custom_game_team_select_join" />
-                    </Panel>
-                    <Panel id="TeamPlayerDivider" />
-                    <Panel id="PlayerList" />
+                <Panel id="TeamInfo" >
+                    <Panel id="TeamBackgroundGradientHighlight" />
+                    <Label id="TeamInfoLabel" text="TEAM_NAME" />
+                    <Label id="JoinTeamLabel" text="#custom_game_team_select_join" />
                 </Panel>
+                <Panel id="TeamHeader">
+                    <Panel id="TeamBackgroundGradient" />
+                    <Panel id="TeamLogo" />
+                    <Label id="TeamNameLabel" text="TEAM_NAME" />
+                </Panel>
+                <Panel id="PlayerList" />
             </Button>
 		</snippet>
 
@@ -42,32 +40,25 @@
 	</snippets>
 
 
-
-
     <Panel hittest="false" class="TeamSelect">
         <Panel hittest="false" id="TeamSelectContainer" selectionpos="auto">`
-            <!--空的空间，使加载屏幕和聊天可见-->
-            <Panel hittest="false" id="TeamsSelectEmptySpace" />
 
-            <!--设置列表，左侧面板-->
-            <Panel id="StartGameCountdownTimer">
-                <Image id="TimerBg" src="file://{images}/status_icons/timer_background.psd" />
-                <Image id="TimerRing" src="file://{images}/status_icons/timer_ring.psd" />
-                <Label id="TeamSelectTimer" text="#custom_game_team_select_timer" />
-                <Panel id="TimerLabelBox" >
-                <Label class='hidden' id="TimerLabelAutoStart" text="#custom_game_team_select_auto_start" />
-                <Label class='hidden' id="TimerLabelGameStart" text="#custom_game_team_select_starting" />
+            <!--游戏信息-->
+            <Panel id="GameInfoPanel" >
+                <!--游戏模式与地图 字样-->
+                <Panel id="CustomGameModeName">
+                    <Label id="GameModeNameLabel" text="#addon_game_name" />
+                </Panel>
+                <Panel id="MapInfo">
+                    <Label id="MapInfoLabel" text="#LoadingScreenMapInfo" />
                 </Panel>
             </Panel>
-            <!--队伍列表，左侧面板-->
-            <Panel id="TeamsList" >
-                <Panel id="TeamsListGroup" >
-                <Panel class='hidden' id="TeamListHeader">
-                    <Label class='hidden' id="TeamListHeaderLabel" text="#custom_game_team_select" />
-                    <Image class='hidden' id="TeamListLockedIcon" src="file://{images}/control_icons/lock_small.png" />
-                </Panel>
-                <Panel id="TeamsListRoot" />
-                <!-- <Panel id="OptionList">
+            
+            <!--队伍列表-->
+            <Panel id="TeamsListRoot" />
+            
+            <!-- 广告与选项 -->
+            <!-- <Panel id="OptionList">
                     <Panel id="OptionListGroup">
                         <Label id="OptionTitle" text="#Options_title" />
                         <Panel id="OptionDivider" />
@@ -91,33 +82,28 @@
                 <Panel id="Discord" class="AdBanner">
                     <Image id="DiscordImage" class="AdImage" src="s2r://panorama/images/custom_game/game_info/discord_png.vtex" onactivate="ExternalBrowserGoToURL('https://discord.gg/pmMnfdA');" onload="DOTAShowTextTooltip('#Ad_updated')" onmouseover="DOTAShowTextTooltip('#Ad_updated')" onmouseout="DOTAHideTextTooltip()"/>
                 </Panel> -->
-                </Panel>
-            </Panel>
-
-            <!--游戏信息和未分配的玩家，右侧面板-->
-            <Panel id="GameAndPlayersRoot">
-
-                <Panel id="GameInfoPanel" >
-                    <!--游戏模式与地图 字样-->
-                    <Panel id="CustomGameModeName">
-                        <Label id="GameModeNameLabel" text="#addon_game_name" />
-                    </Panel>
-                    <Panel id="MapInfo">
-                        <Label id="MapInfoLabel" text="#LoadingScreenMapInfo" />
+                
+            
+            <Panel id="GameAndPlayersRoot"><!--未分配玩家-->
+                <!--设置列表，左侧面板-->
+                <Panel id="StartGameCountdownTimer">
+                    <Image id="TimerBg" src="file://{images}/status_icons/timer_background.psd" />
+                    <Image id="TimerRing" src="file://{images}/status_icons/timer_ring.psd" />
+                    <Label id="TeamSelectTimer" text="#custom_game_team_select_timer" />
+                    <Panel id="TimerLabelBox" >
+                    <Label class='hidden' id="TimerLabelAutoStart" text="#custom_game_team_select_auto_start" />
+                    <Label class='hidden' id="TimerLabelGameStart" text="#custom_game_team_select_starting" />
                     </Panel>
                 </Panel>
-
-                <!--未分配玩家-->
                 <Panel id="UnassignedPlayerPanel" >
                     <Button id="UnassignedPlayersButton" onactivate="OnLeaveTeamPressed()">
                         <Panel id="UnassignedPlayersHeader">
-                        <Label text="#custom_game_team_select_unassigned_players" />
+                            <Label text="#custom_game_team_select_unassigned_players" />
                         </Panel>
                         <Panel id="UnassignedPlayersDivider" />
                         <Panel id="UnassignedPlayersContainer" />
                     </Button>
                 </Panel>
-
                 <!--启动与锁定-->
                 <Button id="LockAndStartButton" class="PlayButton" onactivate="OnLockAndStartPressed()">
                     <Label text="#custom_game_team_select_lock_start" />

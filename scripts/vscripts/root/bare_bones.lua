@@ -3,12 +3,12 @@ print ( '[GameMode] be loadding' )
 GameMode = GameMode or class({})
 
 function GameMode:InitGameMode()
-    GameRules:SetCustomGameSetupAutoLaunchDelay(0)--将自动启动延迟从默认值（30秒）更改为0秒
+    GameRules:SetCustomGameSetupAutoLaunchDelay(30)--将自动启动延迟从默认值（30秒）更改为0秒
     GameRules:SetHeroSelectPenaltyTime(0)--设置没有选择英雄的惩罚时间
     GameRules:SetStrategyTime( 0 )--设置玩家在选择英雄和进入展示阶段之间的时间。
     GameRules:SetShowcaseTime(0)--设置玩家在策略阶段和进入赛前阶段之间的时间
     --GameRules:ForceGameStart(true)--将游戏状态转换为DOTA_GAMERULES_STATE_GAME_IN_PROGRESS
-    GameRules:SetPreGameTime(5)--设置选择英雄与开始游戏之间的倒数时间
+    GameRules:SetPreGameTime(0)--设置选择英雄与开始游戏之间的倒数时间
     GameRules:SetStartingGold(450)--出门金币
     GameRules:SetHeroSelectionTime(HERO_SELECTION_TIME)--设置选择英雄的时间
     GameRules:SetUseUniversalShopMode(true)--商店范围内可以购买全部商品，不再限制家里还是边路还是秘密商店
@@ -17,10 +17,14 @@ function GameMode:InitGameMode()
 	GameRules:SetPostGameTime( POST_GAME_TIME )--结束记分板展示时长
 	GameRules:SetSameHeroSelectionEnabled( ALLOW_SAME_HERO_SELECTION )--英雄复选
     GameRules:EnableCustomGameSetupAutoLaunch(true)--启用 (true)或禁用 (false) 自定义游戏的自动设置。
-    GameRules:LockCustomGameSetupTeamAssignment(true)--锁定(true)或解锁(false)队伍分配.。如果队伍分配被锁定，玩家将不再能修改队伍
+    GameRules:LockCustomGameSetupTeamAssignment(false)--锁定(true)或解锁(false)队伍分配.。如果队伍分配被锁定，玩家将不再能修改队伍
     GameRules:GetGameModeEntity():SetLoseGoldOnDeath(false)--死亡后自己不扣钱
-    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 0 )--天灾最多0个人
-    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 9 )--近卫最多9个人
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 0 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 0 )
+    GameRules:SetCustomGameTeamMaxPlayers( 6, 5 )
+    GameRules:SetCustomGameTeamMaxPlayers( 7, 5 )
+    GameRules:SetCustomGameTeamMaxPlayers( 8, 5 )
+    GameRules:SetCustomGameTeamMaxPlayers( 9, 5 )
     SendToServerConsole("dota_max_physical_items_purchase_limit 9999") --购物个数上线改为9999个
     --[[
         GameRules:GetGameModeEntity():SetFreeCourierModeEnabled(true)--信使

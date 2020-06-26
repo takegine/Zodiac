@@ -1,12 +1,11 @@
 <root>
     <styles>
             <include src="s2r://panorama/styles/dotastyles.vcss_c" />
-            <include src="s2r://panorama/styles/play.vcss_c" />
-            <include src="s2r://panorama/styles/custom_game/team_select.vcss_c" />
+            <include src="s2r://panorama/styles/custom_game/team_select.css" />
+            <include src="s2r://panorama/styles/custom_game/playbutton.css" />
     </styles>
     <scripts>
-            <include src="s2r://panorama/scripts/custom_game/team_select.vjs_c" />
-            <!--include src="s2r://panorama/scripts/custom_game/legion_options.vjs_c" /-->
+            <include src="s2r://panorama/scripts/custom_game/team_select.js" />
     </scripts>
 
     <snippets>
@@ -115,10 +114,10 @@
                     </Button>
                 </Panel>
                 <!--启动与锁定-->
-                <Button id="LockAndStartButton" class="PlayButton" onactivate="OnLockAndStartPressed()">
+                <Button id="LockAndStartButton" class="PlayButtonCustom" onactivate="OnLockAndStartPressed()">
                     <Label text="#custom_game_team_select_lock_start" />
                 </Button>
-                <Button id="CancelAndUnlockButton" class="PlayButton" onactivate="OnCancelAndUnlockPressed()">
+                <Button id="CancelAndUnlockButton" class="PlayButtonCustom" onactivate="OnCancelAndUnlockPressed()">
                     <Label text="#custom_game_team_select_cancel_unlock" />
                 </Button>
 

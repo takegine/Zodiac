@@ -89,11 +89,9 @@ function Buy(myint) {
     GameEvents.SendCustomGameEventToServer( "Buy_Element", { id: Players.GetLocalPlayer(),num:myint} );
 }
 
-var x3mode = false;
 function ToggleX3mode()
 {
-    x3mode = ! x3mode
-    $("#ToggleX3mode").SetHasClass("selectedfilter", x3mode );
+    $("#ToggleX3mode").ToggleClass("selectedfilter");
     UpdateShop( "Elements_Tabel", Players.GetLocalPlayer(), CustomNetTables.GetTableValue( "Elements_Tabel", Players.GetLocalPlayer() ) );
 }
 
@@ -109,11 +107,15 @@ function UpdateShop( table_name, key, data )
                 Newboll.GetChild(2*i).SetHasClass("offcraft", data[i+1] == 0 );
                 Newboll.GetChild(2*i+1).text = "x "+data[i+1];       
         }
-
-        for (var i = 0; i < 30;y++) {
-            for (var j = 0; j <= 2;i++) {
-                $("#craft"+i).SetHasClass( "offcraft", (!x3mode ||data[crafts[i][j]] < 3) &&( x3mode ||data[crafts[i][j]] == 0) );
+$.Msg("go")
+        for (var i = 0; i < 30;i++) {
+            var bool = false
+            for (var j = 0; j <= 2;j++) {
+                bool = $("#ToggleX3mode").BHasClass("selectedfilter") ?  data[crafts[i][j]] < 3 : data[crafts[i][j]] < 1 
+                if (bool)
+                    break;
             }
+            $("#craft"+i).SetHasClass( "offcraft", bool );
         }
     }
 }
@@ -147,5 +149,4 @@ function CreateBolls() {
 
     $("#ShopInfo").visible = false;
     CreateBolls()
-    UpdateShop( "Elements_Tabel", Players.GetLocalPlayer(), CustomNetTables.GetTableValue( "Elements_Tabel", Players.GetLocalPlayer() ) )
 })();

@@ -17,7 +17,7 @@ function Zodiac:new()
     -- self.vBots     = {}
     -- self.vBroadcasters = {}
     -- _G.DedicatedServerKey = GetDedicatedServerKeyV2("2")
-    
+
     cheats = GameRules:IsCheatMode()
 end
 
@@ -25,7 +25,7 @@ function Zodiac:OnConnectFull(keys)
     print("function Zodiac:OnConnectFull()is working.")
     --DeepPrintTable(keys)
     require('root/GameMode')
-    
+
     mode:SetItemAddedToInventoryFilter( Dynamic_Wrap( self, "ItemAddedToInventoryFilter" ), self )--设置一个过滤器，用来控制物品被放入物品栏时的行为。
     local ply      = EntIndexToHScript(keys.index+1)-- 正在进入的用户 玩家实体
 
@@ -36,17 +36,17 @@ function Zodiac:OnConnectFull(keys)
     -- self.game.vSteamIds[PlayerResource:GetSteamAccountID(playerID)] = ply  -- 更新Steam ID表
 
     -- -- If the player is a broadcaster flag it in the Broadcasters table
-    -- if PlayerResource:IsBroadcaster(playerID) then -- 
+    -- if PlayerResource:IsBroadcaster(playerID) then --
     --     self.game.vBroadcasters[keys.userid] = 1
     --     return
     -- end
-    
+
     --DeepPrintTable(value)
 end
 
 function Zodiac:Launch_Change()
     local maxteam  = 6
-    local maxcount = 0 
+    local maxcount = 0
     for i=6,9 do
         local teamcount = PlayerResource:GetPlayerCountForTeam(i)
         if teamcount > maxcount then
@@ -77,8 +77,8 @@ function Zodiac:Launch_Change()
     Zodiac.firstbolltable = value
 end
 
-function Zodiac:OnGameRulesStateChange( keys ) 
-    local newState = GameRules:State_Get() 
+function Zodiac:OnGameRulesStateChange( keys )
+    local newState = GameRules:State_Get()
     print ("print  OnGameRulesStateChange is running."..newState)
 
     if     newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
@@ -89,12 +89,12 @@ function Zodiac:OnGameRulesStateChange( keys )
             end
         end
     elseif newState == DOTA_GAMERULES_STATE_STRATEGY_TIME then  --玩家处于选择选完的准备界面
-        
+
         local unit = CreateUnitByName( "npc_dota_gold_spirit", Vector(0,0,0), true, nil, nil, DOTA_TEAM_GOODGUYS )
-        
+
         for i=0, PlayerResource:GetPlayerCount()-1 do
-            if not PlayerResource:HasSelectedHero(i) then 
-                PlayerResource:GetPlayer(i):MakeRandomHeroSelection() 
+            if not PlayerResource:HasSelectedHero(i) then
+                PlayerResource:GetPlayer(i):MakeRandomHeroSelection()
             end
         end
 
@@ -104,14 +104,14 @@ function Zodiac:OnGameRulesStateChange( keys )
 end
 
 function Zodiac:Continue()
-    
+
     local return_time = 60 + _G.GAME_ROUND -- 关卡之间的时间
     local time_ = 1
-    
+
     cheats = GameRules:IsCheatMode()
 
     local heroes = GameMode:GetAllRealHeroes()
-    
+
     table.foreach(heroes,function(k,h)
         if not h:IsAlive() then h:RespawnUnit() end
 
@@ -120,11 +120,11 @@ function Zodiac:Continue()
         h.round_dmg_deal = not h.total_dmg_deal and 0 or math.ceil(h.total_dmg_deal - (h.round_dmg_deal or 0))
         h.round_dmg_take = not h.total_dmg_take and 0 or math.ceil(h.total_dmg_take - (h.round_dmg_take or 0))
         h.fist_dam_time = nil
-        
+
         local bottle = h:FindItemInInventory("item_bottle")
         if bottle then bottle:SetCurrentCharges(math.ceil(2+_G.GAME_ROUND/5)) end
     end)
-    
+
     local dlist  = {}
     local myneedheroes = GameMode:GetAllRealHeroes()
     for i= #myneedheroes,1,-1 do
@@ -136,19 +136,19 @@ function Zodiac:Continue()
                 maxdh  = n
             end
         end
-        
+
         dlist["hero"..(#heroes-i+1)]=myneedheroes[maxdh]:GetName()
         dlist["damage"..(#heroes-i+1)]=myneedheroes[maxdh].round_dmg_deal
         table.remove(myneedheroes,maxdh)
     end
     CustomGameEventManager:Send_ServerToAllClients( "Open_DamageTop", dlist)
-    
+
     local heronametab = {}
     for i = 1,10 do
         heronametab["hero"..i] = (i <= #heroes) and heroes[i]:GetName() or ""
     end
     CustomGameEventManager:Send_ServerToAllClients( "Display_RoundVote",heronametab)
-    
+
     QuestSystem:CreateQuest( "PrepTime", "#QuestPanel", 1, return_time, nil, _G.GAME_ROUND + 1)
 
     Timer(function()
@@ -159,23 +159,23 @@ function Zodiac:Continue()
             gogame = InBox and gogame+1 or gogame
             CustomGameEventManager:Send_ServerToAllClients("changevote",{ h:GetName(), bool=tostring(InBox)})
         end)
-    
+
         if time_ <= return_time and gogame ~= PlayerResource:GetPlayerCount() then
             QuestSystem:RefreshQuest("PrepTime", time_, return_time, _G.GAME_ROUND + 1)
             print("countdown wait time_: ", string.format("%02d",time_))
             time_ = GameRules:IsGamePaused() and time_ or time_ + 1
-            return 1 
+            return 1
         else
-    
+
             _G.GAME_ROUND = _G.GAME_ROUND + 1
             QuestSystem:DelQuest("PrepTime")
             CustomNetTables:SetTableValue("Hero_Stats","wave",{_G.GAME_ROUND})
             CustomGameEventManager:Send_ServerToAllClients( "Close_DamageTop", {})
             CustomGameEventManager:Send_ServerToAllClients( "Close_RoundVote", {})
             EmitGlobalSound("Tutorial.Quest.complete_01")
-    
+
             print("..................round:" , _G.GAME_ROUND , ".....................")
-            
+
             for i=1,3 do
                 local unitname = "npc_dota_custom_creep_".._G.GAME_ROUND.."_"..i
                 if ROUND_UNITS[unitname] then
@@ -186,7 +186,7 @@ function Zodiac:Continue()
                     end
                 end
             end
-            
+
             print("refresh all modifiers on hero")
             for i=1, #heroes do
                 if PlayerResource:GetConnectionState(heroes[i]:GetPlayerOwnerID()) == 2 then
@@ -198,19 +198,19 @@ function Zodiac:Continue()
 end
 
 function Zodiac:OnNPCSpawned(keys)
-    
+
     local npc = EntIndexToHScript(keys.entindex)
     print("[Zodiac] NPC Spawned ",npc:GetUnitName())
 
 
     if npc.bFirstSpawned then return end
-        
+
     npc.bFirstSpawned = true
     if  npc:IsRealHero() then
         npc.immortalbuffs = {}
         npc:AddExperience(100,1,false,false)
         npc:AddNewModifier(npc, nil, "modifier_imba_generic_talents_handler", {})
-        
+
         local id = npc:GetPlayerID()
         _G.bonuses[1][id] = 0
         _G.bonuses[2][id] = 0
@@ -226,7 +226,7 @@ function Zodiac:OnNPCSpawned(keys)
         --Timers:CreateTimer(1, function() RelicStone:LoadRelics(info) end)
 
         if _G.hardmode == 1 then npc:AddNewModifier(npc, nil, "modifier_easy_mode", {}) end
-    
+
         CustomNetTables:SetTableValue("Elements_Tabel",tostring(id), Zodiac.firstbolltable)
         --hRequest:Login(id)
 
@@ -242,7 +242,7 @@ function Zodiac:OnNPCSpawned(keys)
         --[[ for i = 1,2* (_G.hardmode - 1) do
             local enemyitem={} --另外写一个物品表单来调用
                 local num = math.random(#enemyitem[_G.GAME_ROUND])  --随机个数表示这个物品
-            
+
             unit:AddItemByName(enemyitem[_G.GAME_ROUND][num])--按照随机数给该物品
 
             --根据难度怪物会获得装备，件数为2* (_G.hardmode - 1)  有个装备列表，怪物随机获得其中装备
@@ -260,7 +260,7 @@ function Zodiac:OnEntityKilled( keys )
     print("OnEntityKilled")
         --DeepPrintTable(keys)    --详细打印传递进来的表
     local killedUnit = EntIndexToHScript( keys.entindex_killed )--取得死者实体
-    
+
     if killedUnit and killedUnit:IsHero() then
         local newItem = CreateItem( "item_tombstone", killedUnit, killedUnit )
               newItem:SetPurchaseTime( 0 )
@@ -274,7 +274,7 @@ function Zodiac:OnEntityKilled( keys )
         local test2 = Entities:FindAllByName("item_tombstone")
         if  #test2 == PlayerResource:GetPlayerCount() then GameMode:TheGameEndding( DOTA_TEAM_BADGUYS ) end
     end
-    
+
     if killedUnit:GetUnitName() == "npc_dota_custom_creep_50_1" then GameMode:TheGameEndding( DOTA_TEAM_GOODGUYS ) end
 
     if killedUnit:GetTeam() == 3 and killedUnit:GetName() == "npc_dota_creature" then
@@ -282,14 +282,14 @@ function Zodiac:OnEntityKilled( keys )
             local getxp  = killedUnit:GetBaseDayTimeVisionRange()
             local heroes = GameMode:GetAllRealHeroes()
             if  getxp > 0 then
-                table.foreach(heroes,function(_,h) 
+                table.foreach(heroes,function(_,h)
                     h:AddExperience(getxp / #heroes*(0.75+0.05*#heroes),
-                    false,false) 
+                    false,false)
                 end )
             end
         end
         if  killedUnit:IsCreature() then RollDrops(killedUnit) end
-        
+
         killedUnit:Destroy()
         local units = Entities:FindAllByName("npc_dota_creature")
         if units then
@@ -299,7 +299,7 @@ function Zodiac:OnEntityKilled( keys )
                 then table.remove(units,b) end
             end
         end
-        
+
         print("Remaining enemy count: ",#units)
         if not units or #units == 0 then Zodiac:Continue() end
     end
@@ -323,8 +323,8 @@ function RollDrops(unit)
                 end
 
             elseif item_name == "item_elbol" then
-                if #need_drop_el == 0 then 
-                    for g=1,10 do need_drop_el[g]=g end 
+                if #need_drop_el == 0 then
+                    for g=1,10 do need_drop_el[g]=g end
                 end
                 local roll_no = RandomInt( 1, #need_drop_el )
                 for z=0, PlayerResource:GetPlayerCount()-1 do
@@ -339,7 +339,7 @@ function RollDrops(unit)
                     myTable[tostring(need_drop_el[roll_no])] = myTable[tostring(need_drop_el[roll_no])] + 1
                     CustomNetTables:SetTableValue("Elements_Tabel",tostring(z),myTable)
                 end
-                table.remove(need_drop_el,roll_no) 
+                table.remove(need_drop_el,roll_no)
 
             elseif ItemTable.sins then
                 if RollPercentage(introll*PlayerResource:GetPlayerCount()) then
@@ -349,7 +349,7 @@ function RollDrops(unit)
                     CreateItemOnPositionSync( unit:GetAbsOrigin(), item )
                     item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin()+RandomVector(RandomFloat(110,140)))
 
-                    local PlayerIDs = {}                            
+                    local PlayerIDs = {}
                     table.foreach( GameMode:GetAllRealHeroes() ,function(_,h)
                         if not h:HasOwnerAbandoned() and PlayerResource:GetConnectionState(h:GetPlayerID()) == 2 then
                             table.insert( PlayerIDs, Hero:GetPlayerID() )
@@ -361,14 +361,14 @@ function RollDrops(unit)
                     WinningPlayerID = PlayerIDs[ RandomInt( 1, #PlayerIDs ) ]
 
                     if not WinningPlayerID then return end
-                    
+
                     local WinningHero = PlayerResource:GetSelectedHeroEntity( WinningPlayerID )
                     item:SetPurchaser( WinningHero )
-                    if not WinningHero["lvl_"..item_name] then 
+                    if not WinningHero["lvl_"..item_name] then
                             WinningHero["lvl_"..item_name] = 1
                     else   WinningHero["lvl_"..item_name] = WinningHero["lvl_"..item_name] + 1
                     end
-                    
+
                     EmitSoundOn( "sounds/misc/soundboard/absolutely_perfect.vsnd", WinningHero )
                     --[[
                     local otv = ""
@@ -383,7 +383,7 @@ function RollDrops(unit)
                 end
 
             elseif item_name == "RS" then  ------掉落relic stone 宝石的------
-                
+
                 if RollPercentage(introll*PlayerResource:GetPlayerCount()) then --随机一个100以内的数，如果小于爆率X玩家缺省数
                     local PlayerIDs = {}
                     local Heroes = GameMode:GetAllRealHeroes()
@@ -403,7 +403,7 @@ function RollDrops(unit)
                         print( "Zodiac:OnRelicSpawned - ERROR - WinningPlayerID is invalid." )
                         return
                     end
-                    
+
                     local WinningHero = PlayerResource:GetSelectedHeroEntity( WinningPlayerID )
                     local WinningSteamID = PlayerResource:GetSteamID( WinningPlayerID )
                     local ininvid = ""
@@ -512,19 +512,19 @@ end
 
 -- 非玩家实体使用了技能 A non-player entity (necro-book, chen creep, etc) used an ability
 function Zodiac:OnNonPlayerUsedAbility(keys)
-    
+
     local abilityname=  keys.abilityname
-    
+
     if  abilityname == "elder_titan_echo_stomp" then
         local caster = EntIndexToHScript(keys.caster_entindex)
         local bkb_abil = caster:FindAbilityByName( "my_bkb" )
-        
+
         bkb_abil:ApplyDataDrivenModifier( caster, caster, "my_black_king_bar", {duration = 1.8} )
 
     elseif abilityname == "phoenix_sun_ray_datadriven" then
         local caster = EntIndexToHScript(keys.caster_entindex)
         local bkb_abil = caster:FindAbilityByName( "my_bkb" )
-        
+
         bkb_abil:ApplyDataDrivenModifier( caster, caster, "my_black_king_bar", {duration = 6.1} )
     end
 end
@@ -535,7 +535,7 @@ function Zodiac:OnPlayerLevelUp(keys)
 end
 
 function Zodiac:ItemAddedToInventoryFilter( filterTable )
-    if filterTable["item_entindex_const"] == nil 
+    if filterTable["item_entindex_const"] == nil
     or filterTable["inventory_parent_entindex_const"] == nil then
         return true
     end
@@ -561,16 +561,16 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
         item_shadow_cuirass = 4,
         item_ice_staff = 4
     }
-    
+
     if  hItem:GetPurchaser() ~= parent then
             Timer(0.01,function() parent:DropItemAtPositionImmediate( hItem, hItem:GetPurchaser():GetAbsOrigin()+RandomVector(20) ) end)
-    elseif rlcs[hItem:GetAbilityName()] then 
+    elseif rlcs[hItem:GetAbilityName()] then
         for i=0, 9, 1 do
             local current_item = parent:GetItemInSlot(i)
             if current_item and rlcs[current_item:GetAbilityName()] then
                 if hItem:GetAbilityName() == current_item:GetAbilityName() then local reitem = hItem
                 elseif rlcs[hItem:GetAbilityName()] < rlcs[current_item:GetAbilityName()] then local reitem = hItem
-                elseif rlcs[hItem:GetAbilityName()] > rlcs[current_item:GetAbilityName()] then local reitem = current_item 
+                elseif rlcs[hItem:GetAbilityName()] > rlcs[current_item:GetAbilityName()] then local reitem = current_item
                 end
                 if reitem then parent:RemoveItem(reitem) end
             end
@@ -581,17 +581,17 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
 end
 
 function Zodiac:Buy_Element(event)
-    
+
     local myTable = CustomNetTables:GetTableValue("Elements_Tabel",tostring(event.PlayerID))
     if myTable[tostring(event.num)] <= 0 then return end
-    
+
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
 
     for i=0,15 do
         if  not hero:GetItemInSlot(i) then
             myTable[tostring(event.num)] =  myTable[tostring(event.num)] - 1
             CustomNetTables:SetTableValue("Elements_Tabel",tostring(event.PlayerID),myTable)
-            local itemname = all_elements[event.num]  
+            local itemname = all_elements[event.num]
             local item = CreateItem(itemname, hero, hero)
                   item:SetPurchaseTime(0)
                   item:SetPurchaser( hero )
@@ -600,5 +600,5 @@ function Zodiac:Buy_Element(event)
 
             break
         end
-    end   
+    end
 end

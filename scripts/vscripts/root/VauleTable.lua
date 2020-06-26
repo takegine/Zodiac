@@ -65,18 +65,7 @@ LinkLuaModifier( "modifier_imba_generic_talents_handler", "modifiers/modifier_mo
 --allelements = { "item_jia","item_yi","item_bing","item_ding","item_wu","item_ji","item_geng","item_xin","item_ren","item_kui"}
 all_elements = { "item_life","item_water","item_shadow","item_void","item_earth","item_fire","item_light","item_air","item_ice","item_energy"}
 need_drop_el = {1,2,3,4,5,6,7,8,9,10}
-partlist = { 
-            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8_arc.vpcf",
-            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8_arc_b.vpcf",
-            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-            "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-            "particles/units/heroes/hero_undying/undying_fg_portrait_mouthgas.vpcf",
-            "particles/units/heroes/hero_zeus/zeus_return_king_of_gods_head_style1_ambient.vpcf",
-            "particles/units/heroes/hero_tinker/laser_cutter_sparks_c.vpcf",
-            "particles/units/heroes/hero_techies/techies_stasis_trap_beams.vpcf",
-            "particles/econ/courier/courier_snail/courier_snail_ambient_flying.vpcf"
-                                }
+
 
 notforall = {
     item_ice = true,

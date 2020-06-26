@@ -81,27 +81,27 @@ function CheckElements(keys)
                     end
                 end
                 if est then--如果存在est
-                    local partlist = {--本地变量，一个包含全部元素球的粒子特效文件地址的表，就是掉落元素球的时候飞过来的动画
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                    
-                    }
-                    
-                    local nFXIndex = ParticleManager:CreateParticle( partlist[elid], PATTACH_ABSORIGIN, drop_item )--给掉落的物品加载对应的粒子特效
-                    --ParticleManager:SetParticleControl( nFXIndex, 0, drop_item:GetAbsOrigin() )
-                    --ParticleManager:SetParticleControl( nFXIndex, 1, containedItem:GetPurchaser():GetAbsOrigin() )
-
-                    --未知
-                    ParticleManager:SetParticleControlEnt( nFXIndex, 1, containedItem:GetPurchaser(), PATTACH_POINT_FOLLOW, "attach_hitloc", containedItem:GetPurchaser():GetOrigin(), true )
-                    ParticleManager:ReleaseParticleIndex( nFXIndex )
+                    local partlist = {
+                        "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
+                        "particles/units/heroes/hero_doom_bringer/doom_bringer_devour.vpcf",
+                        "particles/units/heroes/hero_techies/techies_stasis_trap_beams.vpcf",
+                        "particles/econ/courier/courier_snail/courier_snail_ambient_flying.vpcf",
+                        "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8_arc.vpcf",
+                        "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8_arc_b.vpcf",
+                        "particles/econ/items/wisp/wisp_guardian_ti7.vpcf",
+                        "particles/units/heroes/hero_undying/undying_fg_portrait_mouthgas.vpcf",
+                        "particles/units/heroes/hero_zeus/zeus_return_king_of_gods_head_style1_ambient.vpcf",
+                        "particles/units/heroes/hero_tinker/laser_cutter_sparks_c.vpcf",
+                        
+                        }
+                        
+                        local nFXIndex = ParticleManager:CreateParticle( partlist[elid], PATTACH_ABSORIGIN, drop_item )
+                        ParticleManager:SetParticleControl( nFXIndex, 0, drop_item:GetAbsOrigin() )
+                        ParticleManager:SetParticleControl( nFXIndex, 1, containedItem:GetPurchaser():GetAbsOrigin() )
+    
+                        --未知
+                        ParticleManager:SetParticleControlEnt( nFXIndex, 1, containedItem:GetPurchaser(), PATTACH_POINT_FOLLOW, "attach_hitloc", containedItem:GetPurchaser():GetOrigin(), true )
+                        ParticleManager:ReleaseParticleIndex( nFXIndex )
                     
                     local id = containedItem:GetPurchaser():GetPlayerID()--得到获取该元素球的玩家ID
                     local myTable = CustomNetTables:GetTableValue("Elements_Tabel",tostring(id))--获得玩家的元素面板的表单

@@ -327,19 +327,15 @@ function RollDrops(unit)
                     for g=1,10 do need_drop_el[g]=g end
                 end
                 local roll_no = RandomInt( 1, #need_drop_el )
-                for z=0, PlayerResource:GetPlayerCount()-1 do
-                    local myTable  = CustomNetTables:GetTableValue("Elements_Tabel",tostring(z))
-                    -- local nFXIndex = ParticleManager:CreateParticle( partlist[need_drop_el[roll_no]], PATTACH_OVERHEAD_FOLLOW, unit )--特效--原参数2 PATTACH_ABSORIGIN
-                    -- --ParticleManager:SetParticleControl( nFXIndex, 0, drop_item:GetAbsOrigin() )
-                    -- --ParticleManager:SetParticleControl( nFXIndex, 1, containedItem:GetPurchaser():GetAbsOrigin() )
-                    -- ParticleManager:SetParticleControlEnt( nFXIndex, 1, PlayerResource:GetSelectedHeroEntity(z), PATTACH_POINT_FOLLOW, "attach_hitloc", PlayerResource:GetSelectedHeroEntity(z):GetOrigin(), true )
-                    -- --SetParticleControlEnt(particle: ParticleID, controlPoint: int, unit: CDOTA_BaseNPC, particleAttach: ParticleAttachment_t, attachment: string, offset: Vector, lockOrientation: bool)
-                    -- --设置CP点参数
-                    -- ParticleManager:ReleaseParticleIndex( nFXIndex )--释放特效
-                    myTable[tostring(need_drop_el[roll_no])] = myTable[tostring(need_drop_el[roll_no])] + 1
-                    CustomNetTables:SetTableValue("Elements_Tabel",tostring(z),myTable)
+                for id=0, PlayerResource:GetPlayerCount()-1 do
+                    local hero = PlayerResource:GetSelectedHeroEntity( id )
+                    local item = CreateItem(all_elements[need_drop_el[roll_no]], hero, hero)
+                          item:SetPurchaseTime(0)
+                          item:SetPurchaser( hero )
+                    CreateItemOnPositionSync( hero:GetAbsOrigin()+RandomVector(200) , item )
+                    EmitSoundOn( "NeutralLootDrop.TierComplete", hero )
                 end
-                table.remove(need_drop_el,roll_no)
+                table.remove(need_drop_el, roll_no)
 
             elseif ItemTable.sins then
                 if RollPercentage(introll*PlayerResource:GetPlayerCount()) then
@@ -369,7 +365,7 @@ function RollDrops(unit)
                     else   WinningHero["lvl_"..item_name] = WinningHero["lvl_"..item_name] + 1
                     end
 
-                    EmitSoundOn( "sounds/misc/soundboard/absolutely_perfect.vsnd", WinningHero )
+                    EmitSoundOn( "HotPotato.Ow", WinningHero )
                     --[[
                     local otv = ""
                     local req = CreateHTTPRequestScriptVM( "POST", Zodiac.gjfll2 .. "/lol21.php")

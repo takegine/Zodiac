@@ -110,7 +110,7 @@ function Zodiac:Continue()
 
     cheats = GameRules:IsCheatMode()
 
-    local heroes = GameMode:GetAllRealHeroes()
+    local heroes = GetAllRealHeroes()
 
     table.foreach(heroes,function(k,h)
         if not h:IsAlive() then h:RespawnUnit() end
@@ -126,7 +126,7 @@ function Zodiac:Continue()
     end)
 
     local dlist  = {}
-    local myneedheroes = GameMode:GetAllRealHeroes()
+    local myneedheroes = GetAllRealHeroes()
     for i= #myneedheroes,1,-1 do
         local maxdh = nil
         local maxdmg = -1
@@ -280,7 +280,7 @@ function Zodiac:OnEntityKilled( keys )
     if killedUnit:GetTeam() == 3 and killedUnit:GetName() == "npc_dota_creature" then
         if not killedUnit:IsIllusion() then
             local getxp  = killedUnit:GetBaseDayTimeVisionRange()
-            local heroes = GameMode:GetAllRealHeroes()
+            local heroes = GetAllRealHeroes()
             if  getxp > 0 then
                 table.foreach(heroes,function(_,h)
                     h:AddExperience(getxp / #heroes*(0.75+0.05*#heroes),
@@ -350,7 +350,7 @@ function RollDrops(unit)
                     item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin()+RandomVector(RandomFloat(110,140)))
 
                     local PlayerIDs = {}
-                    table.foreach( GameMode:GetAllRealHeroes() ,function(_,h)
+                    table.foreach( GetAllRealHeroes() ,function(_,h)
                         if not h:HasOwnerAbandoned() and PlayerResource:GetConnectionState(h:GetPlayerID()) == 2 then
                             table.insert( PlayerIDs, Hero:GetPlayerID() )
                         end
@@ -386,7 +386,7 @@ function RollDrops(unit)
 
                 if RollPercentage(introll*PlayerResource:GetPlayerCount()) then --随机一个100以内的数，如果小于爆率X玩家缺省数
                     local PlayerIDs = {}
-                    local Heroes = GameMode:GetAllRealHeroes()
+                    local Heroes = GetAllRealHeroes()
                     for _,Hero in pairs ( Heroes ) do
                         if Hero ~= nil and Hero:IsRealHero() and Hero:HasOwnerAbandoned() == false and PlayerResource:GetConnectionState(Hero:GetPlayerID()) == 2 then
                             table.insert( PlayerIDs, Hero:GetPlayerID() )

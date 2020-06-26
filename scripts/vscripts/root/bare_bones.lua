@@ -90,19 +90,6 @@ function GameMode:NeedSteamIds(data)--获取STEAMID发给客户端
     CustomGameEventManager:Send_ServerToPlayer( PlayerResource:GetPlayer(data.PlayerID), "SteamIds", result)
 end
 
--- 多处调用该函数，获取全部玩家操作的英雄单位，返回清单
-function GameMode:GetAllRealHeroes()
-    local rheroes = {}
-    local heroes = HeroList:GetAllHeroes()
-    
-    for i=1,#heroes do
-        if heroes[i]:IsRealHero() then
-            table.insert(rheroes,heroes[i])
-        end
-    end
-    return rheroes
-end
-
 --[[function GameMode:_CheckForDefeat()--游戏失败
     if GameRules:State_Get() ~= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
         return

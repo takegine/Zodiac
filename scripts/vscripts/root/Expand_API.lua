@@ -134,3 +134,16 @@ end
 function testunit(CreateName)
     CreateUnitByName(CreateName,Entities:FindByName( nil, "sweepbirth"):GetAbsOrigin(),false,nil,nil,DOTA_TEAM_NEUTRALS):AddNewModifier(nil, nil, "modifier_phased", {duration=0.1})
 end
+
+function GetAllRealHeroes()
+    local heroes = HeroList:GetAllHeroes()
+    
+    table.foreach(heroes,function(_,h)
+        if not h:IsRealHero() then
+            table.remove(heroes,h)
+        end
+        
+    end)
+    
+    return heroes
+end

@@ -11,7 +11,6 @@ function Zodiac:new()
     CustomGameEventManager:RegisterListener("Launch_team_change", Dynamic_Wrap(self, 'Launch_Change'))
     CustomGameEventManager:RegisterListener("Buy_Element",    Dynamic_Wrap(self, 'Buy_Element'))
     ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(self, 'OnNonPlayerUsedAbility'), self)
-    _G.hardmode=1
 
     -- self.vUserIds  = {}
     -- self.vSteamIds = {}
@@ -41,22 +40,6 @@ function Zodiac:OnConnectFull(keys)
     --     self.game.vBroadcasters[keys.userid] = 1
     --     return
     -- end
-
-    
-    print("/////////////////////////////////////////////////////////////////////////////////////////////")
-    local getboll = 0
-    if _G.hardmode== 2 then getboll = 4 end
-    if _G.hardmode== 3 then getboll = 0 end
-    
-    local value = {}
-    while not (#need_drop_el==getboll) do
-        roll_no = RandomInt( 1, #need_drop_el )
-        print(roll_no)
-        value[need_drop_el[roll_no]]=1
-        table.remove(need_drop_el, roll_no)
-    end
-    for i=1,#need_drop_el do value[need_drop_el[i]]=0 end
-    Zodiac.firstbolltable=value
     
     --DeepPrintTable(value)
 end
@@ -76,6 +59,22 @@ function Zodiac:Launch_Change()
         PlayerResource:SetCustomTeamAssignment(h,maxteam)
         end
     end
+
+    _G.hardmode = maxteam - 5
+
+    print("/////////////////////////////////////////////////////////////////////////////////////////////")
+
+    local lostboll =  _G.hardmode== 2 and 5 or _G.hardmode== 3 and 10 or 0
+    local value = {}
+    while not (#need_drop_el==lostboll) do
+        local roll_no = RandomInt( 1, #need_drop_el )
+        value[need_drop_el[roll_no]]=1
+        table.remove(need_drop_el, roll_no)
+    end
+    for i=1,#need_drop_el do value[need_drop_el[i]]=0 end
+
+
+    Zodiac.firstbolltable = value
 end
 
 function Zodiac:OnGameRulesStateChange( keys ) 
@@ -94,11 +93,13 @@ function Zodiac:OnGameRulesStateChange( keys )
         local unit = CreateUnitByName( "npc_dota_gold_spirit", Vector(0,0,0), true, nil, nil, DOTA_TEAM_GOODGUYS )
         
         for i=0, PlayerResource:GetPlayerCount()-1 do
-            if not PlayerResource:HasSelectedHero(i) then PlayerResource:GetPlayer(i):MakeRandomHeroSelection() end
+            if not PlayerResource:HasSelectedHero(i) then 
+                PlayerResource:GetPlayer(i):MakeRandomHeroSelection() 
+            end
         end
 
     elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-        Zodiac:Continue()
+        Timer(1,function() Zodiac:Continue() end)
     end
 end
 
@@ -116,7 +117,8 @@ function Zodiac:Continue()
 
         h:SetHealth(h:GetMaxHealth())
         h:SetMana(h:GetMaxMana())
-        h.nowwd = not h.total_dmg_deal and 0 or math.ceil(h.total_dmg_deal - (h.nowwd or 0))
+        h.round_dmg_deal = not h.total_dmg_deal and 0 or math.ceil(h.total_dmg_deal - (h.round_dmg_deal or 0))
+        h.round_dmg_take = not h.total_dmg_take and 0 or math.ceil(h.total_dmg_take - (h.round_dmg_take or 0))
         h.fist_dam_time = nil
         
         local bottle = h:FindItemInInventory("item_bottle")
@@ -129,14 +131,14 @@ function Zodiac:Continue()
         local maxdh = nil
         local maxdmg = -1
         for n=1, #myneedheroes do
-            if myneedheroes[n] and myneedheroes[n].nowwd > maxdmg then
-                maxdmg = myneedheroes[n].nowwd
+            if myneedheroes[n] and myneedheroes[n].round_dmg_deal > maxdmg then
+                maxdmg = myneedheroes[n].round_dmg_deal
                 maxdh  = n
             end
         end
         
-        dlist["hero"..i]=myneedheroes[maxdh]:GetName()
-        dlist["damage"..i]=myneedheroes[maxdh].nowwd
+        dlist["hero"..(#heroes-i+1)]=myneedheroes[maxdh]:GetName()
+        dlist["damage"..(#heroes-i+1)]=myneedheroes[maxdh].round_dmg_deal
         table.remove(myneedheroes,maxdh)
     end
     CustomGameEventManager:Send_ServerToAllClients( "Open_DamageTop", dlist)
@@ -147,7 +149,7 @@ function Zodiac:Continue()
     end
     CustomGameEventManager:Send_ServerToAllClients( "Display_RoundVote",heronametab)
     
-    QuestSystem:CreateQuest("PrepTime","#QuestPanel",1,return_time,nil,_G.GAME_ROUND + 1)
+    QuestSystem:CreateQuest( "PrepTime", "#QuestPanel", 1, return_time, nil, _G.GAME_ROUND + 1)
 
     Timer(function()
         local gogame = 0
@@ -292,7 +294,7 @@ function Zodiac:OnEntityKilled( keys )
         local units = Entities:FindAllByName("npc_dota_creature")
         if units then
             for b=#units,1,-1 do
-                if units[b]:GetTeam() ~= 3 
+                if units[b]:GetTeam() ~= 3
                 or not units[b]:IsAlive()
                 then table.remove(units,b) end
             end

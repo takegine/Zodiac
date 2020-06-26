@@ -135,7 +135,7 @@ function CreateBolls() {
     //         Newboll.BLoadLayoutSnippet('BollSnip');
     //         Newboll.GetChild(0).AddClass("btntop"+i);
     //         Newboll.GetChild(0).SetAttributeInt("myint", i+1);
-    //         Newboll.GetChild(0).SetPanelEvent(`onactivate`,() => { Buy(); }  ) ;
+    //         Newboll.GetChild(0).SetPanelEvent(`onactivate`,(myint=i) => { Buy(myint); }  ) ;
     //         Newboll.GetChild(0).GetChild(0).AddClass("BollLabel")
     //         Newboll.GetChild(0).GetChild(0).text = $.Localize("#dota_item_EA_" + i + "_1");
     //         Newboll.GetChild(1).text = 'x 0';

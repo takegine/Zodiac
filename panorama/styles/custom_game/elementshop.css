@@ -24,25 +24,25 @@
    color: #E5E5E5;
 }
 /*按钮颜色*/
-#btntop0 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #18D337 ), color-stop( 0.4, #137723 ), to( #48A357 ) );
+.btntop0 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #18D337 ), color-stop( 0.4, #137723 ), to( #48A357 ) );
 margin-left: 50px;}
-#btntop1 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #344C99 ), color-stop( 0.4, #152044 ), to( #2A365B ) );
+.btntop1 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #344C99 ), color-stop( 0.4, #152044 ), to( #2A365B ) );
 }
-#btntop2 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #505B51 ), color-stop( 0.4, #000000 ), to( #384438 ) );
+.btntop2 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #505B51 ), color-stop( 0.4, #000000 ), to( #384438 ) );
 }
-#btntop3 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #7854B2 ), color-stop( 0.4, #2D1756 ), to( #4D3277 ) );
+.btntop3 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #7854B2 ), color-stop( 0.4, #2D1756 ), to( #4D3277 ) );
 }
-#btntop4 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #844B35 ), color-stop( 0.4, #28180A ), to( #6A371F ) );
+.btntop4 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #844B35 ), color-stop( 0.4, #28180A ), to( #6A371F ) );
 }
-#btntop5 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #E59E51 ), color-stop( 0.7, #BA2B04 ), to( #E26940 ) );
+.btntop5 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #E59E51 ), color-stop( 0.7, #BA2B04 ), to( #E26940 ) );
 margin-left:100px;background-image: url("file://{resources}/images/custom_game/zhengming/yi.jpg");background-size:100%;}
-#btntop6 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #EFF438 ), color-stop( 0.4, #A6AA04 ), to( #C9CC48 ) );
+.btntop6 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #EFF438 ), color-stop( 0.4, #A6AA04 ), to( #C9CC48 ) );
 }
-#btntop7 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #E5E5E5 ), color-stop( 0.4, #969899 ), to( #C9C9C9 ) );
+.btntop7 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #E5E5E5 ), color-stop( 0.4, #969899 ), to( #C9C9C9 ) );
 }
-#btntop8 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #6D8BC6 ), color-stop( 0.5, #1142A5 ), to( #527CCE ) );
+.btntop8 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #6D8BC6 ), color-stop( 0.5, #1142A5 ), to( #527CCE ) );
 }
-#btntop9 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #5EEAEA ), color-stop( 0.4, #2A8282 ), to( #42BCBC ) );
+.btntop9 {background-color: gradient( linear, 40% 0%, 0% 70%, from( #5EEAEA ), color-stop( 0.4, #2A8282 ), to( #42BCBC ) );
 }
 
 .numb{/*按钮右侧个数*/

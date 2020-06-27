@@ -145,7 +145,7 @@ function Zodiac:Continue()
 
     local heronametab = {}
     for i = 1,10 do
-        heronametab["hero"..i] = (i <= #heroes) and heroes[i]:GetName() or ""
+        heronametab[i] = (i <= #heroes) and heroes[i]:GetName() or ""
     end
     CustomGameEventManager:Send_ServerToAllClients( "Display_RoundVote",heronametab)
 
@@ -157,7 +157,7 @@ function Zodiac:Continue()
             local InBox = Entities:FindByName(nil,"neutral_camp"):IsTouching(h)
             print(InBox)
             gogame = InBox and gogame+1 or gogame
-            CustomGameEventManager:Send_ServerToAllClients("changevote",{ h:GetName(), bool=tostring(InBox)})
+            CustomGameEventManager:Send_ServerToAllClients("changevote",{ id=h:GetPlayerID(), hero=h:GetName(), bool=InBox})
         end)
 
         if time_ <= return_time and gogame ~= PlayerResource:GetPlayerCount() then

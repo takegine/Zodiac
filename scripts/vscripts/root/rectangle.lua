@@ -179,8 +179,9 @@ function Zodiac:Continue()
             for i=1,3 do
                 local unitname = "npc_dota_custom_creep_".._G.GAME_ROUND.."_"..i
                 if ROUND_UNITS[unitname] then
+                    
                     local unitnum  = tonumber(ROUND_UNITS[unitname][tostring(_G.hardmode)]) or 0
-                    local point    = Entities:FindByName( nil, "sweepbirth"):GetAbsOrigin() + RandomVector( RandomFloat( 0, 200 ) )
+                    local point    = Entities:FindByName( nil, "sweepbirth_"..RandomInt(1,2)):GetAbsOrigin() + RandomVector( RandomFloat( 0, 200 ) )
                     for k=1,unitnum do
                         CreateUnitByName( unitname, point, true, nil, nil, DOTA_TEAM_BADGUYS ).enemy=true
                     end

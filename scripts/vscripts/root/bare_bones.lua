@@ -36,7 +36,8 @@ function GameMode:InitGameMode()
     ListenToGameEvent("player_chat", 		Dynamic_Wrap(Zodiac, "PlayerChat"), self)--监听玩家聊天事件
     ]]
     
-    if GetMapName()=="rectangle" then require("root/rectangle") end
+    if GetMapName()=="round" then require("root/rectangle") end
+    if GetMapName()=="square" then require("root/rectangle") end
     self.game=Zodiac()
     self.game:new()
 

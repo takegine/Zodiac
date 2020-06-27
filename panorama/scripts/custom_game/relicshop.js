@@ -788,44 +788,22 @@ function PureButtonReady()
 
 function SavesButton()
 {
-    if ($("#saves").BHasClass("savesdis"))
-    {
-        $("#saves").RemoveClass("savesdis");
-        $("#saves").AddClass("savesact");
-        $("#rsfilter").visible = false;
-        $("#rsinv").visible = false;
-        $("#SavesButtonimg").RemoveClass("imgoff");
-    }
-    else
-    {
-        $("#saves").RemoveClass("savesact");
-        $("#saves").AddClass("savesdis");
-        $("#rsfilter").visible = true;
-        $("#rsinv").visible = true;
-        $("#SavesButtonimg").AddClass("imgoff");
-    }
+    var bool = $("#saves").BHasClass("savesdis");
+    $("#saves").ToggleClass("savesdis");
+    $("#saves").SetHasClass("savesact",bool);
+    $("#rsfilter").visible = !bool;
+    $("#rsinv").visible = !bool;
+    $("#SavesButtonimg").SetHasClass("imgoff",!bool);
 }
 
 function SaveSet(num)
 {
     if ($("#saves").BHasClass("savesact"))
     {
-        $("#SaveButton1").RemoveClass("SaveButtons");
-        $("#SaveButton2").RemoveClass("SaveButtons");
-        $("#SaveButton3").RemoveClass("SaveButtons");
-        $("#SaveButton4").RemoveClass("SaveButtons");
-        $("#SaveButton5").RemoveClass("SaveButtons");
-        $("#SaveButton6").RemoveClass("SaveButtons");
-        $("#SaveButton7").RemoveClass("SaveButtons");
-        $("#SaveButton8").RemoveClass("SaveButtons");
-        $("#SaveButton1").AddClass("SaveButtonsdis");
-        $("#SaveButton2").AddClass("SaveButtonsdis");
-        $("#SaveButton3").AddClass("SaveButtonsdis");
-        $("#SaveButton4").AddClass("SaveButtonsdis");
-        $("#SaveButton5").AddClass("SaveButtonsdis");
-        $("#SaveButton6").AddClass("SaveButtonsdis");
-        $("#SaveButton7").AddClass("SaveButtonsdis");
-        $("#SaveButton8").AddClass("SaveButtonsdis");
+        for (var i=1;i<9;i++){
+            $("#SaveButton"+i).RemoveClass("SaveButtons");
+            $("#SaveButton"+i).AddClass("SaveButtonsdis");
+        }
         GameEvents.SendCustomGameEventToServer( "SaveSet", { id: Players.GetLocalPlayer(), num:num} );
     }
 }
@@ -840,22 +818,9 @@ function LoadSet(num)
 
 function ReadySetButton()
 {
-    $("#SaveButton1").RemoveClass("SaveButtonsdis");
-    $("#SaveButton2").RemoveClass("SaveButtonsdis");
-    $("#SaveButton3").RemoveClass("SaveButtonsdis");
-    $("#SaveButton4").RemoveClass("SaveButtonsdis");
-    $("#SaveButton5").RemoveClass("SaveButtonsdis");
-    $("#SaveButton6").RemoveClass("SaveButtonsdis");
-    $("#SaveButton7").RemoveClass("SaveButtonsdis");
-    $("#SaveButton8").RemoveClass("SaveButtonsdis");
-    $("#SaveButton1").AddClass("SaveButtons");
-    $("#SaveButton2").AddClass("SaveButtons");
-    $("#SaveButton3").AddClass("SaveButtons");
-    $("#SaveButton4").AddClass("SaveButtons");
-    $("#SaveButton5").AddClass("SaveButtons");
-    $("#SaveButton6").AddClass("SaveButtons");
-    $("#SaveButton7").AddClass("SaveButtons");
-    $("#SaveButton8").AddClass("SaveButtons");
+    for (var i=1;i<9;i++)
+    $("#SaveButton"+i).RemoveClass("SaveButtonsdis");
+    $("#SaveButton"+i).AddClass("SaveButtons");
 }
 
 function SetColor(colorid)

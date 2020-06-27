@@ -5,7 +5,7 @@
 	</styles>
 
 	<!--<Panel>可以加入图片，文字-->
-	<Panel class="bg">
+	<!-- <Panel class="bg"> -->
 		<!--下面这行图片注释掉了，换到上面的CSS里面了-->
 		<!--Image src="file://{resources}/images/custom_game/loading_screen.jpg"/-->
 
@@ -14,6 +14,6 @@
 			text是文字内容 
 			#可以多语言设置，在localization/addon_english.txt里面-->
 		<!-- <Label class="bb" text="#addon_game_name"/> -->
-	</Panel>
+	<!-- </Panel> -->
 
 </root>

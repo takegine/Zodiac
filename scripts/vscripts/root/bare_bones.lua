@@ -41,7 +41,7 @@ function GameMode:InitGameMode()
     self.game=Zodiac()
     self.game:new()
 
-    GameRules:GetGameModeEntity():SetThink( "OnThink", self, 2 )--加一个计时器，输出游戏失败
+    GameRules:GetGameModeEntity():SetThink( "OnThink", self, 2 )
     ListenToGameEvent("entity_hurt",                 Dynamic_Wrap(self.game, "entity_hurt"), self.game)
     ListenToGameEvent("npc_spawned",                Dynamic_Wrap(self.game, "OnNPCSpawned"), self.game)--监听单位重生或者创建事件
     ListenToGameEvent("entity_killed",		       Dynamic_Wrap(self.game,"OnEntityKilled"), self.game)--单位被击杀
@@ -49,7 +49,6 @@ function GameMode:InitGameMode()
     ListenToGameEvent('dota_player_gained_level',Dynamic_Wrap(self.game, 'OnPlayerLevelUp'), self.game)--玩家升级
     ListenToGameEvent("game_rules_state_change",Dynamic_Wrap(self.game,"OnGameRulesStateChange"), self.game) --游戏阶段改变
 
-    
     CustomGameEventManager:RegisterListener("UpdateProfiles", Dynamic_Wrap(self, 'UpdateProfiles'))--刷新玩家历史记录数据
     CustomGameEventManager:RegisterListener("Updatenandu", Dynamic_Wrap(self, 'NeedSteamIds'))--刷新玩家历史记录数据
 
@@ -60,9 +59,13 @@ function GameMode:InitGameMode()
 end
 
 function GameMode:OnThink()
+    
+    if GetMapName()=="round" then
+        CustomGameEventManager:Send_ServerToTeam(2, "CameraRotateHorizontal", {angle=-0.36*GameRules:GetGameTime()})
+    end
     if GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then return nil end
-       return 1
-   end
+    return 0.1
+end
 
 function GameMode:UpdateProfiles(data)--更新玩家历史游戏记录
     --RelicStone:Levels(data)

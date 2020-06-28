@@ -83,7 +83,6 @@ var shopUI = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDE
 //GameEvents.Subscribe( "playergetcountry", upcountry)
 
 
-function CameraRotateHorizontal(data) {
+GameEvents.Subscribe( "CameraRotateHorizontal", (data) => {
     GameUI.SetCameraYaw(data["angle"])
-}
-GameEvents.Subscribe( "CameraRotateHorizontal", CameraRotateHorizontal)
+})

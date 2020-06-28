@@ -59,22 +59,7 @@ function Zodiac:Launch_Change()
         PlayerResource:SetCustomTeamAssignment(h,maxteam)
         end
     end
-
     _G.hardmode = maxteam - 5
-
-    print("/////////////////////////////////////////////////////////////////////////////////////////////")
-
-    local lostboll =  _G.hardmode== 2 and 5 or _G.hardmode== 3 and 10 or 0
-    local value = {}
-    while not (#need_drop_el==lostboll) do
-        local roll_no = RandomInt( 1, #need_drop_el )
-        value[need_drop_el[roll_no]]=1
-        table.remove(need_drop_el, roll_no)
-    end
-    for i=1,#need_drop_el do value[need_drop_el[i]]=0 end
-
-
-    Zodiac.firstbolltable = value
 end
 
 function Zodiac:OnGameRulesStateChange( keys )
@@ -82,6 +67,18 @@ function Zodiac:OnGameRulesStateChange( keys )
     print ("print  OnGameRulesStateChange is running."..newState)
 
     if     newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
+        Zodiac:Launch_Change()
+        
+        print("/////////////////////////////////////////////////////////////////////////////////////////////")
+        local lostboll =  _G.hardmode== 2 and 5 or _G.hardmode== 3 and 0 or 10
+        local value = {}
+        while (#need_drop_el> 10 - lostboll) do
+            local roll_no = RandomInt( 1, #need_drop_el )
+            value[need_drop_el[roll_no]]=1
+            table.remove(need_drop_el, roll_no)
+        end
+        for i=1,#need_drop_el do value[need_drop_el[i]]=0 end
+        Zodiac.firstbolltable = value
         GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 5 )
         for h=0,9 do
             if  PlayerResource:IsValidPlayer(h) then

@@ -310,6 +310,7 @@ function RollDrops(unit)
     table.foreach(DropInfo,function( item_name, ItemTable)
         local introll = ItemTable.roll or 100
         local intmuch = ItemTable.much or 1
+        local intodds = introll*PlayerResource:GetPlayerCount()
         print("RollDrops", unit:GetUnitName(), introll, intmuch, item_name)
         for i=1,intmuch do
             if     item_name == "item_25gold" then
@@ -336,7 +337,7 @@ function RollDrops(unit)
                 table.remove(need_drop_el, roll_no)
 
             elseif ItemTable.sins then
-                if RollPercentage(introll*PlayerResource:GetPlayerCount()) then
+                if RollPercentage(intodds) then
                     local item = CreateItem(item_name, nil, nil)
                             item:SetPurchaseTime(0)
                             item.bIsRelic = true
@@ -346,7 +347,7 @@ function RollDrops(unit)
                     local PlayerIDs = {}
                     table.foreach( GetAllRealHeroes() ,function(_,h)
                         if not h:HasOwnerAbandoned() and PlayerResource:GetConnectionState(h:GetPlayerID()) == 2 then
-                            table.insert( PlayerIDs, Hero:GetPlayerID() )
+                            table.insert( PlayerIDs, h:GetPlayerID() )
                         end
                     end)
 
@@ -378,7 +379,7 @@ function RollDrops(unit)
 
             elseif item_name == "RS" then  ------掉落relic stone 宝石的------
 
-                if RollPercentage(introll*PlayerResource:GetPlayerCount()) then --随机一个100以内的数，如果小于爆率X玩家缺省数
+                if RollPercentage(intodds) then
                     local PlayerIDs = {}
                     local Heroes = GetAllRealHeroes()
                     for _,Hero in pairs ( Heroes ) do
@@ -530,21 +531,27 @@ end
 
 function Zodiac:ItemAddedToInventoryFilter( filterTable )
     if filterTable["item_entindex_const"] == nil
-    or filterTable["inventory_parent_entindex_const"] == nil then
-        return true
+    or filterTable["inventory_parent_entindex_const"] == nil 
+    then return true
     end
 
-    local hItem = EntIndexToHScript( filterTable["item_entindex_const"] )
-    local parent = EntIndexToHScript( filterTable["inventory_parent_entindex_const"] )
+    local hItem  = EntIndexToHScript( filterTable.item_entindex_const )
+    local parent = EntIndexToHScript( filterTable.inventory_parent_entindex_const )
+    local nItem  =  hItem:GetAbilityName()
 
-    if not hItem or not parent or hItem:GetAbilityName() == "item_tombstone" or not parent:IsRealHero() then return true end
+    if not hItem 
+    or not parent 
+    or not parent:IsRealHero()
+    or nItem == "item_tombstone"
+    then return true 
+    end
 
     local rlcs = {
         item_relic_damage = 1,
         item_relic_armor = 1,
         item_relic_magres = 1,
         item_relic_attackspeed = 1,
-        item_relic_allsatas = 1,
+        item_relic_status = 1,
         item_relic_magvam = 1,
         item_relic_magdam = 1,
         item_book = 1,
@@ -557,16 +564,18 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
     }
 
     if  hItem:GetPurchaser() ~= parent then
-            Timer(0.01,function() parent:DropItemAtPositionImmediate( hItem, hItem:GetPurchaser():GetAbsOrigin()+RandomVector(20) ) end)
-    elseif rlcs[hItem:GetAbilityName()] then
+            Timer(0.01,function() parent:DropItemAtPositionImmediate( hItem, hItem:GetPurchaser() and hItem:GetPurchaser():GetAbsOrigin()+RandomVector(20) ) end)
+    elseif rlcs[nItem] then
         for i=0, 9, 1 do
             local current_item = parent:GetItemInSlot(i)
             if current_item and rlcs[current_item:GetAbilityName()] then
-                if hItem:GetAbilityName() == current_item:GetAbilityName() then local reitem = hItem
-                elseif rlcs[hItem:GetAbilityName()] < rlcs[current_item:GetAbilityName()] then local reitem = hItem
-                elseif rlcs[hItem:GetAbilityName()] > rlcs[current_item:GetAbilityName()] then local reitem = current_item
+                local current = current_item:GetAbilityName()
+                if nItem == current
+                or rlcs[nItem] < rlcs[current]
+                then parent:RemoveItem(hItem)
+                elseif rlcs[nItem] > rlcs[current]
+                then parent:RemoveItem(current_item)
                 end
-                if reitem then parent:RemoveItem(reitem) end
             end
         end
     --elseif notforall[itemA] then hItem:SetPurchaser( parent )

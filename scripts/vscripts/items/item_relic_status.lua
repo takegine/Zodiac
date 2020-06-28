@@ -1,10 +1,10 @@
-item_relic_allsatas = class({})
-LinkLuaModifier( "modifier_item_relic_allsatas", "modifiers/modifier_item_relic_allsatas", LUA_MODIFIER_MOTION_NONE )
+item_relic_status = class({})
+LinkLuaModifier( "modifier_item_relic_status", "modifiers/modifier_item_relic_status", LUA_MODIFIER_MOTION_NONE )
 
 
 --------------------------------------------------------------------------------
 
-function item_relic_allsatas:OnSpellStart()
+function item_relic_status:OnSpellStart()
 	if IsServer() then
 		EmitSoundOn( "DOTA_Item.GhostScepter.Activate", self:GetCaster() )
 
@@ -19,12 +19,12 @@ end
 
 --------------------------------------------------------------------------------
 
-function item_relic_allsatas:OnChannelFinish( bInterrupted )
+function item_relic_status:OnChannelFinish( bInterrupted )
 	if IsServer() then
 		self:GetCaster():RemoveModifierByName( "modifier_ghost_state" )
 	end
 end
 
-function item_relic_allsatas:GetIntrinsicModifierName()
-	return "modifier_item_relic_allsatas"
+function item_relic_status:GetIntrinsicModifierName()
+	return "modifier_item_relic_status"
 end

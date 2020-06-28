@@ -245,13 +245,13 @@
 		"CustomShop"	"1"
 	}
 
-	"item_relic_allstats"
+	"item_relic_status"
 	{
 		// General
 		// -------------------------------------------------------------------------------------------------------------
 		"BaseClass"	"item_lua"
-		"AbilityTextureName"	"custom/relic_allsatas"
-		"ScriptFile"	"items/item_relic_allstats"
+		"AbilityTextureName"	"custom/relic_status"
+		"ScriptFile"	"items/item_relic_status"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityCastPoint"	"0.0"
 		"AbilityCooldown"	"10.0"
@@ -394,7 +394,7 @@
 		"ItemResult"	"item_proved"
 		"ItemRequirements"
 		{
-			"01"	"item_book;item_relic_damage;item_relic_armor;item_relic_magres;item_relic_attackspeed;item_relic_magvam;item_relic_magdam;item_relic_allstats"
+			"01"	"item_book;item_relic_damage;item_relic_armor;item_relic_magres;item_relic_attackspeed;item_relic_magvam;item_relic_magdam;item_relic_status"
 		}
 	}
 
@@ -517,7 +517,7 @@
 		"ItemResult"	"item_finalbook"
 		"ItemRequirements"
 		{
-			"01"	"item_redemption_ticket;item_relic_damage;item_relic_armor;item_relic_magres;item_relic_attackspeed;item_relic_magvam;item_relic_magdam;item_relic_allstats"
+			"01"	"item_redemption_ticket;item_relic_damage;item_relic_armor;item_relic_magres;item_relic_attackspeed;item_relic_magvam;item_relic_magdam;item_relic_status"
 		}
 	}
 

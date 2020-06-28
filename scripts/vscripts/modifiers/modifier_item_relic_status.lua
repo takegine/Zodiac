@@ -1,24 +1,24 @@
 
-modifier_item_relic_allsatas = class({})
+modifier_item_relic_status = class({})
 --------------------------------------------------------------------------------
 
-function modifier_item_relic_allsatas:IsHidden() 
+function modifier_item_relic_status:IsHidden() 
 	return false
 end
 
 --------------------------------------------------------------------------------
 
-function modifier_item_relic_allsatas:IsPurgable()
+function modifier_item_relic_status:IsPurgable()
 	return false
 end
 
-function modifier_item_relic_allsatas:GetTexture ()
-    return "custom/relic_allsatas"
+function modifier_item_relic_status:GetTexture ()
+    return "custom/relic_status"
 end
 
 ----------------------------------------
 
-function modifier_item_relic_allsatas:OnCreated( kv )
+function modifier_item_relic_status:OnCreated( kv )
     self.needupwawe = true
     if self:GetAbility() ~= nil then
         self.bonus_damage_for_wawe = self:GetAbility():GetSpecialValueFor( "bonus_all_stats_for_wawe" )
@@ -30,7 +30,7 @@ end
 
 ----------------------------------------
 
-function modifier_item_relic_allsatas:DeclareFunctions()
+function modifier_item_relic_status:DeclareFunctions()
 	local funcs = 
 	{
 		MODIFIER_PROPERTY_STATS_STRENGTH_BONUS,
@@ -43,77 +43,77 @@ end
 
 ----------------------------------------
 
-function modifier_item_relic_allsatas:OnWaweChange( wawe )
+function modifier_item_relic_status:OnWaweChange( wawe )
 	if IsServer() then
         self.wave = wawe
         local damag = 0
-        if self:GetCaster().lvl_item_relic_allsatas ~= nil then
-            if self:GetCaster().lvl_item_relic_allsatas >= 20 then
+        if self:GetCaster().lvl_item_relic_status ~= nil then
+            if self:GetCaster().lvl_item_relic_status >= 20 then
                 damag = math.floor(self.bonus_damage_for_wawe * self.wave * 20)
             else
-                damag = math.floor(self.bonus_damage_for_wawe * self.wave * self:GetCaster().lvl_item_relic_allsatas)
+                damag = math.floor(self.bonus_damage_for_wawe * self.wave * self:GetCaster().lvl_item_relic_status)
             end
             if damag ~= self:GetStackCount() then
                 self:SetStackCount(damag)
             end
         else
-            self:GetCaster().lvl_item_relic_allsatas = 1
+            self:GetCaster().lvl_item_relic_status = 1
         end
     end
 end
 
-function modifier_item_relic_allsatas:GetModifierBonusStats_Strength( params )
+function modifier_item_relic_status:GetModifierBonusStats_Strength( params )
 	if IsServer() then
         local damag = 0
-        if self:GetCaster().lvl_item_relic_allsatas ~= nil then
-            if self:GetCaster().lvl_item_relic_allsatas >= 20 then
+        if self:GetCaster().lvl_item_relic_status ~= nil then
+            if self:GetCaster().lvl_item_relic_status >= 20 then
                 damag = math.floor(self.bonus_damage_for_wawe * self.wave * 20)
             else
-                damag = math.floor(self.bonus_damage_for_wawe * self.wave * self:GetCaster().lvl_item_relic_allsatas)
+                damag = math.floor(self.bonus_damage_for_wawe * self.wave * self:GetCaster().lvl_item_relic_status)
             end
             if damag ~= self:GetStackCount() then
                 self:SetStackCount(damag)
             end
         else
-            self:GetCaster().lvl_item_relic_allsatas = 1
-        end
-    end
-    return self:GetStackCount()
-end
-
-function modifier_item_relic_allsatas:GetModifierBonusStats_Agility( params )
-	if IsServer() then
-        local damag = 0
-        if self:GetCaster().lvl_item_relic_allsatas ~= nil then
-            if self:GetCaster().lvl_item_relic_allsatas >= 20 then
-                damag = math.floor(self.bonus_damage_for_wawe * self.wave * 20)
-            else
-                damag = math.floor(self.bonus_damage_for_wawe * self.wave * self:GetCaster().lvl_item_relic_allsatas)
-            end
-            if damag ~= self:GetStackCount() then
-                self:SetStackCount(damag)
-            end
-        else
-            self:GetCaster().lvl_item_relic_allsatas = 1
+            self:GetCaster().lvl_item_relic_status = 1
         end
     end
     return self:GetStackCount()
 end
 
-function modifier_item_relic_allsatas:GetModifierBonusStats_Intellect( params )
+function modifier_item_relic_status:GetModifierBonusStats_Agility( params )
 	if IsServer() then
         local damag = 0
-        if self:GetCaster().lvl_item_relic_allsatas ~= nil then
-            if self:GetCaster().lvl_item_relic_allsatas >= 20 then
+        if self:GetCaster().lvl_item_relic_status ~= nil then
+            if self:GetCaster().lvl_item_relic_status >= 20 then
                 damag = math.floor(self.bonus_damage_for_wawe * self.wave * 20)
             else
-                damag = math.floor(self.bonus_damage_for_wawe * self.wave * self:GetCaster().lvl_item_relic_allsatas)
+                damag = math.floor(self.bonus_damage_for_wawe * self.wave * self:GetCaster().lvl_item_relic_status)
             end
             if damag ~= self:GetStackCount() then
                 self:SetStackCount(damag)
             end
         else
-            self:GetCaster().lvl_item_relic_allsatas = 1
+            self:GetCaster().lvl_item_relic_status = 1
+        end
+    end
+    return self:GetStackCount()
+end
+
+function modifier_item_relic_status:GetModifierBonusStats_Intellect( params )
+	if IsServer() then
+        local damag = 0
+        if self:GetCaster().lvl_item_relic_status ~= nil then
+            if self:GetCaster().lvl_item_relic_status >= 20 then
+                damag = math.floor(self.bonus_damage_for_wawe * self.wave * 20)
+            else
+                damag = math.floor(self.bonus_damage_for_wawe * self.wave * self:GetCaster().lvl_item_relic_status)
+            end
+            if damag ~= self:GetStackCount() then
+                self:SetStackCount(damag)
+            end
+        else
+            self:GetCaster().lvl_item_relic_status = 1
         end
     end
     return self:GetStackCount()

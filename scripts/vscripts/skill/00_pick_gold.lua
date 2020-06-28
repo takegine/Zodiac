@@ -1,116 +1,89 @@
-function CheckToPickGold(keys)--捡钱
-    local target	= keys.target--建一个本地变量，值为参数中的target
-	if target:IsRealHero() then --如果是玩家操作的英雄，非幻象
-		local drop_items=Entities:FindAllByClassnameWithin("dota_item_drop",target:GetAbsOrigin(),175)--建一个本地实体，值为英雄175的半径内，符合"dota_item_drop"中类名
-		for _, drop_item in pairs(drop_items) do     -- 遍历刚刚建的实体中的drop_item
-	    local containedItem = drop_item:GetContainedItem() --local其中的禁用物品
-	        if containedItem and containedItem:GetName()=="item_25gold" then --如果有禁用物品，且名为"item_25gold"
-                if GameRules:GetGameTime() - drop_item:GetCreationTime() > 0.5 then --且出现时间在开局0.5以后
-                    print("pick up a gold",GameRules:GetGameTime() - drop_item:GetCreationTime())
-                    local plc = PlayerResource:GetPlayerCount()--获得没有缺少的玩家数，这个是5人游戏，如果只有3个人开图，那么这个值就是2
-    	            local value= 280 / (plc + 2) --算出每人分多少钱
-             	    for nPlayerID = 0, plc-1 do --遍历所有玩家
-    				    if PlayerResource:IsValidPlayer( nPlayerID ) and PlayerResource:HasSelectedHero( nPlayerID ) then --如果是有效玩家且选了英雄
-    						local hero = PlayerResource:GetSelectedHeroEntity( nPlayerID ) --标记出获得玩家所选英雄的实体
-                            SendOverheadEventMessage( hero, OVERHEAD_ALERT_GOLD, hero, value, nil ) --在这个英雄实体的头上显示分到手的钱的数目
-                            PlayerResource:ModifyGold(nPlayerID,value,true,DOTA_ModifyGold_Unspecified)--把钱给该玩家
-    				    end
-    			    end
-    			    UTIL_Remove(containedItem) --删除本地变量，优化内存             
-    	            UTIL_Remove( drop_item )
-                end
-	        end
-	    end
-	end
+function CheckToPickGold(keys)
+    local target = keys.target
+	if not target:IsRealHero() then return end
+
+    table.foreach(Entities:FindAllByClassnameWithin("dota_item_drop", target:GetAbsOrigin(), 175),
+        function(_, drop_item)
+            local containedItem = drop_item:GetContainedItem() --其中的禁用物品
+            if containedItem and containedItem:GetName()=="item_25gold"
+            and GameRules:GetGameTime() - drop_item:GetCreationTime() > 0.5 then
+                print("pick up a gold，time:",GameRules:GetGameTime() - drop_item:GetCreationTime())
+                GivenGold()
+                UTIL_Remove( containedItem)
+                UTIL_Remove( drop_item )
+            end
+        end)
 end
 
-function CheckToPickAllGold(keys)--没捡起来的钱自动捡起来
-	local caster	= keys.caster --未知
-    local drop_items= Entities:FindAllByClassnameWithin("dota_item_drop",caster:GetAbsOrigin(),99999)--全地图的中符合"dota_item_drop"中类名实体
-	for _, drop_item in pairs(drop_items) do     
+function CheckToPickAllGold(keys)
+	local caster = keys.caster
+    table.foreach(Entities:FindAllByClassnameWithin("dota_item_drop", caster:GetAbsOrigin(), 9999),
+        function(_, drop_item)
 	    local containedItem = drop_item:GetContainedItem()
-	    if containedItem then
-            if containedItem:GetName()=="item_25gold" then
-                if GameRules:GetGameTime() - drop_item:GetCreationTime() > 10 then
-                    if drop_item:GetOrigin().z > caster:GetAbsOrigin().z then
-                        local plc = PlayerResource:GetPlayerCount()
-                        local value= (280 / (plc + 2))
-                        for nPlayerID = 0, plc-1 do
-                            if PlayerResource:IsValidPlayer( nPlayerID ) and PlayerResource:HasSelectedHero( nPlayerID ) then
-                                local hero = PlayerResource:GetSelectedHeroEntity( nPlayerID )
-                                SendOverheadEventMessage( hero, OVERHEAD_ALERT_GOLD, hero, value, nil )
-                                PlayerResource:ModifyGold(nPlayerID,value,true,DOTA_ModifyGold_Unspecified)
-                                
-                            end
-                        end
-                        UTIL_Remove(containedItem)
-                        UTIL_Remove( drop_item )
-                    end
-                end
-            end
-	    end
-	end
+        if containedItem
+        and containedItem:GetName()=="item_25gold"
+        and GameRules:GetGameTime() - drop_item:GetCreationTime() > 10
+        and drop_item:GetOrigin().z > caster:GetAbsOrigin().z then
+            GivenGold()
+            UTIL_Remove( containedItem)
+            UTIL_Remove( drop_item )
+        end
+
+	end)
 end
 
 function CheckElements(keys)
-	local caster	= keys.caster
-    local drop_items=Entities:FindAllByClassnameWithin("dota_item_drop",caster:GetAbsOrigin(),99999)
-	for _, drop_item in pairs(drop_items) do     
-	    local containedItem = drop_item:GetContainedItem()
-	    if containedItem then
-            if GameRules:GetGameTime() - drop_item:GetCreationTime() > 5 then
-                local est = false
-                local elid = 0
-                local allelements = { --本地变量，一个包含全部元素球的表
-                    "item_life","item_water","item_shadow",
-                    
-                    "item_void",
+	local caster = keys.caster
+    table.foreach(Entities:FindAllByClassnameWithin("dota_item_drop", caster:GetAbsOrigin(), 9999),
+        function(_, drop_item)
+            local containedItem = drop_item:GetContainedItem()
+            if containedItem
+            and GameRules:GetGameTime() - drop_item:GetCreationTime() > 5 then
 
-                    "item_earth",
-                    "item_fire",
-                    
-                    
-                    "item_light","item_air","item_ice",
-                    "item_energy"
-                }
-                for y=1, #allelements do --遍历本地元素球的表
-                    if containedItem:GetName()==allelements[y] then --如果掉在地上的禁用物品的名字与表中相同
-                        est = true
-                        elid = y
-                        break--结束循环，保证est和elid对应的是重名物品
-                    end
-                end
-                if est then--如果存在est
-                    local partlist = {
-                        "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8.vpcf",
-                        "particles/units/heroes/hero_doom_bringer/doom_bringer_devour.vpcf",
-                        "particles/units/heroes/hero_techies/techies_stasis_trap_beams.vpcf",
-                        "particles/econ/courier/courier_snail/courier_snail_ambient_flying.vpcf",
-                        "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8_arc.vpcf",
-                        "particles/econ/items/lion/lion_ti8/lion_spell_finger_ti8_arc_b.vpcf",
-                        "particles/econ/items/wisp/wisp_guardian_ti7.vpcf",
-                        "particles/units/heroes/hero_undying/undying_fg_portrait_mouthgas.vpcf",
-                        "particles/units/heroes/hero_zeus/zeus_return_king_of_gods_head_style1_ambient.vpcf",
-                        "particles/units/heroes/hero_tinker/laser_cutter_sparks_c.vpcf",
-                        
-                        }
-                        
-                        local nFXIndex = ParticleManager:CreateParticle( partlist[elid], PATTACH_ABSORIGIN, drop_item )
-                        ParticleManager:SetParticleControl( nFXIndex, 0, drop_item:GetAbsOrigin() )
-                        ParticleManager:SetParticleControl( nFXIndex, 1, containedItem:GetPurchaser():GetAbsOrigin() )
-    
-                        --未知
-                        ParticleManager:SetParticleControlEnt( nFXIndex, 1, containedItem:GetPurchaser(), PATTACH_POINT_FOLLOW, "attach_hitloc", containedItem:GetPurchaser():GetOrigin(), true )
-                        ParticleManager:ReleaseParticleIndex( nFXIndex )
-                    
-                    local id = containedItem:GetPurchaser():GetPlayerID()--得到获取该元素球的玩家ID
-                    local myTable = CustomNetTables:GetTableValue("Elements_Tabel",tostring(id))--获得玩家的元素面板的表单
-                    myTable[tostring(elid)] = myTable[tostring(elid)] + 1--把该元素球的库存+1
-                    CustomNetTables:SetTableValue("Elements_Tabel",tostring(id),myTable)--设置该玩家的元素面板的表单，既更新数据
-                    UTIL_Remove(containedItem)
+                local partlist = {}
+                partlist.item_water  ={2,"particles/econ/events/ti7/maelstorm_ti7.vpcf"}
+                partlist.item_void   ={4,"particles/econ/events/ti9/maelstorm_ti9.vpcf"}
+                partlist.item_fire   ={6,"particles/econ/events/ti6/maelstorm_ti6.vpcf"}
+                partlist.item_light  ={7,"particles/units/heroes/hero_lion/lion_spell_finger_of_death_orig.vpcf"}
+                partlist.item_air    ={8,"particles/units/heroes/hero_lina/lina_spell_laguna_blade.vpcf"}
+                partlist.item_ice    ={9,"particles/units/heroes/hero_techies/techies_stasis_trap_beams.vpcf"}
+                partlist.item_energy ={10,"particles/econ/events/ti8/maelstorm_ti8.vpcf"}
+
+                partlist.item_life   ={1,"particles/econ/events/battlecup/battle_cup_summer2016_destroy.vpcf"}
+                partlist.item_shadow ={3,"particles/units/heroes/hero_grimstroke/grimstroke_phantom_return.vpcf"}
+                partlist.item_earth  ={5,"particles/units/heroes/hero_grimstroke/grimstroke_phantom_ambient.vpcf"}
+
+                local t = partlist[containedItem:GetName()]
+                if t then
+
+                    local nFXIndex = ParticleManager:CreateParticle( t[2], PATTACH_ABSORIGIN, drop_item )
+                    ParticleManager:SetParticleControl( nFXIndex, 0, drop_item:GetAbsOrigin() )
+                    ParticleManager:SetParticleControl( nFXIndex, 1, containedItem:GetPurchaser():GetAbsOrigin() )
+                    ParticleManager:SetParticleControlEnt( nFXIndex, 1, containedItem:GetPurchaser(), PATTACH_POINT_FOLLOW, "attach_hitloc", containedItem:GetPurchaser():GetOrigin(), true )
+                    ParticleManager:ReleaseParticleIndex( nFXIndex )
+
+                    local id = containedItem:GetPurchaser():GetPlayerID()
+                    local myTable = CustomNetTables:GetTableValue("Elements_Tabel",tostring(id))
+                    myTable[tostring(t[1])] = myTable[tostring(t[1])] + 1
+                    CustomNetTables:SetTableValue("Elements_Tabel",tostring(id),myTable)
+                    UTIL_Remove( containedItem)
                     UTIL_Remove( drop_item )
                 end
             end
-	    end
-	end
+	    end)
+end
+
+
+function GivenGold()
+
+    local plc  = PlayerResource:GetPlayerCount()
+    local gold = 280 / (plc + 2)
+    for id = 0, plc-1 do
+        if  PlayerResource:IsValidPlayer( id )
+        and PlayerResource:HasSelectedHero( id ) then
+            local hero = PlayerResource:GetSelectedHeroEntity( id )
+            SendOverheadEventMessage( hero, OVERHEAD_ALERT_GOLD, hero, gold, nil )
+            PlayerResource:ModifyGold( id, gold, true, DOTA_ModifyGold_Unspecified )
+        end
+    end
 end

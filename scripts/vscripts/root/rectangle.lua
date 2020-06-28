@@ -548,12 +548,12 @@ function Zodiac:ItemAddedToInventoryFilter( filterTable )
 
     local rlcs = {
         item_relic_damage = 1,
-        item_relic_armor = 1,
-        item_relic_magres = 1,
-        item_relic_attackspeed = 1,
+        item_relic_armors = 1,
+        item_relic_aspeed = 1,
         item_relic_status = 1,
-        item_relic_magvam = 1,
         item_relic_magdam = 1,
+        item_relic_magres = 1,
+        item_relic_magvam = 1,
         item_book = 1,
         item_redemption_ticket = 1,
         item_proved = 2,

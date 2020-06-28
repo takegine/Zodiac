@@ -143,13 +143,13 @@
 		"CustomShop"	"1"
 	}
 
-	"item_relic_armor"
+	"item_relic_armors"
 	{
 		// General
 		// -------------------------------------------------------------------------------------------------------------
 		"BaseClass"	"item_lua"
 		"AbilityTextureName"	"custom/relic_armor"
-		"ScriptFile"	"items/item_relic_armor"
+		"ScriptFile"	"items/item_relic_armors"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ItemQuality"	"artifact"
 		"Model"	"models/props_gameplay/rune_illusion01.vmdl"
@@ -211,13 +211,13 @@
 		"CustomShop"	"1"
 	}
 
-	"item_relic_attackspeed"
+	"item_relic_aspeed"
 	{
 		// General
 		// -------------------------------------------------------------------------------------------------------------
 		"BaseClass"	"item_lua"
 		"AbilityTextureName"	"custom/relic_attackspeed"
-		"ScriptFile"	"items/item_relic_attackspeed"
+		"ScriptFile"	"items/item_relic_aspeed"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ItemQuality"	"artifact"
 		"Model"	"models/props_gameplay/rune_haste01.vmdl"
@@ -394,7 +394,7 @@
 		"ItemResult"	"item_proved"
 		"ItemRequirements"
 		{
-			"01"	"item_book;item_relic_damage;item_relic_armor;item_relic_magres;item_relic_attackspeed;item_relic_magvam;item_relic_magdam;item_relic_status"
+			"01"	"item_book;item_relic_damage;item_relic_armors;item_relic_magres;item_relic_aspeed;item_relic_magvam;item_relic_magdam;item_relic_status"
 		}
 	}
 
@@ -517,7 +517,7 @@
 		"ItemResult"	"item_finalbook"
 		"ItemRequirements"
 		{
-			"01"	"item_redemption_ticket;item_relic_damage;item_relic_armor;item_relic_magres;item_relic_attackspeed;item_relic_magvam;item_relic_magdam;item_relic_status"
+			"01"	"item_redemption_ticket;item_relic_damage;item_relic_armors;item_relic_magres;item_relic_aspeed;item_relic_magvam;item_relic_magdam;item_relic_status"
 		}
 	}
 

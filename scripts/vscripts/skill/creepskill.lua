@@ -4,14 +4,14 @@ end
 
 function OnDestroyDebuff( event )--round1
     local target = event.target
-    target:SetModelScale(0.9)
+    target:SetModelScale(0.7+0.05*_G.hardmode)
     target:SetBaseDamageMin(21+_G.hardmode*5)
     target:SetBaseDamageMax(19+_G.hardmode*8)
     
 end
 
 function my_death_puls( event )--round3
-    event.target:SetModelScale(event.target:GetModelScale() + 0.2)
+    event.target:SetModelScale(event.target:GetModelScale() +0.05*_G.hardmode)
 end
 
 function OnCreated(event)--round9

@@ -8378,54 +8378,6 @@
 		}
 	}
 
-	"my_create_dva_new_2_2"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"mud_golem_rock_destroy"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"Modifiers"
-		{
-			"my_create_dva_new"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
-				"OnDestroy"
-				{
-					"SpawnUnit"
-					{
-						"UnitName"	"npc_dota_custom_creep_4_2_2"
-						"UnitCount"	"3"
-						"SpawnRadius"	"100"
-					}
-				}
-			}
-		}
-	}
-
-	"my_create_dva_new_2_1"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"mud_golem_rock_destroy"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"Modifiers"
-		{
-			"my_create_dva_new"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
-				"OnDestroy"
-				{
-					"SpawnUnit"
-					{
-						"UnitName"	"npc_dota_custom_creep_4_2_1"
-						"UnitCount"	"3"
-						"SpawnRadius"	"100"
-					}
-				}
-			}
-		}
-	}
-
 	"my_create_dva_new_1_2"
 	{
 		"BaseClass"	"ability_datadriven"

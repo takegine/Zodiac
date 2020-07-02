@@ -8,7 +8,7 @@ Zodiac = Zodiac or class({})
 function Zodiac:new()
     print("print InitGameMode is loaded.")
 
-    CustomGameEventManager:RegisterListener("Launch_team_change", Dynamic_Wrap(self, 'Launch_Change'))
+    CustomGameEventManager:RegisterListener("Launch_team_change", Dynamic_Wrap(self, 'UniteTeam'))
     CustomGameEventManager:RegisterListener("Buy_Element",    Dynamic_Wrap(self, 'Buy_Element'))
     ListenToGameEvent('dota_non_player_used_ability', Dynamic_Wrap(self, 'OnNonPlayerUsedAbility'), self)
 
@@ -44,7 +44,7 @@ function Zodiac:OnConnectFull(keys)
     --DeepPrintTable(value)
 end
 
-function Zodiac:Launch_Change()
+function Zodiac:UniteTeam()
     local maxteam  = 6
     local maxcount = 0
     for i=6,9 do
@@ -67,7 +67,7 @@ function Zodiac:OnGameRulesStateChange( keys )
     print ("print  OnGameRulesStateChange is running."..newState)
 
     if     newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
-        Zodiac:Launch_Change()
+        Zodiac:UniteTeam()
         
         print("/////////////////////////////////////////////////////////////////////////////////////////////")
         local lostboll =  _G.hardmode== 2 and 5 or _G.hardmode== 3 and 0 or 10
@@ -94,9 +94,13 @@ function Zodiac:OnGameRulesStateChange( keys )
                 PlayerResource:GetPlayer(i):MakeRandomHeroSelection()
             end
         end
-
-    elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-        Timer(1,function() Zodiac:Continue() end)
+        
+        Timer(1,function() 
+            if #GetAllRealHeroes() ~= PlayerResource:GetPlayerCount() then
+                return 1
+            else self:Continue()
+            end
+        end)
     end
 end
 
@@ -114,8 +118,8 @@ function Zodiac:Continue()
 
         h:SetHealth(h:GetMaxHealth())
         h:SetMana(h:GetMaxMana())
-        h.round_dmg_deal = not h.total_dmg_deal and 0 or math.ceil(h.total_dmg_deal - (h.round_dmg_deal or 0))
-        h.round_dmg_take = not h.total_dmg_take and 0 or math.ceil(h.total_dmg_take - (h.round_dmg_take or 0))
+        h.round_dmg_deal = not h.total_dmg_deal and 0 or math.ceil(h.total_dmg_deal - (h.round_dmg_deal or 0) )
+        h.round_dmg_take = not h.total_dmg_take and 0 or math.ceil(h.total_dmg_take - (h.round_dmg_take or 0) )
         h.fist_dam_time = nil
 
         local bottle = h:FindItemInInventory("item_bottle")
@@ -174,7 +178,7 @@ function Zodiac:Continue()
             print("..................round:" , _G.GAME_ROUND , ".....................")
 
             for i=1,3 do
-                local unitname = "npc_dota_custom_creep_".._G.GAME_ROUND.."_"..i
+                local unitname = "npc_dota_custom_creep_"..string.format("%02d",_G.GAME_ROUND).."_"..i
                 if ROUND_UNITS[unitname] then
                     
                     local unitnum  = tonumber(ROUND_UNITS[unitname][tostring(_G.hardmode)]) or 0
@@ -321,7 +325,8 @@ function RollDrops(unit)
                     item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin() + RandomVector(RandomFloat(150,200)) )
                 end
 
-            elseif item_name == "item_elbol" then
+            elseif item_name == "item_elbol" 
+            and math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0 then
                 if #need_drop_el == 0 then
                     for g=1,10 do need_drop_el[g]=g end
                 end

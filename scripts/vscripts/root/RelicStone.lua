@@ -11,7 +11,7 @@ function RelicStone:listenList()
     CustomGameEventManager:RegisterListener("Levels",         Dynamic_Wrap(RelicStone, 'Levels'))
 end
 
-function RelicStone:Buy_Relic(event) 
+function RelicStone:Buy_Relic(event)
     print("function RelicStone:Buy_Relic()is working.")
     local hero = PlayerResource:GetSelectedHeroEntity(event.PlayerID)
     if event.num == 0 then                  --如果他按了全买就是0，否则就是一个个买
@@ -383,7 +383,7 @@ function RelicStone:LoadRelics(info)
                 end
             end
         end)
-        
+
         Timers:CreateTimer(10, function()
             if  loaded == false then            --如果没加载
                 selectheroo.needrefresh = true  --改为需要刷新，并给玩家发送消息
@@ -540,7 +540,7 @@ function RelicStone:PureRS(event)--粉碎石头
                     break
                 end
             end
-            
+
             if inslot == false then
                 for i=1,#hero.rsinv do
                     if hero.rsinv[i] == v then
@@ -650,14 +650,14 @@ function GameMode:_Stats(iswin)
     and GameRules:GetDOTATime(false,false) > 35     	--返回Dota游戏内的时间，不包含 赛前时间PregameTime 和 负时间NegativeTime
     and plc > 0 then 							    	--玩家数大于0
         local req = CreateHTTPRequestScriptVM( "POST", GameMode.gjfll2 .. "/data.php")--创建一个通讯到数据服务器
-        
+
         req:SetHTTPRequestGetOrPostParameter("v", _G.DedicatedServerKey)--专用服务器密钥
 
         if iswin ~= nil then 							--判断是否通关
             req:SetHTTPRequestGetOrPostParameter("test", "-1" .. iswin)
         else
             req:SetHTTPRequestGetOrPostParameter("test", tostring(_G.GAME_ROUND))
-        end 	
+        end
         										--把玩家数和通关时间发给服务器
         req:SetHTTPRequestGetOrPostParameter("players", tostring(plc))
         req:SetHTTPRequestGetOrPostParameter("time", tostring(math.floor(GameRules:GetDOTATime(false,false))))
@@ -680,7 +680,7 @@ function GameMode:_Stats(iswin)
 end
 
 
--- local req = CreateHTTPRequestScriptVM( "POST", gjfll2 .. "/data.php") 
+-- local req = CreateHTTPRequestScriptVM( "POST", "http://127.0.0.1:8888/")
 -- req:SetHTTPRequestGetOrPostParameter( "inid" , tostring(PlayerResource:GetSteamID(event.PlayerID)))
 -- req:SetHTTPRequestGetOrPostParameter( "part" , "defaults")
 -- req:SetHTTPRequestGetOrPostParameter( "reson", tostring(event.part) )
@@ -691,13 +691,13 @@ end
 
 -- -----------------------------------------------------------------------------------------
 
--- local req = CreateHTTPRequestScriptVM( "POST", gjfll2 .. "/data.php") 
+-- local req = CreateHTTPRequestScriptVM( "POST", "http://127.0.0.1:8888/")
 -- req:SetHTTPRequestHeaderValue("Content-Type", "application/json")
 
 -- local encoded = {}
 -- encoded.inid  = tostring(PlayerResource:GetSteamID(playerID))
 -- encoded.part  = 'defaults'
--- encoded.reson = tostring(event.part) 
+-- encoded.reson = tostring(event.part)
 -- encoded.v     = GetDedicatedServerKeyV2("2")
 
 -- req:SetHTTPRequestRawPostBody("application/json", json.encode( encoded ) )
@@ -705,4 +705,18 @@ end
 --     print(result.Body)
 -- end)
 
+-- -----------------------------------------------------------------------------------------
+-- local serverHost = "http://127.0.0.1:8888"
+
+-- local encoded = {}
+-- encoded.steamID  = tostring(PlayerResource:GetSteamID(0))
+
+-- local req = CreateHTTPRequestScriptVM( "GET", serverHost )
+-- req:SetHTTPRequestHeaderValue("Dedicated-Server-Key", GetDedicatedServerKeyV2("1"))
+-- req:SetHTTPRequestGetOrPostParameter("steamID", encoded.steamID)
+-- req:Send(function(result)
+--     local table1=json.decode(result.Body)
+--     print("12345678------------")
+--     DeepPrintTable(table1)
+-- end)
 

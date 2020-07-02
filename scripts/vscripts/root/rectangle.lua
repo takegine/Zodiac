@@ -87,14 +87,14 @@ function Zodiac:OnGameRulesStateChange( keys )
         end
     elseif newState == DOTA_GAMERULES_STATE_STRATEGY_TIME then  --玩家处于选择选完的准备界面
 
-        local unit = CreateUnitByName( "npc_dota_gold_spirit", Vector(0,0,0), true, nil, nil, DOTA_TEAM_GOODGUYS )
+        MARK_THINK = CreateUnitByName( THINK_UNIT, Vector(0,0,0), true, nil, nil, DOTA_TEAM_GOODGUYS )
 
         for i=0, PlayerResource:GetPlayerCount()-1 do
             if not PlayerResource:HasSelectedHero(i) then
                 PlayerResource:GetPlayer(i):MakeRandomHeroSelection()
             end
         end
-        
+
         Timer(1,function() 
             if #GetAllRealHeroes() ~= PlayerResource:GetPlayerCount() then
                 return 1
@@ -317,16 +317,21 @@ function RollDrops(unit)
         local intodds = introll*PlayerResource:GetPlayerCount()
         print("RollDrops", unit:GetUnitName(), introll, intmuch, item_name)
         for i=1,intmuch do
-            if     item_name == "item_25gold" then
-                if RollPercentage(introll) then
-                    local item = CreateItem(item_name, nil, nil)
-                    item:SetPurchaseTime(0)
-                    CreateItemOnPositionSync( unit:GetAbsOrigin() , item )
-                    item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin() + RandomVector(RandomFloat(150,200)) )
-                end
+            if  item_name == "item_25gold" and RollPercentage(introll) then
+                local item = CreateItem(item_name, nil, nil)
+                item:SetPurchaseTime(0)
+                CreateItemOnPositionSync( unit:GetAbsOrigin() , item )
+                item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin() + RandomVector(RandomFloat(150,200)) )
 
-            elseif item_name == "item_elbol" 
-            and math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0 then
+            elseif item_name == "item_elbol" and math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0 then
+                
+                local intcount = tonumber(ROUND_UNITS[unit:GetUnitName()][tostring(_G.hardmode)])
+                local chance = { 100,98,90,84,75,64,58,45,44,40,34,28,26,25,22 }
+                local broll = RollPseudoRandomPercentage( chance[intcount] or chance[15] , intcount , MARK_THINK  )
+                -- and #need_drop_el + self.firstbollcount <= 10
+                print('item_elbol',  #need_drop_el ,  _G.GAME_ROUND, Zodiac.firstbollcount )
+
+                if not broll then return end
                 if #need_drop_el == 0 then
                     for g=1,10 do need_drop_el[g]=g end
                 end
@@ -341,7 +346,7 @@ function RollDrops(unit)
                 end
                 table.remove(need_drop_el, roll_no)
 
-            elseif ItemTable.sins then
+            elseif ItemTable.sins and math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0 then
                 if RollPercentage(intodds) then
                     local item = CreateItem(item_name, nil, nil)
                             item:SetPurchaseTime(0)
@@ -382,7 +387,7 @@ function RollDrops(unit)
                     ]]
                 end
 
-            elseif item_name == "RS" then  ------掉落relic stone 宝石的------
+            elseif item_name == "RS" and math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0 then
 
                 if RollPercentage(intodds) then
                     local PlayerIDs = {}

@@ -35,6 +35,7 @@ KILLS_TO_END_GAME_FOR_TEAM = 50         -- How many kills for a team should sign
 MAX_LEVEL = 200                         -- 设置英雄满级 What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
+THINK_UNIT = "npc_dota_gold_spirit"
 PlaysTopList    = {}
 WinsTopList     = {}
 HardWinsTopList = {}

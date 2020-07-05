@@ -3,7 +3,7 @@ my_cent = class({})
 function my_cent:OnAbilityPhaseStart()
 	if IsServer() then
         self.radius = self:GetSpecialValueFor( "radius" )
-		self.damage = self:GetSpecialValueFor( "damage" ) * _G.hardmode
+		self.damage = self:GetSpecialValueFor( "damage" )
 	end
 
 	return true
@@ -36,18 +36,17 @@ function my_cent:OnSpellStart()
 
 		local enemies = FindUnitsInRadius( self:GetCaster():GetTeamNumber(), self:GetCaster():GetOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false )
 		for _,enemy in pairs( enemies ) do
-			if enemy ~= nil and enemy:IsInvulnerable() == false then
+			if enemy and not enemy:IsInvulnerable() then
 				local damageInfo = 
 				{
-					victim = enemy,
+					victim   = enemy,
 					attacker = self:GetCaster(),
-					damage = self.damage,
+					ability  = self,
+					damage   = self.damage,
 					damage_type = DAMAGE_TYPE_MAGICAL,
-					ability = self,
 				}
 				ApplyDamage( damageInfo )
 			end
 		end
-	
 	end
 end

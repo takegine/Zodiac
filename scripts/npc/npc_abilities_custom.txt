@@ -8166,7 +8166,7 @@
 		"ScriptFile"	"skill/06_my_cent"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
-		"MaxLevel"	"1"
+		"MaxLevel"	"4"
 		"AbilityCastPoint"	"1.5"
 		"AbilityCastAnimation"	"ACT_DOTA_CAST_ABILITY_1"
 		"AbilityCooldown"	"8"
@@ -8176,12 +8176,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"375"
+				"radius"	"375 450 525 600"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"damage"	"600"
+				"damage"	"600 1200 1800 2400"
 			}
 		}
 	}

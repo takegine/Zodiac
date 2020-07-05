@@ -1,225 +1,183 @@
---[[
-	Author: Ractidous
-	Date: 09.02.2015.
-	Cast spirits.
-]]
-spirit_speed = 0
-col_spirits = 0
-start_razgon = false
-max_sp = 3 + 5 * _G.hardmode
 
+-- Author: 西索酱
+-- Date: 03.07.2020.
+-- 开始这个技能
+
+spirit_speed = 0
+col_spirits  = 0
+max_sp = 3 + 4 * _G.hardmode
+
+spirit_list  = {}
 
 function CastSpirits( event )
-	
-	local caster	= event.caster
-	local ability	= event.ability
+    print("CastSpirits")
+    local caster  = event.caster
+    local ability = event.ability
 
-	ability.spirits_startTime		= GameRules:GetGameTime()
-	ability.spirits_numSpirits		= 0		-- Use this rather than "#spirits_spiritsSpawned"
-	ability.spirits_spiritsSpawned	= {}
-	caster.spirits_radius			= event.default_radius
-	caster.spirits_movementFactor	= 0		-- Changed by the toggle abilities
+    ability.start = GameRules:GetGameTime()
+    caster.radius = event.default_radius
 
 end
 
---[[
-	Author: Ractidous
-	Date: 09.02.2015.
-	Update spirits.
-]]
+
+-- Author: 西索酱
+-- Date: 03.07.2020.
+-- 更新精灵护卫
+
 wtfparams = true
 function ThinkSpirits( event )
-	
-	local caster	= event.caster
-	local ability	= event.ability
+    local caster	= event.caster
+    local ability	= event.ability
+    local spirit_mod= event.spirit_modifier
+    local casterOrigin	= caster:GetAbsOrigin()
 
-	local casterOrigin	= caster:GetAbsOrigin()
-
-	local elapsedTime	= GameRules:GetGameTime() - ability.spirits_startTime
-
-	--------------------------------------------------------------------------------
-	-- Validate the number of spirits summoned
-	--
-	local idealNumSpiritsSpawned = elapsedTime / event.spirit_summon_interval
-	idealNumSpiritsSpawned = math.min( idealNumSpiritsSpawned, max_sp )
+    --------------------------------------------------------------------------------
+    -- Validate the number of spirits summoned
     
     --小精灵不足数就创建小精灵
-	if col_spirits < max_sp then
-		-- Spawn a new spirit
-		local newSpirit = CreateUnitByName( "npc_dota_wisp_spirit", casterOrigin, false, caster, caster, caster:GetTeam() )
+    if #spirit_list < max_sp then
+        -- 创建新的小精灵
+        local newSpirit = CreateUnitByName( "npc_dota_custom_creep_05_3", casterOrigin, false, caster, caster, caster:GetTeam() )
 
-		-- 创建粒子 FX
-		local pfx = ParticleManager:CreateParticle( event.spirit_particle_name, PATTACH_ABSORIGIN_FOLLOW, newSpirit )
-		newSpirit.spirit_pfx = pfx
+        -- 创建粒子
+        newSpirit.pfx = ParticleManager:CreateParticle( event.spirit_particle_name, PATTACH_ABSORIGIN_FOLLOW, newSpirit )
 
-		-- Update the state
-		local spiritIndex = ability.spirits_numSpirits + 1
-		newSpirit.spirit_index = spiritIndex
-		ability.spirits_numSpirits = spiritIndex
-		ability.spirits_spiritsSpawned[spiritIndex] = newSpirit
-
-		-- Apply the spirit modifier
-		ability:ApplyDataDrivenModifier( caster, newSpirit, event.spirit_modifier, {} )
+        table.insert(spirit_list, newSpirit)
+        ability:ApplyDataDrivenModifier( caster, newSpirit, spirit_mod, {} )
         
         col_spirits = col_spirits + 1
-	end
-	--------------------------------------------------------------------------------
-	-- Update the radius
-	--
-	local currentRadius	= caster.spirits_radius
-	local deltaRadius = caster.spirits_movementFactor * event.spirit_movement_rate * event.think_interval
-	currentRadius = currentRadius + deltaRadius
-	currentRadius = math.min( math.max( currentRadius, event.min_range ), event.max_range )
+    end
+    --------------------------------------------------------------------------------
+    -- 更新精灵圈的半径
+    --
+    local currentRadius	= caster.radius + ( wtfparams and - 3 or 3) 
+
+    -- Clamp(currentRadius , event.min_range , event.max_range)
+    if wtfparams and currentRadius < event.min_range then
+        wtfparams = false
+	elseif currentRadius > event.max_range then
+		wtfparams = true
+    end
+
+    caster.radius = currentRadius
+    --------------------------------------------------------------------------------
+    -- 更新精灵护卫 的坐标
+    --
     
-    if wtfparams == true then
-    currentRadius = currentRadius - 3
-    if currentRadius < 100 then
-    wtfparams = false
+    if col_spirits == max_sp then
+        spirit_speed = spirit_speed < 50 and spirit_speed + 0.3 or 200
     end
-    else
-    currentRadius = currentRadius + 3
-    if currentRadius > 600 then
-    wtfparams = true
+
+    local currentRotationAngle = (GameRules:GetGameTime() - ability.start) * spirit_speed
+
+    for k,v in pairs( spirit_list ) do
+
+        -- Rotate
+        local rotationAngle = currentRotationAngle - (360 / max_sp) * ( k - 1 )
+        local relPos = RotatePosition( Vector(0,0,0), QAngle( 0, -rotationAngle, 0 ), Vector( 0,  currentRadius, 0 ) )
+
+        v:SetAbsOrigin( GetGroundPosition( relPos + casterOrigin, v ) )
+
+        -- Update particle
+        ParticleManager:SetParticleControl( v.pfx, 1, Vector( currentRadius, 0, 0 ) )
+
     end
+
+    if col_spirits == max_sp and numSpiritsAlive == 0 then
+        -- All spirits have been exploded.
+        caster:RemoveModifierByName( event.caster_modifier )
     end
-	caster.spirits_radius = currentRadius
-
-	--------------------------------------------------------------------------------
-	-- Update the spirits' positions
-	--
-    local currentRotationAngle	= 0
-    if col_spirits == max_sp and start_razgon == false then
-        spirit_speed = spirit_speed + 0.3
-        if spirit_speed >= 50 then
-            spirit_speed = 200
-            start_razgon = true
-        end
-    end
-    currentRotationAngle = elapsedTime * spirit_speed
-	local rotationAngleOffset	= 360 / max_sp
-
-	local numSpiritsAlive = 0
-
-	for k,v in pairs( ability.spirits_spiritsSpawned ) do
-
-		
-
-		numSpiritsAlive = numSpiritsAlive + 1
-
-		-- Rotate
-		local rotationAngle = currentRotationAngle - rotationAngleOffset * ( k - 1 )
-		local relPos = Vector( 0, currentRadius, 0 )
-		relPos = RotatePosition( Vector(0,0,0), QAngle( 0, -rotationAngle, 0 ), relPos )
-
-		local absPos = GetGroundPosition( relPos + casterOrigin, v )
-
-		v:SetAbsOrigin( absPos )
-
-		-- Update particle
-		ParticleManager:SetParticleControl( v.spirit_pfx, 1, Vector( currentRadius, 0, 0 ) )
-
-	end
-
-	if ability.spirits_numSpirits == max_sp and numSpiritsAlive == 0 then
-		-- All spirits have been exploded.
-		caster:RemoveModifierByName( event.caster_modifier )
-		return
-	end
 
 end
 
---[[
-	Author: Ractidous
-	Date: 09.02.2015.
-	Destroy all spirits and swap the abilities back to the original states.
-]]
+
+-- Author: 西索酱
+-- Date: 03.07.2020.
+-- 清空精灵护卫
+
 function EndSpirits( event )
-	col_spirits = 0
-	local caster	= event.caster
-	local ability	= event.ability
+    print("EndSpirits")
+    local caster	= event.caster
+    local ability	= event.ability
 
-	-- Destroy all spirits
-	if ability.spirits_spiritsSpawned and #ability.spirits_spiritsSpawned ~= 0 then
-	for k,v in pairs( ability.spirits_spiritsSpawned ) do
-		print("EndSpirits",k,v)
-		v:RemoveModifierByName(  event.spirit_modifier )
-	end
-	end
+        for k,v in pairs( spirit_list ) do
+            print("EndSpirits",k,v)
+            v:RemoveModifierByName(  event.spirit_modifier )
+        end
+
+    StopSoundEvent( event.sound_name, event.caster )
 end
 
-function StopSound( event )
-	StopSoundEvent( event.sound_name, event.caster )
-end
 
---[[
-	Author: Ractidous
-	Date: 09.02.2015.
-	Apply a modifier which detects collision with a hero.
-]]
+-- Author: 西索酱
+-- Date: 03.07.2020.
+-- 检测与英雄碰撞的修改器。
+
 function OnCreatedSpirit( event )
-	
-	local spirit = event.target
-	local ability = event.ability
+    
+    print("OnCreatedSpirit")
+    local spirit = event.target
+    local ability = event.ability
 
-	-- Set the spirit to caster
+    -- Set the spirit to caster
     Timers:CreateTimer(0.01, function()
-	ability:ApplyDataDrivenModifier( spirit, spirit, event.additionalModifier, {} )
+        ability:ApplyDataDrivenModifier( spirit, spirit, event.additionalModifier, {} )
     end)
     
 end
 
---[[
-	Author: Ractidous
-	Date: 09.02.2015.
-	Destroy a spirit.
-]]
+
+-- Author: 西索酱
+-- Date: 03.07.2020.
+-- 摧毁这个精力护卫
+
 function OnDestroySpirit( event )
     
-    Timers:CreateTimer(1, function()
-    col_spirits = col_spirits - 1
-    end)
+    print("OnDestroySpirit")
     
     local spirit	= event.target
-	local ability	= event.ability
+    local ability	= event.ability
     
-	ParticleManager:DestroyParticle( spirit.spirit_pfx, false )
+    ParticleManager:DestroyParticle( spirit.pfx, false )
 
-	-- Create vision
-	ability:CreateVisibilityNode( spirit:GetAbsOrigin(), event.vision_radius, event.vision_duration )
+    -- Create vision
+    ability:CreateVisibilityNode( spirit:GetAbsOrigin(), event.vision_radius, event.vision_duration )
 
-	-- Kill
-    spirit:SetTeam(2)
-	spirit:ForceKill( true )
+    -- Kill
+    -- spirit:SetTeam(2)
+    spirit:ForceKill( true )
 
 end
 
---[[
-	Author: Ractidous
-	Date: 09.02.2015.
-	Explode the spirit due to collision with an enemy hero.
-]]
+
+-- Author: 西索酱
+-- Date: 03.07.2020.
+-- 撞到敌方英雄就爆炸
+
 function ExplodeSpirit( event )
-	local spirit	= event.caster		-- We have set the spirit to the caster
-	local ability	= event.ability
+    print("ExplodeSpirit")
+    local spirit	= event.caster
 
-	if not spirit.spirit_isExploded then
+    if not spirit.spirit_isExploded then
 
-		spirit.spirit_isExploded = true
-		-- Remove from the list of spirits
-		
-		-- Remove the spirit modifier
-		spirit:RemoveModifierByName( event.spirit_modifier )
-		ability.spirits_spiritsSpawned[spirit.spirit_index] = nil
+        spirit.spirit_isExploded = true
+        -- Remove from the list of spirits
+        
+        for k,v in pairs( spirit_list ) do
+            if v==spirit then
+                table.remove(spirit_list,k)
+                v:RemoveModifierByName(  event.spirit_modifier )
+                break
+            end
+        end
 
-		-- Fire the hit sound
-		StartSoundEvent( event.explosion_sound, spirit )
-		spirit:RemoveSelf()
-
-	end
+        -- Fire the hit sound
+        StartSoundEvent( event.explosion_sound, spirit )
+        --spirit:RemoveSelf()--
+    end
 end
 
---[[
-	Author: Ractidous
-	Date: 29.01.2015.
-	Stop a sound.
-]]
+
+    -- Author: 西索酱
+    -- Date: 29.01.2015.
+    -- Stop a sound.

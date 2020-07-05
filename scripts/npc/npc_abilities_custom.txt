@@ -7995,7 +7995,7 @@
 		{
 			"SpawnUnit"
 			{
-				"UnitName"	"npc_dota_custom_creep_9_3"
+				"UnitName"	"npc_dota_custom_creep_09_3"
 				"UnitCount"	"10"
 				"SpawnRadius"	"400"
 				"Duration"	"70"
@@ -8322,7 +8322,7 @@
 		}
 	}
 
-	"my_boss_create_minions"
+	"05_ghost"
 	{
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"death_prophet_exorcism"
@@ -8333,7 +8333,7 @@
 		{
 			"SpawnUnit"
 			{
-				"UnitName"	"npc_dota_custom_creep_5_2"
+				"UnitName"	"npc_dota_custom_creep_05_2"
 				"UnitCount"	"5"
 				"SpawnRadius"	"400"
 				"Duration"	"13"
@@ -8341,37 +8341,16 @@
 		}
 		"Modifiers"
 		{
-			"my_create_dva_new"
+			"modifier_05_ghost"
 			{
 				"IsHidden"	"1"
-				"Passive"	"1"
-				"OnCreated"
-				{
-					"ApplyModifier"
-					{
-						"Target"	"CASTER"
-						"ModifierName"	"my_create_dva_new_sfdf"
-					}
-				}
-			}
-			"my_create_dva_new_sfdf"
-			{
-				"IsHidden"	"1"
-				"Duration"	"15"
-				"OnCreated"
+				"ThinkInterval"	"15"
+				"OnIntervalThink"
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"skill/05_my_boss_create_minions.lua"
+						"ScriptFile"	"skill/05_ghost.lua"
 						"Function"	"OnCreated"
-					}
-				}
-				"OnDestroy"
-				{
-					"ApplyModifier"
-					{
-						"Target"	"CASTER"
-						"ModifierName"	"my_create_dva_new_sfdf"
 					}
 				}
 			}
@@ -8393,7 +8372,7 @@
 				{
 					"SpawnUnit"
 					{
-						"UnitName"	"npc_dota_custom_creep_4_1_2"
+						"UnitName"	"npc_dota_custom_creep_04_1_2"
 						"UnitCount"	"3"
 						"SpawnRadius"	"100"
 						"GrantsXP"	"20"
@@ -8418,7 +8397,7 @@
 				{
 					"SpawnUnit"
 					{
-						"UnitName"	"npc_dota_custom_creep_4_1_1"
+						"UnitName"	"npc_dota_custom_creep_04_1_1"
 						"UnitCount"	"3"
 						"SpawnRadius"	"100"
 						"GrantsXP"	"20"
@@ -8428,7 +8407,7 @@
 		}
 	}
 
-	"wisp_spirits_datadriven"
+	"05_spirits"
 	{
 		// General
 		// -------------------------------------------------------------------------------------------------------------
@@ -8454,11 +8433,13 @@
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_wisp.vsndevts"
 			"particle"	"particles/units/heroes/hero_wisp/wisp_guardian_explosion_small.vpcf"
 		}
+		
 		"Modifiers"
 		{
-			"modifier_spifsdrits_caster_datadriven"
+			"modifier_spirits_caster_datadriven"
 			{
 				"Passive"	"1"
+				"Duration"	"%spirit_duration"
 				"IsHidden"	"1"
 				"OnCreated"
 				{
@@ -8467,33 +8448,11 @@
 						"EffectName"	"Hero_Wisp.Spirits.Cast"
 						"Target"	"CASTER"
 					}
-					"RemoveModifier"
-					{
-						"ModifierName"	"modifier_spirits_caster_datadriven"
-						"Target"	"CASTER"
-					}
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_spirits_caster_datadriven"
-						"Target"	"CASTER"
-					}
-				}
-			}
-			"modifier_spirits_caster_datadriven"
-			{
-				"Duration"	"%spirit_duration"
-				"IsHidden"	"1"
-				"OnCreated"
-				{
 					"RunScript"
 					{
 						"ScriptFile"	"skill/05_spirits.lua"
-						"Function"	"CastSpirits"
+						"Function" 		"CastSpirits"
 						"default_radius"	"%default_radius"
-						"empty1_ability"	"wisp_empty1_datadriven"
-						"empty2_ability"	"wisp_empty2_datadriven"
-						"spirits_in_ability"	"wisp_spirits_in_datadriven"
-						"spirits_out_ability"	"wisp_spirits_out_datadriven"
 					}
 					"FireSound"
 					{
@@ -8501,25 +8460,24 @@
 						"Target"	"CASTER"
 					}
 				}
+
 				"ThinkInterval"	"%think_interval"
 				"OnIntervalThink"
 				{
 					"RunScript"
 					{
 						"ScriptFile"	"skill/05_spirits.lua"
-						"Function"	"ThinkSpirits"
-						"think_interval"	"%think_interval"
-						"num_spirits"	"%num_spirits"
-						"spirit_summon_interval"	"%spirit_summon_interval"
-						"spirit_turn_rate"	"%spirit_turn_rate"
-						"min_range"	"%min_range"
-						"max_range"	"%max_range"
-						"spirit_movement_rate"	"%spirit_movement_rate"
-						"caster_modifier"	"modifier_spirits_caster_datadriven"
+						"Function"		"ThinkSpirits"
+						"num_spirits" 			"%num_spirits"
+						"spirit_turn_rate"		"%spirit_turn_rate"
+						"min_range"				"%min_range"
+						"max_range"				"%max_range"
+						"caster_modifier"		"modifier_spirits_caster_datadriven"
 						"spirit_particle_name"	"particles/units/heroes/hero_wisp/wisp_guardian_.vpcf"
-						"spirit_modifier"	"modifier_spirits_spirit_datadriven"
+						"spirit_modifier"		"modifier_spirits_spirit_datadriven"
 					}
 				}
+
 				"OnDestroy"
 				{
 					"RunScript"
@@ -8527,15 +8485,6 @@
 						"ScriptFile"	"skill/05_spirits.lua"
 						"Function"	"EndSpirits"
 						"spirit_modifier"	"modifier_spirits_spirit_datadriven"
-						"empty1_ability"	"wisp_empty1_datadriven"
-						"empty2_ability"	"wisp_empty2_datadriven"
-						"spirits_in_ability"	"wisp_spirits_in_datadriven"
-						"spirits_out_ability"	"wisp_spirits_out_datadriven"
-					}
-					"RunScript"
-					{
-						"ScriptFile"	"skill/05_spirits.lua"
-						"Function"	"StopSound"
 						"sound_name"	"Hero_Wisp.Spirits.Loop"
 					}
 				}
@@ -8602,6 +8551,12 @@
 					"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT"	"6.5"
+				}
+				
 			}
 			"modifier_spirits_spirit_collision_with_hero_datadriven"
 			{
@@ -8700,7 +8655,7 @@
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"max_range"	"875"
+				"max_range"	"750"
 			}
 			"06"
 			{
@@ -8722,11 +8677,6 @@
 				"var_type"	"FIELD_INTEGER"
 				"default_radius"	"400"
 			}
-			"10"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"spirit_movement_rate"	"250"
-			}
 			"11"
 			{
 				"var_type"	"FIELD_FLOAT"
@@ -8736,12 +8686,7 @@
 			"12"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"num_spirits"	"8"
-			}
-			"13"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"spirit_summon_interval"	"0.5"
+				"num_spirits"	"7 11 15 19"
 			}
 			"14"
 			{
@@ -8762,7 +8707,7 @@
 			"17"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"creep_damage_interval"	"0"
+				"creep_damage_interval"	"0.01"
 			}
 		}
 	}

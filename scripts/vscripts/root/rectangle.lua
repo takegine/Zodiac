@@ -253,7 +253,7 @@ function Zodiac:OnNPCSpawned(keys)
             table.foreach(ADDED_ITEM[unitname],function(item,hard)  if _G.hardmode > hard then npc:AddItemByName(item) end end)
         end
         if ADDED_ABLE[unitname] then
-            table.foreach(ADDED_ABLE[unitname],function(_,able)  npc:AddAbility(able):SetLevel(1) end)
+            table.foreach(ADDED_ABLE[unitname],function(_,able)  npc:AddAbility(able):SetLevel(1) end) --SetLevel(_G.hardmode)
         end
     end
 end

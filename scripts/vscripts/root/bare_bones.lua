@@ -153,12 +153,12 @@ function GameMode:GetFullRelic(strid)
             local id = tonumber(strid)
             local hero = PlayerResource:GetSelectedHeroEntity(id)
             hero.lvl_item_relic_damage = 20
-            hero.lvl_item_relic_armor = 20
-            hero.lvl_item_relic_magres = 20
-            hero.lvl_item_relic_attackspeed = 20
-            hero.lvl_item_relic_allsatas = 20
-            hero.lvl_item_relic_magvam = 20
+            hero.lvl_item_relic_armors = 20
+            hero.lvl_item_relic_aspeed = 20
+            hero.lvl_item_relic_status = 20
             hero.lvl_item_relic_magdam = 20
+            hero.lvl_item_relic_magres = 20
+            hero.lvl_item_relic_magvam = 20
             hero.lvl_item_book = 1
             hero.rsinv = ""
             hero.rsp = 0

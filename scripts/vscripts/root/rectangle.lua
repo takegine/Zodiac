@@ -316,7 +316,7 @@ function RollDrops(unit)
         local intmuch = ItemTable.much or 1
         local intodds = introll*PlayerResource:GetPlayerCount()
         print("RollDrops", unit:GetUnitName(), introll, intmuch, item_name)
-        for i=1,intmuch do
+        for i=1, intmuch do
             if  item_name == "item_25gold" and RollPercentage(introll) then
                 local item = CreateItem(item_name, nil, nil)
                 item:SetPurchaseTime(0)
@@ -352,27 +352,23 @@ function RollDrops(unit)
                             item:SetPurchaseTime(0)
                             item.bIsRelic = true
                     CreateItemOnPositionSync( unit:GetAbsOrigin(), item )
-                    item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin()+RandomVector(RandomFloat(110,140)))
+                    item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin() + RandomVector( RandomFloat(110,140) ) )
 
-                    local PlayerIDs = {}
-                    table.foreach( GetAllRealHeroes() ,function(_,h)
-                        if not h:HasOwnerAbandoned() and PlayerResource:GetConnectionState(h:GetPlayerID()) == 2 then
-                            table.insert( PlayerIDs, h:GetPlayerID() )
+                    local Heroes = GetAllRealHeroes()
+                    for n = #Heroes, 1 ,-1 do
+                        if Heroes[n]:HasOwnerAbandoned() 
+                        or PlayerResource:GetConnectionState( Heroes[n]:GetPlayerID() ) == 2 
+                        then table.remove( Heroes, n )
                         end
-                    end)
+                    end
 
                     --抽一个玩家作为得到掉落的人
-                    local WinningPlayerID = nil
-                    WinningPlayerID = PlayerIDs[ RandomInt( 1, #PlayerIDs ) ]
 
-                    if not WinningPlayerID then return end
+                    local WinningHero = Heroes[ RandomInt( 1, #Heroes ) ]
+                    local WinningPlayerID = WinningHero:GetPlayerID()
 
-                    local WinningHero = PlayerResource:GetSelectedHeroEntity( WinningPlayerID )
                     item:SetPurchaser( WinningHero )
-                    if not WinningHero["lvl_"..item_name] then
-                            WinningHero["lvl_"..item_name] = 1
-                    else   WinningHero["lvl_"..item_name] = WinningHero["lvl_"..item_name] + 1
-                    end
+                    WinningHero["lvl_"..item_name] = 1 + ( WinningHero["lvl_"..item_name] or 0 )
 
                     EmitSoundOn( "HotPotato.Ow", WinningHero )
                     --[[
@@ -390,27 +386,19 @@ function RollDrops(unit)
             elseif item_name == "RS" and math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0 then
 
                 if RollPercentage(intodds) then
-                    local PlayerIDs = {}
+                    
                     local Heroes = GetAllRealHeroes()
-                    for _,Hero in pairs ( Heroes ) do
-                        if Hero ~= nil and Hero:IsRealHero() and Hero:HasOwnerAbandoned() == false and PlayerResource:GetConnectionState(Hero:GetPlayerID()) == 2 then
-                            table.insert( PlayerIDs, Hero:GetPlayerID() )
+                    for n = #Heroes, 1 ,-1 do
+                        if Heroes[n]:HasOwnerAbandoned() 
+                        or PlayerResource:GetConnectionState( Heroes[n]:GetPlayerID() ) == 2 
+                        then table.remove( Heroes, n )
                         end
                     end
 
-                    local WinningPlayerID = -1
-                    if #PlayerIDs == 1 then
-                        WinningPlayerID = PlayerIDs[1]
-                    else
-                        WinningPlayerID = PlayerIDs[ RandomInt( 1, #PlayerIDs ) ]
-                    end
-                    if WinningPlayerID == -1 or WinningPlayerID == nil then
-                        print( "Zodiac:OnRelicSpawned - ERROR - WinningPlayerID is invalid." )
-                        return
-                    end
-
-                    local WinningHero = PlayerResource:GetSelectedHeroEntity( WinningPlayerID )
-                    local WinningSteamID = PlayerResource:GetSteamID( WinningPlayerID )
+                    local WinningHero = Heroes[ RandomInt( 1, #Heroes ) ]
+                    local WinningPlayerID = WinningHero:GetPlayerID()
+                    local WinningSteamID  = PlayerResource:GetSteamID( WinningPlayerID )
+                    
                     local ininvid = ""
                     if WinningHero.rsinv ~= nil then
                         if #WinningHero.rsinv > 99 then

@@ -70,7 +70,7 @@ function modifier_item_relic_armors:OnTakeDamage( params )
 end
 
 ----------------------------------------
-LinkLuaModifier( "modifier_my_relic_armor", "modifiers/modifier_item_relic_armors", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier( "modifier_my_relic_armor", "items/item_relic_armors", LUA_MODIFIER_MOTION_NONE )
 modifier_my_relic_armor = class({})
 function modifier_my_relic_armor:IsHidden() return false end
 function modifier_my_relic_armor:IsDebuff() return false end

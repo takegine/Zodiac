@@ -41,8 +41,7 @@
 		"ItemInitialCharges"	"1"
 		"ItemShopTags"			"consumable"
 		"ItemQuality"			"consumable"
-		"ItemShareability"		"ITEM_FULLY_SHAREABLE"
-		
+		"ItemShareability"		"ITEM_FULLY_SHAREABLE"	
 	}
 
 	"item_25gold"
@@ -71,36 +70,6 @@
 		"ItemStackable"	"1"
 		"ItemShopTags"	"consumable"
 		"AbilityName"	"item_25gold"
-	}
-
-	// =================================================================================================================
-	// Bag of Gold
-	// =================================================================================================================
-	"item_bag_of_gold"
-	{
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
-		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO"
-		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityCastPoint"	"0.0"
-		// Stats
-		// -------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"	"100"
-		"ItemQuality"	"consumable"
-		"Model"	"models/props_gameplay/gold_bag.vmdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"99999"
-		"ItemShareability"	"ITEM_FULLY_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemKillable"	"0"
-		"ItemPermanent"	"0"
-		"ItemInitialCharges"	"1"
-		"ItemStackable"	"1"
-		"ItemShopTags"	"consumable"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"AbilityName"	"item_bag_of_gold"
 	}
 
 	"item_infused_raindrop"

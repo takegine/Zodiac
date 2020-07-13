@@ -7,6 +7,7 @@
         <include src="s2r://panorama/scripts/custom_game/boss_hp.js"/>
         <include src="s2r://panorama/scripts/custom_game/util.js" />
     </scripts>
+
     <snippets>
         <snippet hittest="false" name="QuestLine">
             <Panel hittest="false">
@@ -22,8 +23,6 @@
 
     </snippets>
     <Panel hittest="false">
-        <Panel hittest="false" id="QuestMain">
-            <Panel hittest="false" id="QuestPanel"> </Panel>
-        </Panel>
+        <Panel hittest="false" id="QuestPanel" />
     </Panel>
 </root>

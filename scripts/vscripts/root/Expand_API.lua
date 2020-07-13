@@ -138,12 +138,12 @@ end
 function GetAllRealHeroes()
     local heroes = HeroList:GetAllHeroes()
     
-    table.foreach(heroes,function(_,h)
-        if not h:IsRealHero() then
-            table.remove(heroes,h)
+    for i=#heroes,1,-1 do
+        if not heroes[i]:IsRealHero() then
+            table.remove(heroes,i)
         end
         
-    end)
+    end
     
     return heroes
 end

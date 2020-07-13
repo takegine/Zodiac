@@ -315,6 +315,7 @@ function RollDrops(unit)
         local introll = ItemTable.roll or 100
         local intmuch = ItemTable.much or 1
         local intodds = introll*PlayerResource:GetPlayerCount()
+        local booboll = math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0
         print("RollDrops", unit:GetUnitName(), introll, intmuch, item_name)
         for i=1, intmuch do
             if  item_name == "item_25gold" and RollPercentage(introll) then
@@ -323,11 +324,11 @@ function RollDrops(unit)
                 CreateItemOnPositionSync( unit:GetAbsOrigin() , item )
                 item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin() + RandomVector(RandomFloat(150,200)) )
 
-            elseif item_name == "item_elbol" and math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0 then
+            elseif item_name == "item_elbol" and booboll then
                 
                 local intcount = tonumber(ROUND_UNITS[unit:GetUnitName()][tostring(_G.hardmode)])
-                local chance = { 100,98,90,84,75,64,58,45,44,40,34,28,26,25,22 }
-                local broll = RollPseudoRandomPercentage( chance[intcount] or chance[15] , intcount , MARK_THINK  )
+                local chance   = { 100,98,90,84,75,64,58,45,44,40,34,28,26,25,22 }
+                local broll    = RollPseudoRandomPercentage( chance[intcount] or chance[15] , intcount , MARK_THINK  )
                 -- and #need_drop_el + self.firstbollcount <= 10
                 print('item_elbol',  #need_drop_el ,  _G.GAME_ROUND, Zodiac.firstbollcount )
 
@@ -346,28 +347,29 @@ function RollDrops(unit)
                 end
                 table.remove(need_drop_el, roll_no)
 
-            elseif ItemTable.sins and math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0 then
+            elseif ItemTable.sins and booboll then
                 if RollPercentage(intodds) then
-                    local item = CreateItem(item_name, nil, nil)
-                            item:SetPurchaseTime(0)
-                            item.bIsRelic = true
-                    CreateItemOnPositionSync( unit:GetAbsOrigin(), item )
-                    item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin() + RandomVector( RandomFloat(110,140) ) )
-
+                    
                     local Heroes = GetAllRealHeroes()
                     for n = #Heroes, 1 ,-1 do
                         if Heroes[n]:HasOwnerAbandoned() 
-                        or PlayerResource:GetConnectionState( Heroes[n]:GetPlayerID() ) == 2 
+                        or PlayerResource:GetConnectionState( Heroes[n]:GetPlayerID() ) ~= 2 
                         then table.remove( Heroes, n )
                         end
                     end
+                    local  WinningHero = Heroes[ RandomInt( 1, #Heroes ) ]
+                    if not WinningHero 
+                    then return
+                    end
 
-                    --抽一个玩家作为得到掉落的人
-
-                    local WinningHero = Heroes[ RandomInt( 1, #Heroes ) ]
                     local WinningPlayerID = WinningHero:GetPlayerID()
 
+                    local item = CreateItem(item_name, nil, nil)
+                    item:SetPurchaseTime(0)
                     item:SetPurchaser( WinningHero )
+                    item.bIsRelic = true
+                    CreateItemOnPositionSync( unit:GetAbsOrigin(), item )
+                    item:LaunchLoot(false, 200, 0.75, unit:GetAbsOrigin() + RandomVector( RandomFloat(110,140) ) )
                     WinningHero["lvl_"..item_name] = 1 + ( WinningHero["lvl_"..item_name] or 0 )
 
                     EmitSoundOn( "HotPotato.Ow", WinningHero )
@@ -383,14 +385,14 @@ function RollDrops(unit)
                     ]]
                 end
 
-            elseif item_name == "RS" and math.fmod( #need_drop_el + _G.GAME_ROUND, 10 )>0 then
+            elseif item_name == "RS" and booboll then
 
                 if RollPercentage(intodds) then
                     
                     local Heroes = GetAllRealHeroes()
                     for n = #Heroes, 1 ,-1 do
                         if Heroes[n]:HasOwnerAbandoned() 
-                        or PlayerResource:GetConnectionState( Heroes[n]:GetPlayerID() ) == 2 
+                        or PlayerResource:GetConnectionState( Heroes[n]:GetPlayerID() ) ~= 2 
                         then table.remove( Heroes, n )
                         end
                     end

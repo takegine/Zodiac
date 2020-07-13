@@ -73,12 +73,6 @@ var NoKDA  = rootUI.FindChildTraverse("stackable_side_panels");
     NoKDA.FindChildTraverse("quickstats").style.visibility = "collapse";
     NoKDA.FindChildTraverse("PlusStatus").style.visibility = "collapse";
 
-var shopUI = $.GetContextPanel().GetParent().GetParent().FindChildTraverse("HUDElements").FindChildTraverse("shop");
-    shopUI.FindChildTraverse("GuideFlyout").style.visibility = "collapse";
-    shopUI.FindChildTraverse("Main").FindChildTraverse("ItemCombinesAndBasicItemsContainer").style.visibility = "collapse";
-
-
-
 //newUI.FindChildTraverse("AbilitiesAndStatBranch").FindChildTraverse("StatBranch").BCreateChildren("<Panel id='herocountry' style='width:62px;height:62px;' class='ShowStatBranch'><Label id='herocountrytext' text='' style='font-size:60px;' class='ShowStatBranch'/></Panel>");
 //GameEvents.Subscribe( "playergetcountry", upcountry)
 

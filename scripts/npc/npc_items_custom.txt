@@ -348,17 +348,7 @@
 	// 七罪的合成公式
 	"item_recipe_proved"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_proved"
 		"ItemRequirements"
@@ -471,17 +461,7 @@
 	// 神罪的合成公式
 	"item_recipe_finalbook"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_finalbook"
 		"ItemRequirements"
@@ -791,234 +771,113 @@
 	// ###############################################################################################################################元素球####################
 	"item_recipe_ice"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123523"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_ice"
 		"ItemRequirements"
 		{
-			"01"	"item_ice_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
 	"item_recipe_fire"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123524"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_fire"
 		"ItemRequirements"
 		{
-			"01"	"item_fire_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
 	"item_recipe_water"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123525"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_water"
 		"ItemRequirements"
 		{
-			"01"	"item_water_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
 	"item_recipe_energy"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123526"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy"
 		"ItemRequirements"
 		{
-			"01"	"item_energy_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
 	"item_recipe_earth"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123527"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_earth"
 		"ItemRequirements"
 		{
-			"01"	"item_earth_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
 	"item_recipe_life"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123528"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_life"
 		"ItemRequirements"
 		{
-			"01"	"item_life_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
 	"item_recipe_void"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123529"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_void"
 		"ItemRequirements"
 		{
-			"01"	"item_void_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
 	"item_recipe_air"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123530"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air"
 		"ItemRequirements"
 		{
-			"01"	"item_air_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
 	"item_recipe_light"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123531"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light"
 		"ItemRequirements"
 		{
-			"01"	"item_light_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
 	"item_recipe_shadow"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/recipe"
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"ID"	"123532"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemShopTags"	"artifacts"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_shadow"
 		"ItemRequirements"
 		{
-			"01"	"item_shadow_dummy"
+			"01"	"item_element_dummy"
 		}
 	}
 
-	"item_ice_dummy"
+	"item_element_dummy"
 	{
 		// General
 		// -------------------------------------------------------------------------------------------------------------
 		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_ice"
+		"AbilityTextureName"	""
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ID"	"133523"
 		"ItemQuality"	"artifact"
-		"Model"	"models/new/ice2.vmdl"
 		"Effect"	"particles/units/heroes/hero_ancient_apparition/ice_temp.vpcf"
 		// Item Info
 		// -------------------------------------------------------------------------------------------------------------
@@ -1028,204 +887,6 @@
 		"ItemPurchasable"	"0"
 		"ItemKillable"	"0"
 		"ItemAliases"	"ice"
-		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
-	}
-
-	"item_fire_dummy"
-	{
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_fire"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ID"	"133524"
-		"ItemQuality"	"artifact"
-		"Model"	"models/new/fire.vmdl"
-		"Effect"	"particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_fire_arcana.vpcf"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemSellable"	"0"
-		"ItemShareability"	"ITEM_NOT_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemAliases"	"fire"
-		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
-	}
-
-	"item_water_dummy"
-	{
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_water"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ID"	"133525"
-		"ItemQuality"	"artifact"
-		"Model"	"models/new/water.vmdl"
-		"Effect"	"particles/econ/events/ti7/teleport_start_ti7_spin_water.vpcf"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemSellable"	"0"
-		"ItemShareability"	"ITEM_NOT_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemAliases"	"water"
-		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
-	}
-
-	"item_energy_dummy"
-	{
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_energy"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ID"	"133526"
-		"ItemQuality"	"artifact"
-		"Model"	"models/new/energy.vmdl"
-		"Effect"	"particles/units/heroes/hero_leshrac/leshrac_lightning_slow.vpcf"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemSellable"	"0"
-		"ItemShareability"	"ITEM_NOT_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemAliases"	"energy"
-		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
-	}
-
-	"item_earth_dummy"
-	{
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_earth"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ID"	"133527"
-		"ItemQuality"	"artifact"
-		"Model"	"models/new/earth.vmdl"
-		"Effect"	"particles/units/heroes/hero_templar_assassin/templar_assassin_trap_stone.vpcf"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemSellable"	"0"
-		"ItemShareability"	"ITEM_NOT_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemAliases"	"earth"
-		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
-	}
-
-	"item_life_dummy"
-	{
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_life"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ID"	"133528"
-		"ItemQuality"	"artifact"
-		"Model"	"models/new/life.vmdl"
-		"Effect"	"particles/items_fx/ironwood_tree.vpcf"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemSellable"	"0"
-		"ItemShareability"	"ITEM_NOT_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemAliases"	"life"
-		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
-	}
-
-	"item_void_dummy"
-	{
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_void"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ID"	"133529"
-		"ItemQuality"	"artifact"
-		"Model"	"models/new/void.vmdl"
-		"Effect"	"particles/units/heroes/hero_enigma/enigma_ambient_body_fallback_low.vpcf"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemSellable"	"0"
-		"ItemShareability"	"ITEM_NOT_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemAliases"	"void"
-		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
-	}
-
-	"item_air_dummy"
-	{
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_air"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ID"	"133530"
-		"ItemQuality"	"artifact"
-		"Model"	"models/new/air.vmdl"
-		"Effect"	"particles/my_air_part.vpcf"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemSellable"	"0"
-		"ItemShareability"	"ITEM_NOT_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemAliases"	"air"
-		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
-	}
-
-	"item_light_dummy"
-	{
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_light"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ID"	"133531"
-		"ItemQuality"	"artifact"
-		"Model"	"models/new/light.vmdl"
-		"Effect"	"particles/my_courier_trail_polycount_01.vpcf"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemSellable"	"0"
-		"ItemShareability"	"ITEM_NOT_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemAliases"	"light"
-		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
-	}
-
-	"item_shadow_dummy"
-	{
-		// General
-		// -------------------------------------------------------------------------------------------------------------
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"custom/item_shadow"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"ID"	"133532"
-		"ItemQuality"	"artifact"
-		"Model"	"models/new/shadow.vmdl"
-		"Effect"	"particles/items2_fx/urn_of_shadows_orbs.vpcf"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		"ItemSellable"	"0"
-		"ItemShareability"	"ITEM_NOT_SHAREABLE"
-		"ItemPurchasable"	"0"
-		"ItemKillable"	"0"
-		"ItemAliases"	"shadow"
 		"ItemDisassembleRule"	"DOTA_ITEM_DISASSEMBLE_NEVER"
 	}
 
@@ -1254,15 +915,7 @@
 
 	"item_recipe_light_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000001"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_essence"
 		"ItemRequirements"
@@ -1294,15 +947,7 @@
 
 	"item_recipe_earth_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000003"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_earth_essence"
 		"ItemRequirements"
@@ -1334,15 +979,7 @@
 
 	"item_recipe_air_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000005"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_essence"
 		"ItemRequirements"
@@ -1374,15 +1011,7 @@
 
 	"item_recipe_void_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000007"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_void_essence"
 		"ItemRequirements"
@@ -1414,15 +1043,7 @@
 
 	"item_recipe_energy_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000009"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_essence"
 		"ItemRequirements"
@@ -1454,15 +1075,7 @@
 
 	"item_recipe_water_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000011"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_water_essence"
 		"ItemRequirements"
@@ -1494,15 +1107,7 @@
 
 	"item_recipe_ice_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000013"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_ice_essence"
 		"ItemRequirements"
@@ -1534,15 +1139,7 @@
 
 	"item_recipe_shadow_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000015"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_shadow_essence"
 		"ItemRequirements"
@@ -1574,15 +1171,7 @@
 
 	"item_recipe_life_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000017"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_life_essence"
 		"ItemRequirements"
@@ -1614,15 +1203,7 @@
 
 	"item_recipe_fire_essence"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000019"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_fire_essence"
 		"ItemRequirements"
@@ -1747,15 +1328,7 @@
 
 	"item_recipe_upgraded_mjollnir"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000021"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_mjollnir"
 		"ItemRequirements"
@@ -1818,15 +1391,7 @@
 
 	"item_recipe_upgraded_heart"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000023"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_heart"
 		"ItemRequirements"
@@ -1879,15 +1444,7 @@
 
 	"item_recipe_upgraded_greater_crit"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000025"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_greater_crit"
 		"ItemRequirements"
@@ -1957,15 +1514,7 @@
 
 	"item_recipe_upgraded_satanic"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000027"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_satanic"
 		"ItemRequirements"
@@ -2061,15 +1610,7 @@
 
 	"item_recipe_upgraded_pipe"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000029"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_pipe"
 		"ItemRequirements"
@@ -2117,15 +1658,7 @@
 
 	"item_recipe_upgraded_desolator"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000031"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_desolator"
 		"ItemRequirements"
@@ -2215,15 +1748,7 @@
 
 	"item_recipe_upgraded_diffusal_blade"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000033"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_diffusal_blade"
 		"ItemRequirements"
@@ -2286,15 +1811,7 @@
 
 	"item_recipe_upgraded_sange_and_yasha"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000035"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_sange_and_yasha"
 		"ItemRequirements"
@@ -2348,15 +1865,7 @@
 
 	"item_recipe_upgraded_butterfly"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000037"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_butterfly"
 		"ItemRequirements"
@@ -2409,15 +1918,7 @@
 
 	"item_recipe_upgraded_monkey_king_bar"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1000039"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_upgraded_monkey_king_bar"
 		"ItemRequirements"
@@ -2539,15 +2040,7 @@
 
 	"item_recipe_light_fire_earth"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235247"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_fire_earth"
 		"ItemRequirements"
@@ -2652,15 +2145,7 @@
 
 	"item_recipe_light_life_earth"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235249"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_life_earth"
 		"ItemRequirements"
@@ -2738,15 +2223,7 @@
 
 	"item_recipe_air_earth_shadow"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235251"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_earth_shadow"
 		"ItemRequirements"
@@ -2830,15 +2307,7 @@
 
 	"item_recipe_air_life_void"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235253"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_life_void"
 		"ItemRequirements"
@@ -2916,15 +2385,7 @@
 
 	"item_recipe_air_fire_life"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235255"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven"  
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_fire_life"
 		"ItemRequirements"
@@ -3023,16 +2484,7 @@
 
 	"item_recipe_energy_fire_void"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1335255"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemRecipe"	"1"
+		"BaseClass"	"item_datadriven" 
 		"ItemResult"	"item_energy_fire_void"
 		"ItemRequirements"
 		{
@@ -3104,15 +2556,7 @@
 
 	"item_recipe_energy_shadow_water"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235257"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_shadow_water"
 		"ItemRequirements"
@@ -3251,15 +2695,7 @@
 
 	"item_recipe_energy_earth_water"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235259"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_earth_water"
 		"ItemRequirements"
@@ -3352,15 +2788,7 @@
 
 	"item_recipe_fire_earth_water"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235261"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_fire_earth_water"
 		"ItemRequirements"
@@ -3444,15 +2872,7 @@
 
 	"item_recipe_ice_shadow_air"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235263"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_ice_shadow_air"
 		"ItemRequirements"
@@ -3533,15 +2953,7 @@
 
 	"item_recipe_energy_void_ice"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235265"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_void_ice"
 		"ItemRequirements"
@@ -3673,15 +3085,7 @@
 
 	"item_recipe_shadow_light_ice"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235267"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_shadow_light_ice"
 		"ItemRequirements"
@@ -3763,15 +3167,7 @@
 
 	"item_recipe_water_life_shadow"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235269"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_water_life_shadow"
 		"ItemRequirements"
@@ -3960,15 +3356,7 @@
 
 	"item_recipe_light_water_void"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235271"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_water_void"
 		"ItemRequirements"
@@ -4071,15 +3459,7 @@
 
 	"item_recipe_void_ice_earth"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235273"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_void_ice_earth"
 		"ItemRequirements"
@@ -4173,15 +3553,7 @@
 
 	"item_recipe_void_fire_shadow"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235275"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_void_fire_shadow"
 		"ItemRequirements"
@@ -4259,15 +3631,7 @@
 
 	"item_recipe_energy_light_air"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235277"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_light_air"
 		"ItemRequirements"
@@ -4339,15 +3703,7 @@
 
 	"item_recipe_light_life_ice"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235279"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_life_ice"
 		"ItemRequirements"
@@ -4441,15 +3797,7 @@
 
 	"item_recipe_energy_life_fire"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235281"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_life_fire"
 		"ItemRequirements"
@@ -4569,15 +3917,7 @@
 
 	"item_recipe_ice_air_water"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235283"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_ice_air_water"
 		"ItemRequirements"
@@ -4700,15 +4040,7 @@
 
 	"item_recipe_light_fire_earth_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235286"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_fire_earth_2"
 		"ItemRequirements"
@@ -4813,15 +4145,7 @@
 
 	"item_recipe_light_life_earth_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235288"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_life_earth_2"
 		"ItemRequirements"
@@ -4899,15 +4223,7 @@
 
 	"item_recipe_air_earth_shadow_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235290"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_earth_shadow_2"
 		"ItemRequirements"
@@ -4991,15 +4307,7 @@
 
 	"item_recipe_air_life_void_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235291"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven"  
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_life_void_2"
 		"ItemRequirements"
@@ -5077,15 +4385,7 @@
 
 	"item_recipe_air_fire_life_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235293"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven"  
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_fire_life_2"
 		"ItemRequirements"
@@ -5184,15 +4484,7 @@
 
 	"item_recipe_energy_fire_void_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235295"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_fire_void_2"
 		"ItemRequirements"
@@ -5265,15 +4557,7 @@
 
 	"item_recipe_energy_shadow_water_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235297"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_shadow_water_2"
 		"ItemRequirements"
@@ -5412,15 +4696,7 @@
 
 	"item_recipe_energy_earth_water_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235299"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_earth_water_2"
 		"ItemRequirements"
@@ -5513,15 +4789,7 @@
 
 	"item_recipe_fire_earth_water_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235301"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_fire_earth_water_2"
 		"ItemRequirements"
@@ -5605,15 +4873,7 @@
 
 	"item_recipe_ice_shadow_air_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235303"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_ice_shadow_air_2"
 		"ItemRequirements"
@@ -5694,15 +4954,7 @@
 
 	"item_recipe_energy_void_ice_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235305"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_void_ice_2"
 		"ItemRequirements"
@@ -5834,15 +5086,7 @@
 
 	"item_recipe_shadow_light_ice_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235307"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_shadow_light_ice_2"
 		"ItemRequirements"
@@ -5924,15 +5168,7 @@
 
 	"item_recipe_water_life_shadow_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235309"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_water_life_shadow_2"
 		"ItemRequirements"
@@ -6121,15 +5357,7 @@
 
 	"item_recipe_light_water_void_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235311"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_water_void_2"
 		"ItemRequirements"
@@ -6245,15 +5473,7 @@
 
 	"item_recipe_void_ice_earth_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235313"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_void_ice_earth_2"
 		"ItemRequirements"
@@ -6347,15 +5567,7 @@
 
 	"item_recipe_void_fire_shadow_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235315"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_void_fire_shadow_2"
 		"ItemRequirements"
@@ -6433,15 +5645,7 @@
 
 	"item_recipe_energy_light_air_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235317"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_light_air_2"
 		"ItemRequirements"
@@ -6513,15 +5717,7 @@
 
 	"item_recipe_light_life_ice_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235319"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_life_ice_2"
 		"ItemRequirements"
@@ -6615,15 +5811,7 @@
 
 	"item_recipe_energy_life_fire_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235321"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_life_fire_2"
 		"ItemRequirements"
@@ -6744,15 +5932,7 @@
 
 	"item_recipe_ice_air_water_2"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1235323"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_ice_air_water_2"
 		"ItemRequirements"
@@ -6875,15 +6055,7 @@
 
 	"item_recipe_light_fire_earth_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435286"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_fire_earth_3"
 		"ItemRequirements"
@@ -6988,15 +6160,7 @@
 
 	"item_recipe_light_life_earth_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435288"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_life_earth_3"
 		"ItemRequirements"
@@ -7074,15 +6238,7 @@
 
 	"item_recipe_air_earth_shadow_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435290"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_earth_shadow_3"
 		"ItemRequirements"
@@ -7166,15 +6322,7 @@
 
 	"item_recipe_air_life_void_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435291"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_life_void_3"
 		"ItemRequirements"
@@ -7252,15 +6400,7 @@
 
 	"item_recipe_air_fire_life_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435293"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_air_fire_life_3"
 		"ItemRequirements"
@@ -7359,15 +6499,7 @@
 
 	"item_recipe_energy_fire_void_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435295"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_fire_void_3"
 		"ItemRequirements"
@@ -7440,15 +6572,7 @@
 
 	"item_recipe_energy_shadow_water_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435297"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_shadow_water_3"
 		"ItemRequirements"
@@ -7587,15 +6711,7 @@
 
 	"item_recipe_energy_earth_water_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435299"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_earth_water_3"
 		"ItemRequirements"
@@ -7688,15 +6804,7 @@
 
 	"item_recipe_fire_earth_water_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435301"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_fire_earth_water_3"
 		"ItemRequirements"
@@ -7780,15 +6888,7 @@
 
 	"item_recipe_ice_shadow_air_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435303"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_ice_shadow_air_3"
 		"ItemRequirements"
@@ -7869,15 +6969,7 @@
 
 	"item_recipe_energy_void_ice_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435305"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_void_ice_3"
 		"ItemRequirements"
@@ -8009,15 +7101,7 @@
 
 	"item_recipe_shadow_light_ice_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435307"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_shadow_light_ice_3"
 		"ItemRequirements"
@@ -8099,15 +7183,7 @@
 
 	"item_recipe_water_life_shadow_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435309"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_water_life_shadow_3"
 		"ItemRequirements"
@@ -8296,15 +7372,7 @@
 
 	"item_recipe_light_water_void_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435311"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_water_void_3"
 		"ItemRequirements"
@@ -8420,15 +7488,7 @@
 
 	"item_recipe_void_ice_earth_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435313"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_void_ice_earth_3"
 		"ItemRequirements"
@@ -8522,15 +7582,7 @@
 
 	"item_recipe_void_fire_shadow_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435315"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_void_fire_shadow_3"
 		"ItemRequirements"
@@ -8608,15 +7660,7 @@
 
 	"item_recipe_energy_light_air_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435317"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_light_air_3"
 		"ItemRequirements"
@@ -8688,15 +7732,7 @@
 
 	"item_recipe_light_life_ice_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435319"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_light_life_ice_3"
 		"ItemRequirements"
@@ -8790,15 +7826,7 @@
 
 	"item_recipe_energy_life_fire_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435321"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_life_fire_3"
 		"ItemRequirements"
@@ -8919,15 +7947,7 @@
 
 	"item_recipe_ice_air_water_3"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435323"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_ice_air_water_3"
 		"ItemRequirements"
@@ -9037,15 +8057,7 @@
 
 	"item_recipe_power_dagon"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435325"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_power_dagon"
 		"ItemRequirements"
@@ -9226,15 +8238,7 @@
 
 	"item_recipe_fire_radiance"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435327"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_fire_radiance"
 		"ItemRequirements"
@@ -9393,15 +8397,7 @@
 
 	"item_recipe_life_greaves"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435329"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_life_greaves"
 		"ItemRequirements"
@@ -9512,15 +8508,7 @@
 
 	"item_recipe_fire_desol"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435331"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_fire_desol"
 		"ItemRequirements"
@@ -9645,15 +8633,7 @@
 
 	"item_recipe_water_butterfly"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435333"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_water_butterfly"
 		"ItemRequirements"
@@ -9862,15 +8842,7 @@
 
 	"item_recipe_shivas_shield"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435335"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_shivas_shield"
 		"ItemRequirements"
@@ -10062,15 +9034,7 @@
 
 	"item_recipe_energy_sphere"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435337"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_sphere"
 		"ItemRequirements"
@@ -10186,15 +9150,7 @@
 
 	"item_recipe_water_blades"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435339"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_water_blades"
 		"ItemRequirements"
@@ -10296,15 +9252,7 @@
 
 	"item_recipe_energy_core"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435341"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_energy_core"
 		"ItemRequirements"
@@ -10478,15 +9426,7 @@
 
 	"item_recipe_power_satanic"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435343"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_power_satanic"
 		"ItemRequirements"
@@ -10584,15 +9524,7 @@
 
 	"item_recipe_heart_of_light"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435345"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_heart_of_light"
 		"ItemRequirements"
@@ -10711,15 +9643,7 @@
 
 	"item_recipe_earth_cuirass"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435347"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_earth_cuirass"
 		"ItemRequirements"
@@ -10928,15 +9852,7 @@
 
 	"item_recipe_dragon_staff"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435349"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_dragon_staff"
 		"ItemRequirements"
@@ -11086,15 +10002,7 @@
 
 	"item_recipe_earth_s_and_y"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435351"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_earth_s_and_y"
 		"ItemRequirements"
@@ -11242,15 +10150,7 @@
 
 	"item_recipe_ice_pipe"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435353"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_ice_pipe"
 		"ItemRequirements"
@@ -11346,15 +10246,7 @@
 
 	"item_recipe_fire_core"
 	{
-		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_recipe"
-		"ID"	"1435355"
-		"Model"	"models/props_gameplay/recipe.mdl"
-		// Item Info
-		// -------------------------------------------------------------------------------------------------------------
-		"ItemCost"	"0"
-		// Recipe
-		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"item_datadriven" 
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_fire_core"
 		"ItemRequirements"

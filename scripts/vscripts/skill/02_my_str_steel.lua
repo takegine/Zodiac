@@ -4,18 +4,19 @@ function OnAttack( event )
     local caster  = event.caster
     local target  = event.target
     local ability = event.ability
-    
-    local modif   = target:FindModifierByName("modifier_decrease_strength")
+    local modName = "modifier_decrease_strength"
+    local modif   = target:FindModifierByName(modName)
 
-    if not modif then
-
-        target:AddNewModifier(target, ability, "modifier_decrease_strength", {duration = 30})
-        modif:IncrementStackCount()
-    else
+    if  modif then
         modif:SetDuration(30,true)
+    else
+        target:AddNewModifier(target, ability, modName, {duration = 30})
+        
+        modif = target:FindModifierByName(modName)
+        modif:IncrementStackCount()
     end
-    
-    for i =1,_G.hardmode do
+
+    for i = 1,_G.hardmode do
         modif:IncrementStackCount() 
     end
     print("round 02 ,the modifier count equal the level of hardmode："..modif:GetStackCount().."now hardmode is:".._G.hardmode)
